@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>La Querendona Foods | Reconstruyendo el Sabor</title>
 
   <!-- Tailwind CSS CDN -->
@@ -25,7 +25,7 @@
       -webkit-appearance: none !important;
     }
 
-    /* Video maximizado (protagonista absoluto de la pantalla) y fundido perfecto */
+    /* Video maximizado y fundido perfecto */
     .flow-video-seamless {
       mix-blend-mode: lighten;
       filter: contrast(1.16) brightness(0.96);
@@ -40,7 +40,7 @@
       }
     }
 
-    /* Barrido de izquierda a derecha para "HECHO CON AMOR" (tamaño sutil, elegante y proporcionado) */
+    /* Barrido de izquierda a derecha para "HECHO CON AMOR" */
     @keyframes sweepLeftToRight {
       0% {
         clip-path: inset(0 100% 0 0);
@@ -93,13 +93,13 @@
 </head>
 <body class="bg-black text-white antialiased overflow-hidden select-none">
 
-  <!-- PORTADA PRINCIPAL -->
-  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-6 sm:pb-8 pt-0 overflow-hidden px-4">
+  <!-- PORTADA PRINCIPAL (Usa min-h-[100dvh] y padding seguro para evitar que la barra de Safari pise los botones) -->
+  <main class="relative min-h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-8 sm:pb-8 pt-0 overflow-hidden px-4">
 
-    <!-- 1. Contenedor Superior: Video Maximizado + Frase "HECHO CON AMOR" (proporcionada) -->
-    <div class="relative z-20 w-full max-w-5xl flex flex-col items-center justify-start pointer-events-none">
+    <!-- 1. Contenedor Superior: Video Maximizado + Frase "HECHO CON AMOR" (subida de posición) -->
+    <div class="relative z-25 w-full max-w-5xl flex flex-col items-center justify-start pointer-events-none">
       
-      <!-- Video con mayor protagonismo (120dvh en desktop, 100dvh en móvil) -->
+      <!-- Video (mantiene tus tamaños personalizados de 80 en móvil / 100 en página) -->
       <video
         id="querendona-intro-video"
         src="./logo-intro.mp4"
@@ -110,11 +110,11 @@
         webkit-playsinline="true"
         preload="auto"
         disablePictureInPicture
-        class="flow-video-seamless w-full h-[80dvh] sm:h-[100dvh] object-contain object-top -mb-4 sm:-mb-6"
+        class="flow-video-seamless w-full h-[62dvh] sm:h-[72dvh] object-contain object-top -mb-12 sm:-mb-14"
       ></video>
 
-      <!-- Frase en MAYÚSCULAS, cursiva elegante pero con tamaño discreto y armónico -->
-      <div class="relative z-30 text-center">
+      <!-- Frase "HECHO CON AMOR" subida para que quede cerca del logo -->
+      <div class="relative z-30 text-center -mt-2 sm:-mt-3">
         <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-lg sm:text-xl md:text-2xl tracking-[0.12em] uppercase">
           Hecho con amor
         </p>
@@ -135,8 +135,8 @@
       <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_70px_at_top,transparent_10%,white)]"></div>
     </div>
 
-    <!-- 3. Dos Botones Blancos Gemelos 3D -->
-    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700">
+    <!-- 3. Dos Botones Blancos Gemelos 3D (Subidos en móvil para evitar que la barra de Safari los pise) -->
+    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700 pb-4 sm:pb-2">
 
       <!-- Botón 1: Clientes Corporativos -->
       <a
@@ -159,7 +159,7 @@
 
   </main>
 
-  <!-- Script de Sincronización y Partículas -->
+  <!-- Script de Sincronización Retrasada y Partículas -->
   <script>
     function lockedUnidadesNotice(button) {
       const label = button.querySelector("#unidades-btn-text");
@@ -230,11 +230,13 @@
 
       video.addEventListener("timeupdate", () => {
         if (video.currentTime >= 2.2) triggerStageAndButtons();
-        if (video.currentTime >= 5.5) triggerPhrase();
+        // RETRASADO A 6.2s: Para que la frase aparezca justo cuando el brillo de la luz termina de recorrer la catedral
+        if (video.currentTime >= 6.2) triggerPhrase();
       });
 
+      // Respaldo por temporizador ajustado
       setTimeout(triggerStageAndButtons, 2300);
-      setTimeout(triggerPhrase, 5400);
+      setTimeout(triggerPhrase, 6300);
     })();
 
     // Motor Sparkles Core
