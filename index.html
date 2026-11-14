@@ -8,7 +8,7 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cormorant Garamond + Inter -->
+  <!-- Google Fonts: Cormorant Garamond (Cursiva elegante) + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -19,42 +19,33 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* 1. OCULTA EL BOTÓN DE PLAY NATIVO DE SAFARI / iPAD EN MODO AHORRO DE BATERÍA */
+    /* Ocultar cualquier control nativo de video */
     video::-webkit-media-controls {
       display: none !important;
       -webkit-appearance: none !important;
     }
-    video::-webkit-media-controls-panel,
-    video::-webkit-media-controls-play-button,
-    video::-webkit-media-controls-start-playback-button,
-    video::-webkit-media-controls-overlay-play-button {
-      display: none !important;
-      -webkit-appearance: none !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
 
-    /* 2. Fusión limpia con el fondo negro #000000 sin mostrar bordes del video 9:16 */
+    /* Video con mayor protagonismo (ocupa más espacio en pantalla) y fundido perfecto */
     .flow-video-seamless {
       mix-blend-mode: lighten;
-      filter: contrast(1.16) brightness(0.95);
-      -webkit-mask-image: radial-gradient(ellipse 48% 82% at 50% 28%, #000 52%, transparent 98%);
-      mask-image: radial-gradient(ellipse 48% 82% at 50% 28%, #000 52%, transparent 98%);
+      filter: contrast(1.16) brightness(0.96);
+      -webkit-mask-image: radial-gradient(ellipse 58% 88% at 50% 32%, #000 62%, transparent 99%);
+      mask-image: radial-gradient(ellipse 58% 88% at 50% 32%, #000 62%, transparent 99%);
     }
 
     @media (max-width: 640px) {
       .flow-video-seamless {
-        -webkit-mask-image: radial-gradient(ellipse 78% 82% at 50% 30%, #000 58%, transparent 98%);
-        mask-image: radial-gradient(ellipse 78% 82% at 50% 30%, #000 58%, transparent 98%);
+        -webkit-mask-image: radial-gradient(ellipse 85% 88% at 50% 34%, #000 68%, transparent 99%);
+        mask-image: radial-gradient(ellipse 85% 88% at 50% 34%, #000 68%, transparent 99%);
       }
     }
 
-    /* 3. Barrido de izquierda a derecha para "Hecho con amor" */
+    /* Barrido de izquierda a derecha para "HECHO CON AMOR" (En mayúsculas, cursiva elegante y gran tamaño) */
     @keyframes sweepLeftToRight {
       0% {
         clip-path: inset(0 100% 0 0);
         opacity: 0;
-        transform: translateX(-10px);
+        transform: translateX(-12px);
       }
       20% {
         opacity: 1;
@@ -89,7 +80,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.5));
+      filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.55));
       opacity: 0;
     }
 
@@ -102,12 +93,13 @@
 </head>
 <body class="bg-black text-white antialiased overflow-hidden select-none">
 
-  <!-- PORTADA PRINCIPAL (Usa 100dvh para que en iPad y móviles jamás se corten los botones abajo) -->
-  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-10 sm:pb-12 pt-0 overflow-hidden px-6">
+  <!-- PORTADA PRINCIPAL (Aprovecha todo el alto y ancho de la pantalla) -->
+  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-6 sm:pb-8 pt-1 overflow-hidden px-4">
 
-    <!-- 1. Contenedor Superior: Video de Flow + Respaldo + "Hecho con amor" -->
-    <div class="relative z-20 w-full max-w-3xl flex flex-col items-center justify-start pointer-events-none">
+    <!-- 1. Contenedor Superior: Video Ampliado + Frase "HECHO CON AMOR" -->
+    <div class="relative z-20 w-full max-w-4xl flex flex-col items-center justify-start pointer-events-none">
       
+      <!-- Video con mayor protagonismo (70dvh en desktop, 62dvh en móvil) -->
       <video
         id="querendona-intro-video"
         src="./logo-intro.mp4"
@@ -118,33 +110,33 @@
         webkit-playsinline="true"
         preload="auto"
         disablePictureInPicture
-        class="flow-video-seamless w-full h-[46dvh] sm:h-[50dvh] object-contain object-top -mb-10 sm:-mb-12"
+        class="flow-video-seamless w-full h-[62dvh] sm:h-[70dvh] object-contain object-top -mb-8 sm:-mb-10"
       ></video>
 
-      <!-- Frase "Hecho con amor" -->
+      <!-- Frase en MAYÚSCULAS, cursiva elegante y tamaño equilibrado -->
       <div class="relative z-30 text-center">
-        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-2xl sm:text-3xl md:text-4xl tracking-[0.06em]">
+        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-bold text-3xl sm:text-4xl md:text-5xl tracking-[0.08em] uppercase">
           Hecho con amor
         </p>
       </div>
 
     </div>
 
-    <!-- 2. Haz de Luz Dorado y Partículas Sutiles (Aceternity Sparkles) -->
-    <div id="sparkles-stage" class="w-full max-w-[36rem] h-16 sm:h-20 relative -mt-2 z-10 opacity-0 transition-opacity duration-1000">
-      <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-3/4 mx-auto blur-sm opacity-90"></div>
-      <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-3/4 mx-auto"></div>
-      <div class="absolute inset-x-44 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[4px] w-1/4 mx-auto blur-sm opacity-80"></div>
-      <div class="absolute inset-x-44 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-1/4 mx-auto"></div>
+    <!-- 2. Haz de Luz Dorado y Partículas (Expandidas a lo ancho para ocupar más espacio) -->
+    <div id="sparkles-stage" class="w-full max-w-[48rem] h-14 sm:h-16 relative -mt-1 z-10 opacity-0 transition-opacity duration-1000">
+      <div class="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-5/6 mx-auto blur-sm opacity-95"></div>
+      <div class="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-5/6 mx-auto"></div>
+      <div class="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[4px] w-1/2 mx-auto blur-sm opacity-85"></div>
+      <div class="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-1/2 mx-auto"></div>
 
       <canvas id="sparkles-canvas" class="w-full h-full block"></canvas>
 
-      <!-- Máscara Radial Negra -->
-      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(300px_110px_at_top,transparent_20%,white)]"></div>
+      <!-- Máscara Radial Ampliada -->
+      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(450px_90px_at_top,transparent_15%,white)]"></div>
     </div>
 
-    <!-- 3. Dos Botones Blancos Gemelos con Profundidad 3D (Siempre visibles con margen inferior seguro) -->
-    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700">
+    <!-- 3. Dos Botones Blancos Gemelos 3D -->
+    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700">
 
       <!-- Botón 1: Clientes Corporativos -->
       <a
@@ -154,7 +146,7 @@
         Clientes Corporativos
       </a>
 
-      <!-- Botón 2: Unidades (Bloqueado por ahora) -->
+      <!-- Botón 2: Unidades -->
       <button
         type="button"
         onclick="lockedUnidadesNotice(this)"
@@ -167,7 +159,7 @@
 
   </main>
 
-  <!-- Motor de Desbloqueo de Video Safari/iPad + Sparkles Core -->
+  <!-- Script de Sincronización y Partículas Anchas -->
   <script>
     function lockedUnidadesNotice(button) {
       const label = button.querySelector("#unidades-btn-text");
@@ -202,7 +194,6 @@
 
       if (!video) return;
 
-      // Forzar silencio explícito para WebKit/Safari
       video.defaultMuted = true;
       video.muted = true;
       video.playsInline = true;
@@ -211,8 +202,6 @@
         const playPromise = video.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
-            // Si el iPad está en Modo Ahorro de Batería y bloquea el autoplay:
-            // Saltamos al fotograma 7.0s donde el logo ya está abajo e iluminado para que nunca quede vacío
             video.currentTime = 7.0;
             triggerStageAndButtons();
             triggerPhrase();
@@ -220,14 +209,12 @@
         }
       }
 
-      // Intentar reproducir apenas cargue metadatos
       if (video.readyState >= 2) {
         attemptAutoPlay();
       } else {
         video.addEventListener("loadeddata", attemptAutoPlay, { once: true });
       }
 
-      // Si Safari bloqueó por Ahorro de Batería, al primer toque en la pantalla arranca el video desde 0
       const unlockOnTouch = () => {
         if (video.paused && video.currentTime >= 6.8) {
           video.currentTime = 0;
@@ -241,18 +228,16 @@
       window.addEventListener("touchstart", unlockOnTouch, { passive: true });
       window.addEventListener("click", unlockOnTouch, { passive: true });
 
-      // Sincronizar con el avance real del video
       video.addEventListener("timeupdate", () => {
         if (video.currentTime >= 2.2) triggerStageAndButtons();
         if (video.currentTime >= 5.5) triggerPhrase();
       });
 
-      // Respaldo de seguridad
       setTimeout(triggerStageAndButtons, 2300);
       setTimeout(triggerPhrase, 5400);
     })();
 
-    // Motor Sparkles Core
+    // Motor Sparkles Core expandido a lo ancho
     (function initSparkles() {
       const canvas = document.getElementById("sparkles-canvas");
       if (!canvas) return;
@@ -274,13 +259,13 @@
 
       function createParticles() {
         particles = [];
-        for (let i = 0; i < 95; i++) {
+        for (let i = 0; i < 140; i++) {
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            size: Math.random() * (1.1 - 0.4) + 0.4,
-            speedX: (Math.random() - 0.5) * 0.3,
-            speedY: (Math.random() - 0.5) * 0.3,
+            size: Math.random() * (1.2 - 0.4) + 0.4,
+            speedX: (Math.random() - 0.5) * 0.35,
+            speedY: (Math.random() - 0.5) * 0.35,
             opacity: Math.random(),
             opacitySpeed: (Math.random() * 0.016 + 0.004) * (Math.random() < 0.5 ? 1 : -1),
             color: palette[Math.floor(Math.random() * palette.length)]
