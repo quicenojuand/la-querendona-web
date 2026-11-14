@@ -8,71 +8,121 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cormorant Garamond, Inter, JetBrains Mono -->
+  <!-- Google Fonts: Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            serif: ['"Cormorant Garamond"', 'serif'],
-            sans: ['"Inter"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          }
-        }
+  <style>
+    /* 1. Animación física de descenso por cuerdas con rebote de tensión */
+    @keyframes ropeDrop {
+      0% {
+        transform: translateY(-105%) rotate(0deg);
+        opacity: 0;
       }
-    };
-  </script>
+      15% {
+        opacity: 1;
+      }
+      62% {
+        transform: translateY(14px) rotate(0.7deg);
+      }
+      78% {
+        transform: translateY(-9px) rotate(-0.45deg);
+      }
+      90% {
+        transform: translateY(4px) rotate(0.2deg);
+      }
+      100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    /* 2. Micro-balanceo pendular suave una vez queda colgado en el centro */
+    @keyframes pendulumSway {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(2px) rotate(0.35deg);
+      }
+    }
+
+    /* 3. Aparición sincronizada del haz de luz y los botones cuando el logo se asienta */
+    @keyframes revealAfterDrop {
+      0% {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+    }
+
+    .rope-rig {
+      transform-origin: top center;
+      animation:
+        ropeDrop 1.85s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        pendulumSway 7s ease-in-out 1.85s infinite;
+    }
+
+    .delayed-stage {
+      opacity: 0;
+      animation: revealAfterDrop 0.9s ease-out 1.45s forwards;
+    }
+
+    .delayed-buttons {
+      opacity: 0;
+      animation: revealAfterDrop 0.9s ease-out 1.75s forwards;
+    }
+  </style>
 </head>
 <body class="bg-black text-white font-sans antialiased overflow-hidden select-none">
 
   <!-- PORTADA PRINCIPAL EN NEGRO ABSOLUTO -->
-  <main class="relative min-h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden px-6">
+  <main class="relative h-screen w-full bg-black flex flex-col items-center justify-start overflow-hidden px-6">
 
-    <!-- Logotipo La Querendona en Dorado Luminoso -->
-    <div class="relative z-20 flex flex-col items-center text-center">
-      <span class="font-mono text-[10px] md:text-xs uppercase tracking-[0.45em] text-[#D4AF37]/85 mb-3">
-        Reconstruyendo el Sabor
-      </span>
-      <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-center bg-clip-text text-transparent bg-gradient-to-b from-[#FFF8DC] via-[#D4AF37] to-[#9A7418] drop-shadow-[0_0_35px_rgba(212,175,55,0.55)]">
-        La Querendona
-      </h1>
+    <!-- Contenedor del Logo Anclado al Techo (Baja colgado de las cuerdas) -->
+    <div class="rope-rig relative z-20 w-full max-w-[290px] sm:max-w-[350px] md:max-w-[400px] -mt-2 flex flex-col items-center pointer-events-none">
+      <img
+        src="./logo-dorado.png"
+        alt="La Querendona - Reconstruyendo el Sabor"
+        class="w-full h-auto max-h-[54vh] object-contain object-top mix-blend-lighten drop-shadow-[0_10px_35px_rgba(212,175,55,0.45)] [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
+      />
     </div>
 
-    <!-- Efecto Aceternity Sparkles (Haces de Luz + Partículas Doradas) -->
-    <div class="w-full max-w-[42rem] h-36 relative mt-3">
-      <!-- Gradients Superiores en Oro Luminoso -->
+    <!-- Efecto Aceternity Sparkles (Se enciende justo cuando el logo llega al centro) -->
+    <div class="delayed-stage w-full max-w-[38rem] h-24 sm:h-28 relative -mt-4 z-10">
+      <!-- Haces de Luz en Oro Luminoso -->
       <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-3/4 mx-auto blur-sm"></div>
       <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-3/4 mx-auto"></div>
-      <div class="absolute inset-x-48 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[5px] w-1/4 mx-auto blur-sm"></div>
-      <div class="absolute inset-x-48 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-1/4 mx-auto"></div>
+      <div class="absolute inset-x-44 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[4px] w-1/4 mx-auto blur-sm"></div>
+      <div class="absolute inset-x-44 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-1/4 mx-auto"></div>
 
-      <!-- Lienzo de Partículas -->
-      <canvas id="sparkles-canvas" class="w-full h-full block opacity-0 transition-opacity duration-1000"></canvas>
+      <!-- Lienzo de Partículas Doradas -->
+      <canvas id="sparkles-canvas" class="w-full h-full block"></canvas>
 
-      <!-- Máscara Radial Negra para fundir bordes -->
-      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+      <!-- Máscara Radial Negra para fundir los bordes -->
+      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(320px_160px_at_top,transparent_20%,white)]"></div>
     </div>
 
-    <!-- Dos Botones Blancos Minimalistas -->
-    <div class="relative z-20 mt-4 flex flex-col sm:flex-row items-center justify-center gap-6 w-full max-w-xl">
+    <!-- Dos Botones Blancos 3D Compactos con Profundidad Física -->
+    <div class="delayed-buttons relative z-30 mt-2 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-md">
 
-      <!-- Botón 1: Clientes Corporativos (Abre corporativos.html) -->
+      <!-- Botón 1: Clientes Corporativos -->
       <a
         href="./corporativos.html"
-        class="w-full sm:w-64 py-4 px-8 rounded-full bg-white text-black font-sans font-semibold text-xs md:text-sm uppercase tracking-[0.18em] text-center transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_45px_rgba(255,255,255,0.85)] active:scale-100 cursor-pointer block"
+        class="relative w-48 sm:w-48 py-2.5 px-5 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-200 text-black font-sans font-bold text-[11px] uppercase tracking-[0.15em] text-center border-b-[4px] border-neutral-400 shadow-[0_10px_22px_rgba(0,0,0,0.85),inset_0_2px_1px_rgba(255,255,255,0.9)] hover:scale-105 hover:-translate-y-1 hover:shadow-[0_0_32px_rgba(255,255,255,0.75),0_12px_24px_rgba(0,0,0,0.9)] active:border-b-[1px] active:translate-y-0.5 transition-all duration-200 ease-out cursor-pointer block"
       >
         Clientes Corporativos
       </a>
 
-      <!-- Botón 2: Unidades (Sobresale igual en hover, sin acceso por ahora) -->
+      <!-- Botón 2: Unidades (Sin acceso actualmente) -->
       <button
         type="button"
         onclick="lockedUnidadesNotice(this)"
-        class="w-full sm:w-64 py-4 px-8 rounded-full bg-white text-black font-sans font-semibold text-xs md:text-sm uppercase tracking-[0.18em] text-center transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_45px_rgba(255,255,255,0.85)] active:scale-100 cursor-not-allowed"
+        class="relative w-48 sm:w-48 py-2.5 px-5 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-200 text-black font-sans font-bold text-[11px] uppercase tracking-[0.15em] text-center border-b-[4px] border-neutral-400 shadow-[0_10px_22px_rgba(0,0,0,0.85),inset_0_2px_1px_rgba(255,255,255,0.9)] hover:scale-105 hover:-translate-y-1 hover:shadow-[0_0_32px_rgba(255,255,255,0.75),0_12px_24px_rgba(0,0,0,0.9)] active:border-b-[1px] active:translate-y-0.5 transition-all duration-200 ease-out cursor-not-allowed block"
       >
         <span id="unidades-btn-text">Unidades</span>
       </button>
@@ -113,7 +163,7 @@
 
       function createParticles() {
         particles = [];
-        for (let i = 0; i < 130; i++) {
+        for (let i = 0; i < 110; i++) {
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
@@ -152,7 +202,6 @@
       resize();
       createParticles();
       render();
-      requestAnimationFrame(() => canvas.classList.remove("opacity-0"));
       window.addEventListener("resize", () => {
         resize();
         createParticles();
