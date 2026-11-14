@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>La Querendona Foods | Reconstruyendo el Sabor</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cormorant Garamond (para 'Hecho con amor') + Inter (para botones) -->
+  <!-- Google Fonts: Cormorant Garamond + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -19,28 +19,37 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /*
-     * Ajuste específico para el video 9:16 de Flow:
-     * 1. mix-blend-mode: lighten hace transparente el negro del video.
-     * 2. contrast(1.16) absorbe el resplandor ámbar del fondo para que no ensucie el negro puro.
-     * 3. La doble máscara difumina los bordes izquierdo, derecho e inferior para que el rayo de luz (2.5s-6.0s) jamás muestre una línea vertical de corte.
-     */
+    /* 1. OCULTA EL BOTÓN DE PLAY NATIVO DE SAFARI / iPAD EN MODO AHORRO DE BATERÍA */
+    video::-webkit-media-controls {
+      display: none !important;
+      -webkit-appearance: none !important;
+    }
+    video::-webkit-media-controls-panel,
+    video::-webkit-media-controls-play-button,
+    video::-webkit-media-controls-start-playback-button,
+    video::-webkit-media-controls-overlay-play-button {
+      display: none !important;
+      -webkit-appearance: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* 2. Fusión limpia con el fondo negro #000000 sin mostrar bordes del video 9:16 */
     .flow-video-seamless {
       mix-blend-mode: lighten;
       filter: contrast(1.16) brightness(0.95);
-      -webkit-mask-image: radial-gradient(ellipse 48% 82% at 50% 26%, #000 52%, transparent 98%);
-      mask-image: radial-gradient(ellipse 48% 82% at 50% 26%, #000 52%, transparent 98%);
+      -webkit-mask-image: radial-gradient(ellipse 48% 82% at 50% 28%, #000 52%, transparent 98%);
+      mask-image: radial-gradient(ellipse 48% 82% at 50% 28%, #000 52%, transparent 98%);
     }
 
-    /* En celulares el video 9:16 ocupa más ancho natural */
     @media (max-width: 640px) {
       .flow-video-seamless {
-        -webkit-mask-image: radial-gradient(ellipse 78% 82% at 50% 28%, #000 58%, transparent 98%);
-        mask-image: radial-gradient(ellipse 78% 82% at 50% 28%, #000 58%, transparent 98%);
+        -webkit-mask-image: radial-gradient(ellipse 78% 82% at 50% 30%, #000 58%, transparent 98%);
+        mask-image: radial-gradient(ellipse 78% 82% at 50% 30%, #000 58%, transparent 98%);
       }
     }
 
-    /* Barrido de izquierda a derecha para "Hecho con amor" sincronizado con el final del rayo (5.8s) */
+    /* 3. Barrido de izquierda a derecha para "Hecho con amor" */
     @keyframes sweepLeftToRight {
       0% {
         clip-path: inset(0 100% 0 0);
@@ -93,24 +102,26 @@
 </head>
 <body class="bg-black text-white antialiased overflow-hidden select-none">
 
-  <!-- PORTADA PRINCIPAL EN NEGRO ABSOLUTO -->
-  <main class="relative h-screen w-full bg-black flex flex-col items-center justify-between pb-10 sm:pb-12 pt-0 overflow-hidden px-6">
+  <!-- PORTADA PRINCIPAL (Usa 100dvh para que en iPad y móviles jamás se corten los botones abajo) -->
+  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-10 sm:pb-12 pt-0 overflow-hidden px-6">
 
-    <!-- 1. Contenedor Superior: Video de Flow Anclado al Techo + "Hecho con amor" -->
+    <!-- 1. Contenedor Superior: Video de Flow + Respaldo + "Hecho con amor" -->
     <div class="relative z-20 w-full max-w-3xl flex flex-col items-center justify-start pointer-events-none">
       
-      <!-- Video de descenso por cuerdas y rayo de luz (Se detiene en el último fotograma 7.8s) -->
       <video
         id="querendona-intro-video"
         src="./logo-intro.mp4"
+        poster="./logo-dorado.jpg"
         autoplay
         muted
         playsinline
+        webkit-playsinline="true"
         preload="auto"
-        class="flow-video-seamless w-full h-[58vh] sm:h-[62vh] object-contain object-top -mb-16 sm:-mb-20"
+        disablePictureInPicture
+        class="flow-video-seamless w-full h-[46dvh] sm:h-[50dvh] object-contain object-top -mb-10 sm:-mb-12"
       ></video>
 
-      <!-- Frase "Hecho con amor" (Se activa cuando el rayo cruza el logo) -->
+      <!-- Frase "Hecho con amor" -->
       <div class="relative z-30 text-center">
         <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-2xl sm:text-3xl md:text-4xl tracking-[0.06em]">
           Hecho con amor
@@ -120,7 +131,7 @@
     </div>
 
     <!-- 2. Haz de Luz Dorado y Partículas Sutiles (Aceternity Sparkles) -->
-    <div id="sparkles-stage" class="w-full max-w-[36rem] h-20 relative -mt-2 z-10 opacity-0 transition-opacity duration-1000">
+    <div id="sparkles-stage" class="w-full max-w-[36rem] h-16 sm:h-20 relative -mt-2 z-10 opacity-0 transition-opacity duration-1000">
       <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-3/4 mx-auto blur-sm opacity-90"></div>
       <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-3/4 mx-auto"></div>
       <div class="absolute inset-x-44 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[4px] w-1/4 mx-auto blur-sm opacity-80"></div>
@@ -128,11 +139,11 @@
 
       <canvas id="sparkles-canvas" class="w-full h-full block"></canvas>
 
-      <!-- Máscara Radial Negra para fundir el lienzo de partículas -->
-      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(300px_120px_at_top,transparent_20%,white)]"></div>
+      <!-- Máscara Radial Negra -->
+      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(300px_110px_at_top,transparent_20%,white)]"></div>
     </div>
 
-    <!-- 3. Dos Botones Blancos Gemelos con Profundidad 3D -->
+    <!-- 3. Dos Botones Blancos Gemelos con Profundidad 3D (Siempre visibles con margen inferior seguro) -->
     <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700">
 
       <!-- Botón 1: Clientes Corporativos -->
@@ -143,7 +154,7 @@
         Clientes Corporativos
       </a>
 
-      <!-- Botón 2: Unidades (Misma proporción exacta, bloqueado por ahora) -->
+      <!-- Botón 2: Unidades (Bloqueado por ahora) -->
       <button
         type="button"
         onclick="lockedUnidadesNotice(this)"
@@ -156,7 +167,7 @@
 
   </main>
 
-  <!-- Sincronización del Video + Motor Sparkles Core -->
+  <!-- Motor de Desbloqueo de Video Safari/iPad + Sparkles Core -->
   <script>
     function lockedUnidadesNotice(button) {
       const label = button.querySelector("#unidades-btn-text");
@@ -167,8 +178,7 @@
       }, 1600);
     }
 
-    // Sincroniza la aparición de "Hecho con amor", las partículas y los botones con el video
-    (function syncIntroTimeline() {
+    (function syncAndForcePlay() {
       const video = document.getElementById("querendona-intro-video");
       const phrase = document.getElementById("hecho-con-amor-text");
       const sparklesStage = document.getElementById("sparkles-stage");
@@ -190,22 +200,56 @@
         phrase.classList.add("hecho-con-amor-active");
       }
 
-      if (video) {
-        video.addEventListener("timeupdate", () => {
-          // A los 2.2s el logo ya cayó a su posición central -> encendemos haz de partículas y botones
-          if (video.currentTime >= 2.2) {
-            triggerStageAndButtons();
-          }
-          // A los 5.5s el rayo de luz termina de cruzar hacia la catedral -> barrido de "Hecho con amor"
-          if (video.currentTime >= 5.5) {
-            triggerPhrase();
-          }
-        });
+      if (!video) return;
 
-        // Respaldo por si el navegador bloquea autoplay o el archivo tarda en cargar
-        setTimeout(triggerStageAndButtons, 2400);
-        setTimeout(triggerPhrase, 5600);
+      // Forzar silencio explícito para WebKit/Safari
+      video.defaultMuted = true;
+      video.muted = true;
+      video.playsInline = true;
+
+      function attemptAutoPlay() {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Si el iPad está en Modo Ahorro de Batería y bloquea el autoplay:
+            // Saltamos al fotograma 7.0s donde el logo ya está abajo e iluminado para que nunca quede vacío
+            video.currentTime = 7.0;
+            triggerStageAndButtons();
+            triggerPhrase();
+          });
+        }
       }
+
+      // Intentar reproducir apenas cargue metadatos
+      if (video.readyState >= 2) {
+        attemptAutoPlay();
+      } else {
+        video.addEventListener("loadeddata", attemptAutoPlay, { once: true });
+      }
+
+      // Si Safari bloqueó por Ahorro de Batería, al primer toque en la pantalla arranca el video desde 0
+      const unlockOnTouch = () => {
+        if (video.paused && video.currentTime >= 6.8) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        } else if (video.paused) {
+          video.play().catch(() => {});
+        }
+        window.removeEventListener("touchstart", unlockOnTouch);
+        window.removeEventListener("click", unlockOnTouch);
+      };
+      window.addEventListener("touchstart", unlockOnTouch, { passive: true });
+      window.addEventListener("click", unlockOnTouch, { passive: true });
+
+      // Sincronizar con el avance real del video
+      video.addEventListener("timeupdate", () => {
+        if (video.currentTime >= 2.2) triggerStageAndButtons();
+        if (video.currentTime >= 5.5) triggerPhrase();
+      });
+
+      // Respaldo de seguridad
+      setTimeout(triggerStageAndButtons, 2300);
+      setTimeout(triggerPhrase, 5400);
     })();
 
     // Motor Sparkles Core
