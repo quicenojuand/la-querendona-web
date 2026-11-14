@@ -110,7 +110,7 @@
         webkit-playsinline="true"
         preload="auto"
         disablePictureInPicture
-        class="flow-video-seamless w-full h-[62dvh] sm:h-[72dvh] object-contain object-top -mb-12 sm:-mb-14"
+        class="flow-video-seamless w-full h-[82dvh] sm:h-[100dvh] object-contain object-top -mb-12 sm:-mb-14"
       ></video>
 
       <!-- Frase "HECHO CON AMOR" subida para que quede cerca del logo -->
@@ -230,8 +230,8 @@
 
       video.addEventListener("timeupdate", () => {
         if (video.currentTime >= 2.2) triggerStageAndButtons();
-        // RETRASADO A 6.2s: Para que la frase aparezca justo cuando el brillo de la luz termina de recorrer la catedral
-        if (video.currentTime >= 6.2) triggerPhrase();
+        // RETRASADO A 6.8s: Para que la frase aparezca justo cuando el brillo de la luz termina de recorrer la catedral
+        if (video.currentTime >= 6.8) triggerPhrase();
       });
 
       // Respaldo por temporizador ajustado
