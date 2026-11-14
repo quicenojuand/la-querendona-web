@@ -8,7 +8,7 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cormorant Garamond (Cursiva elegante) + Inter -->
+  <!-- Google Fonts: Cormorant Garamond + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -19,33 +19,33 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* Ocultar cualquier control nativo de video */
+    /* Ocultar controles nativos de video */
     video::-webkit-media-controls {
       display: none !important;
       -webkit-appearance: none !important;
     }
 
-    /* Video con mayor protagonismo (ocupa más espacio en pantalla) y fundido perfecto */
+    /* Video maximizado (protagonista absoluto de la pantalla) y fundido perfecto */
     .flow-video-seamless {
       mix-blend-mode: lighten;
       filter: contrast(1.16) brightness(0.96);
-      -webkit-mask-image: radial-gradient(ellipse 58% 88% at 50% 32%, #000 62%, transparent 99%);
-      mask-image: radial-gradient(ellipse 58% 88% at 50% 32%, #000 62%, transparent 99%);
+      -webkit-mask-image: radial-gradient(ellipse 65% 90% at 50% 35%, #000 65%, transparent 99%);
+      mask-image: radial-gradient(ellipse 65% 90% at 50% 35%, #000 65%, transparent 99%);
     }
 
     @media (max-width: 640px) {
       .flow-video-seamless {
-        -webkit-mask-image: radial-gradient(ellipse 85% 88% at 50% 34%, #000 68%, transparent 99%);
-        mask-image: radial-gradient(ellipse 85% 88% at 50% 34%, #000 68%, transparent 99%);
+        -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 36%, #000 72%, transparent 99%);
+        mask-image: radial-gradient(ellipse 90% 90% at 50% 36%, #000 72%, transparent 99%);
       }
     }
 
-    /* Barrido de izquierda a derecha para "HECHO CON AMOR" (En mayúsculas, cursiva elegante y gran tamaño) */
+    /* Barrido de izquierda a derecha para "HECHO CON AMOR" (tamaño sutil, elegante y proporcionado) */
     @keyframes sweepLeftToRight {
       0% {
         clip-path: inset(0 100% 0 0);
         opacity: 0;
-        transform: translateX(-12px);
+        transform: translateX(-10px);
       }
       20% {
         opacity: 1;
@@ -80,7 +80,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.55));
+      filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.45));
       opacity: 0;
     }
 
@@ -93,13 +93,13 @@
 </head>
 <body class="bg-black text-white antialiased overflow-hidden select-none">
 
-  <!-- PORTADA PRINCIPAL (Aprovecha todo el alto y ancho de la pantalla) -->
-  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-6 sm:pb-8 pt-1 overflow-hidden px-4">
+  <!-- PORTADA PRINCIPAL -->
+  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-6 sm:pb-8 pt-0 overflow-hidden px-4">
 
-    <!-- 1. Contenedor Superior: Video Ampliado + Frase "HECHO CON AMOR" -->
-    <div class="relative z-20 w-full max-w-4xl flex flex-col items-center justify-start pointer-events-none">
+    <!-- 1. Contenedor Superior: Video Maximizado + Frase "HECHO CON AMOR" (proporcionada) -->
+    <div class="relative z-20 w-full max-w-5xl flex flex-col items-center justify-start pointer-events-none">
       
-      <!-- Video con mayor protagonismo (70dvh en desktop, 62dvh en móvil) -->
+      <!-- Video con mayor protagonismo (74dvh en desktop, 66dvh en móvil) -->
       <video
         id="querendona-intro-video"
         src="./logo-intro.mp4"
@@ -110,29 +110,29 @@
         webkit-playsinline="true"
         preload="auto"
         disablePictureInPicture
-        class="flow-video-seamless w-full h-[62dvh] sm:h-[70dvh] object-contain object-top -mb-8 sm:-mb-10"
+        class="flow-video-seamless w-full h-[66dvh] sm:h-[74dvh] object-contain object-top -mb-4 sm:-mb-6"
       ></video>
 
-      <!-- Frase en MAYÚSCULAS, cursiva elegante y tamaño equilibrado -->
+      <!-- Frase en MAYÚSCULAS, cursiva elegante pero con tamaño discreto y armónico -->
       <div class="relative z-30 text-center">
-        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-bold text-3xl sm:text-4xl md:text-5xl tracking-[0.08em] uppercase">
+        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-lg sm:text-xl md:text-2xl tracking-[0.12em] uppercase">
           Hecho con amor
         </p>
       </div>
 
     </div>
 
-    <!-- 2. Haz de Luz Dorado y Partículas (Expandidas a lo ancho para ocupar más espacio) -->
-    <div id="sparkles-stage" class="w-full max-w-[48rem] h-14 sm:h-16 relative -mt-1 z-10 opacity-0 transition-opacity duration-1000">
-      <div class="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-5/6 mx-auto blur-sm opacity-95"></div>
-      <div class="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-5/6 mx-auto"></div>
-      <div class="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[4px] w-1/2 mx-auto blur-sm opacity-85"></div>
-      <div class="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-1/2 mx-auto"></div>
+    <!-- 2. Haz de Luz Dorado y Partículas -->
+    <div id="sparkles-stage" class="w-full max-w-[50rem] h-12 sm:h-14 relative z-10 opacity-0 transition-opacity duration-1000">
+      <div class="absolute inset-x-6 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-11/12 mx-auto blur-sm opacity-90"></div>
+      <div class="absolute inset-x-6 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-11/12 mx-auto"></div>
+      <div class="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[3px] w-2/3 mx-auto blur-sm opacity-80"></div>
+      <div class="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-2/3 mx-auto"></div>
 
       <canvas id="sparkles-canvas" class="w-full h-full block"></canvas>
 
-      <!-- Máscara Radial Ampliada -->
-      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(450px_90px_at_top,transparent_15%,white)]"></div>
+      <!-- Máscara Radial -->
+      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_70px_at_top,transparent_10%,white)]"></div>
     </div>
 
     <!-- 3. Dos Botones Blancos Gemelos 3D -->
@@ -159,7 +159,7 @@
 
   </main>
 
-  <!-- Script de Sincronización y Partículas Anchas -->
+  <!-- Script de Sincronización y Partículas -->
   <script>
     function lockedUnidadesNotice(button) {
       const label = button.querySelector("#unidades-btn-text");
@@ -237,7 +237,7 @@
       setTimeout(triggerPhrase, 5400);
     })();
 
-    // Motor Sparkles Core expandido a lo ancho
+    // Motor Sparkles Core
     (function initSparkles() {
       const canvas = document.getElementById("sparkles-canvas");
       if (!canvas) return;
@@ -259,7 +259,7 @@
 
       function createParticles() {
         particles = [];
-        for (let i = 0; i < 140; i++) {
+        for (let i = 0; i < 120; i++) {
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
