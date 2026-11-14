@@ -11,6 +11,51 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- =====================================================================
+       DETECTOR INTELIGENTE DE IMÁGENES (.JPG / .jpg / .jpeg / .PNG / MAYÚSCULAS)
+       Se ejecuta antes de cargar la página para que el formato del iPad nunca falle
+       ===================================================================== -->
+  <script>
+    window.tryNextExt = function (img) {
+      if (!img) return;
+      const raw = img.getAttribute('data-base') || img.getAttribute('src') || '';
+      const cleanBase = raw.split('?')[0].replace(/\.(JPG|jpg|JPEG|jpeg|PNG|png|WEBP|webp)$/, '');
+      if (!cleanBase) return;
+      img.setAttribute('data-base', cleanBase);
+
+      const upperBase = cleanBase.toUpperCase();
+      const lowerBase = cleanBase.toLowerCase();
+      const candidates = [
+        lowerBase + '.JPG',
+        lowerBase + '.jpg',
+        upperBase + '.JPG',
+        upperBase + '.jpg',
+        lowerBase + '.jpeg',
+        lowerBase + '.JPEG',
+        upperBase + '.JPEG',
+        lowerBase + '.png',
+        lowerBase + '.PNG',
+        upperBase + '.PNG'
+      ];
+
+      let idx = parseInt(img.getAttribute('data-ext-idx') || '0', 10);
+      while (idx < candidates.length && img.src.endsWith('/' + candidates[idx])) {
+        idx++;
+      }
+      if (idx < candidates.length) {
+        img.setAttribute('data-ext-idx', String(idx + 1));
+        img.src = candidates[idx];
+      } else if (img.getAttribute('data-is-logo') === 'true') {
+        img.style.display = 'none';
+        const fallbackId = img.getAttribute('data-fallback-id');
+        if (fallbackId && document.getElementById(fallbackId)) {
+          document.getElementById(fallbackId).classList.remove('hidden');
+        }
+      }
+    };
+  </script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -81,29 +126,65 @@
 </head>
 <body class="bg-white text-ink-950 selection:bg-querendona-700 selection:text-white">
 
-  <!-- Cortina de Bienvenida Institucional -->
+  <!-- =====================================================================
+       CORTINA DE ENTRADA CON EL LOGOTIPO OFICIAL DE LA QUERENDONA
+       ===================================================================== -->
   <div id="brand-preloader" class="fixed inset-0 z-[100] bg-querendona-700 text-white flex flex-col justify-between p-6 sm:p-12">
     <div class="flex items-center justify-between text-[11px] font-mono tracking-[0.25em] text-panela-400 uppercase">
       <span>LA QUERENDONA FOODS</span>
       <span>PEREIRA · DOSQUEBRADAS · ARMENIA</span>
     </div>
-    <div class="my-auto text-center max-w-2xl mx-auto">
-      <p class="font-mono text-xs uppercase tracking-[0.35em] text-panela-400 mb-3">Reconstruyendo el Sabor</p>
-      <h1 class="font-serif italic text-5xl sm:text-7xl leading-none mb-6">La Querendona</h1>
-      <div class="w-48 h-[1px] bg-white/20 mx-auto overflow-hidden mb-6">
+
+    <div class="my-auto text-center max-w-2xl mx-auto flex flex-col items-center">
+      <!-- Imagen del Logotipo Oficial (logo.JPG / logo.jpg / logo.png) -->
+      <img
+        src="logo.JPG"
+        alt="Logotipo Oficial La Querendona — Reconstruyendo el Sabor"
+        data-is-logo="true"
+        data-fallback-id="preloader-svg-logo"
+        onerror="tryNextExt(this)"
+        class="w-72 sm:w-96 h-auto rounded-3xl border border-panela-400/40 shadow-2xl mb-6 object-contain"
+      />
+
+      <!-- Respaldo Vectorial Automático con el Viaducto y la Catedral si aún no se ha subido logo.JPG -->
+      <div id="preloader-svg-logo" class="hidden mb-6 px-8 py-6 rounded-[2.5rem] border-2 border-panela-400 bg-querendona-700 shadow-2xl">
+        <svg viewBox="0 0 420 120" class="w-64 sm:w-80 h-auto mx-auto stroke-panela-400 fill-none" stroke-width="1.8">
+          <!-- Viaducto César Gaviria Trujillo -->
+          <line x1="20" y1="82" x2="220" y2="82" />
+          <path d="M75 88 L80 28 L86 28 L91 88 M165 88 L170 28 L176 28 L181 88" />
+          <line x1="80" y1="34" x2="35" y2="82" /><line x1="80" y1="42" x2="50" y2="82" /><line x1="80" y1="50" x2="64" y2="82" />
+          <line x1="86" y1="34" x2="128" y2="82" /><line x1="86" y1="42" x2="115" y2="82" /><line x1="86" y1="50" x2="102" y2="82" />
+          <line x1="170" y1="34" x2="130" y2="82" /><line x1="170" y1="42" x2="144" y2="82" />
+          <line x1="176" y1="34" x2="218" y2="82" /><line x1="176" y1="42" x2="204" y2="82" />
+          <!-- Arcos Centrales -->
+          <path d="M215 82 Q240 60 265 82 Q290 60 315 82" />
+          <!-- Catedral de Pereira -->
+          <rect x="320" y="52" width="18" height="30" />
+          <path d="M320 52 Q329 30 338 52 M329 30 L329 22 M326 25 L332 25" />
+          <path d="M348 82 L348 64 L390 64 L390 82 M354 64 Q369 34 384 64 M369 34 L369 26" />
+        </svg>
+        <span class="block font-serif text-3xl sm:text-5xl tracking-wider text-panela-400 font-bold mt-1">LA QUERENDONA®</span>
+        <span class="block font-sans text-xs tracking-[0.22em] text-panela-400/90 mt-1">Reconstruyendo el sabor</span>
+      </div>
+
+      <div class="w-48 h-[1px] bg-white/25 mx-auto overflow-hidden mb-6">
         <div id="preloader-fill" class="h-full bg-panela-400 w-0 transition-all duration-700"></div>
       </div>
-      <button type="button" onclick="enterExperience()" class="px-7 py-3 rounded-full bg-white text-querendona-700 font-mono text-xs uppercase tracking-[0.2em] font-semibold hover:bg-panela-400 hover:text-ink-950 transition">
-        Ingresar al Catálogo Oficial →
+
+      <button type="button" onclick="enterExperience()" class="px-8 py-3.5 rounded-full bg-panela-400 text-ink-950 font-mono text-xs uppercase tracking-[0.2em] font-bold hover:bg-white transition shadow-lg">
+        Ingresar a La Querendona →
       </button>
     </div>
+
     <div class="flex items-center justify-between text-[10px] font-mono text-white/70 uppercase tracking-widest">
       <span>WhatsApp Compras: +57 311 648 8685</span>
       <span>Comercial@laquerendonafoods.com</span>
     </div>
   </div>
 
-  <!-- Barra Superior Oficial -->
+  <!-- =====================================================================
+       BARRA SUPERIOR CON EL LOGOTIPO OFICIAL Y ACCESO AL CATÁLOGO
+       ===================================================================== -->
   <header class="sticky top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md hairline-b">
     <div class="bg-alabaster hairline-b px-4 sm:px-8 py-2 text-[11px] font-mono text-ink-600 flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center gap-2">
@@ -118,9 +199,17 @@
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-3">
       <a href="#inicio" class="text-left group flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-querendona-700 text-white flex items-center justify-center font-serif italic text-xl shadow-sm group-hover:scale-105 transition">
+        <img
+          src="logo.JPG"
+          alt="La Querendona"
+          data-is-logo="true"
+          data-fallback-id="header-fallback-badge"
+          onerror="tryNextExt(this)"
+          class="h-12 sm:h-14 w-auto rounded-xl object-contain shadow-sm"
+        />
+        <div id="header-fallback-badge" class="hidden w-10 h-10 rounded-full bg-querendona-700 text-panela-400 border border-panela-400 flex items-center justify-center font-serif italic text-xl shadow-sm">
           Q
         </div>
         <div>
@@ -138,9 +227,9 @@
       </nav>
 
       <div class="flex items-center gap-2.5">
-        <a href="https://docs.google.com/document/d/1T-wUzzqyEzWGar2O5vy_1Oo8UnEZBEiC-zRvlUzHUDo/export?format=pdf" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex px-4 py-2 rounded-full bg-panela-100 border border-panela-400/50 text-ink-950 text-xs font-mono uppercase tracking-wider hover:bg-panela-400 transition">
+        <button type="button" onclick="openCatalogLeadModal()" class="px-4 py-2.5 rounded-full bg-panela-100 border border-panela-400/70 text-ink-950 text-xs font-mono uppercase tracking-wider font-semibold hover:bg-panela-400 transition">
           ⬇ Catálogo PDF
-        </a>
+        </button>
         <button type="button" onclick="toggleCartDrawer()" class="px-5 py-2.5 rounded-full bg-querendona-700 text-white text-xs font-mono uppercase tracking-wider hover:bg-ink-950 transition flex items-center gap-2 shadow-sm">
           <span>Mi Pedido</span>
           <span id="cart-count-badge" class="px-2 py-0.5 rounded-full bg-panela-400 text-ink-950 font-bold text-[11px]">100</span>
@@ -178,9 +267,9 @@
               <a href="#catalogo" class="px-7 py-3.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-md">
                 Ver Portafolio Navidad (REF-01 a REF-06) →
               </a>
-              <a href="#calculador" class="px-7 py-3.5 rounded-full bg-alabaster hairline-box text-ink-950 font-mono text-xs uppercase tracking-wider hover:border-ink-950 transition">
-                Calcular Cotización
-              </a>
+              <button type="button" onclick="openCatalogLeadModal()" class="px-7 py-3.5 rounded-full bg-panela-100 border border-panela-400 text-ink-950 font-mono text-xs uppercase tracking-wider font-semibold hover:bg-panela-400 transition">
+                ⬇ Descargar Catálogo Corporativo PDF
+              </button>
             </div>
 
             <div class="hero-anim grid grid-cols-3 gap-4 pt-6 hairline-t">
@@ -199,7 +288,7 @@
             </div>
           </div>
 
-          <!-- Imagen / Video Maestro en Fondo Blanco Infinito (Sin Bordes) -->
+          <!-- Imagen / Video Maestro en Fondo Blanco Infinito -->
           <div class="lg:col-span-6">
             <div class="luxury-card relative rounded-[2rem] overflow-hidden bg-white p-2" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
               <video
@@ -207,12 +296,18 @@
                 loop
                 muted
                 playsinline
-                poster="hero-bunuelos.jpg"
-                class="w-full h-auto rounded-[1.75rem] object-cover"
+                class="w-full h-auto rounded-[1.75rem] object-cover hidden"
+                onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
               >
                 <source src="web-hero-bunuelos.mp4" type="video/mp4" />
-                <img src="hero-bunuelos.jpg" alt="Buñuelos dorados y reducción de mora La Querendona" class="w-full h-auto rounded-[1.75rem]" />
+                <source src="web-hero-bunuelos.MP4" type="video/mp4" />
               </video>
+              <img
+                src="hero-bunuelos.JPG"
+                alt="Buñuelos dorados y reducción de mora La Querendona"
+                onerror="tryNextExt(this)"
+                class="w-full h-auto rounded-[1.75rem] object-cover"
+              />
             </div>
           </div>
         </div>
@@ -237,7 +332,7 @@
     </div>
 
     <!-- ===================================================================
-         SECCIÓN 1: ARTE CULINARIO EN GRAVEDAD CERO (LAS 4 ESCENAS EXCLUSIVAS WEB)
+         SECCIÓN 1: ARTE CULINARIO EN GRAVEDAD CERO (SIN BOTÓN DE VIDEO ANTIGUO)
          =================================================================== -->
     <section id="experiencia" class="py-20 px-4 sm:px-8 bg-white hairline-b">
       <div class="max-w-7xl mx-auto">
@@ -251,19 +346,20 @@
               Maíz trillado, carnes seleccionadas en cocción lenta, panela de trapiche, mora de Castilla, queso costeño y mantequilla batida artesanalmente.
             </p>
           </div>
-          <a href="https://drive.google.com/file/d/1pxOl9kZIFG4d_mV_e6XRYPoc2QkeiVk8/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="shrink-0 px-6 py-3 rounded-full bg-ink-950 text-white font-mono text-xs uppercase tracking-wider hover:bg-querendona-700 transition">
-            🎬 Ver Video Comercial 4K ↗
-          </a>
+          <button type="button" onclick="openCatalogLeadModal()" class="shrink-0 px-6 py-3 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition">
+            ⬇ Solicitar Catálogo Corporativo PDF
+          </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- Escena 1: Buñuelos & Mora -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-video rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline poster="hero-bunuelos.jpg" class="w-full h-full object-cover">
+              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
                 <source src="web-hero-bunuelos.mp4" type="video/mp4" />
-                <img src="hero-bunuelos.jpg" alt="Buñuelos dorados y reducción de mora" class="w-full h-full object-cover" />
+                <source src="web-hero-bunuelos.MP4" type="video/mp4" />
               </video>
+              <img src="hero-bunuelos.JPG" alt="Buñuelos dorados y reducción de mora" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-end justify-between gap-4">
               <div>
@@ -277,10 +373,11 @@
           <!-- Escena 2: Tamal en Hoja de Bijao -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-video rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline poster="hero-tamal.jpg" class="w-full h-full object-cover">
+              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
                 <source src="web-tamal-3d.mp4" type="video/mp4" />
-                <img src="hero-tamal.jpg" alt="Tamal Pereirano en hoja de bijao" class="w-full h-full object-cover" />
+                <source src="web-tamal-3d.MP4" type="video/mp4" />
               </video>
+              <img src="hero-tamal.JPG" alt="Tamal Pereirano en hoja de bijao" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-end justify-between gap-4">
               <div>
@@ -294,10 +391,11 @@
           <!-- Escena 3: Mantequilla Artesanal & Pan Don Gerardo -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline poster="hero-mantequilla.jpg" class="w-full h-full object-cover">
+              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
                 <source src="web-mantequilla-3d.mp4" type="video/mp4" />
-                <img src="hero-mantequilla.jpg" alt="Mantequilla Artesanal y Pan Aliñado Don Gerardo" class="w-full h-full object-cover" />
+                <source src="web-mantequilla-3d.MP4" type="video/mp4" />
               </video>
+              <img src="hero-mantequilla.JPG" alt="Mantequilla Artesanal y Pan Aliñado Don Gerardo" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-end justify-between gap-4">
               <div>
@@ -311,10 +409,11 @@
           <!-- Escena 4: Natilla Imperial & Mini Buñuelos -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline poster="hero-natilla.jpg" class="w-full h-full object-cover">
+              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
                 <source src="web-natilla-3d.mp4" type="video/mp4" />
-                <img src="hero-natilla.jpg" alt="Natilla Imperial de panela con mora y mini buñuelos" class="w-full h-full object-cover" />
+                <source src="web-natilla-3d.MP4" type="video/mp4" />
               </video>
+              <img src="hero-natilla.JPG" alt="Natilla Imperial de panela con mora y mini buñuelos" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-end justify-between gap-4">
               <div>
@@ -344,7 +443,6 @@
             </p>
           </div>
 
-          <!-- Selector de Escala Corporativa Oficial -->
           <div class="p-2 rounded-2xl bg-white hairline-box flex items-center gap-2 self-start lg:self-auto shadow-sm">
             <button type="button" id="scale-btn-1" onclick="setCorporateScale(1)" class="px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-querendona-700 text-white transition">
               Escala 1: 100 a 500 unds (Base)
@@ -355,7 +453,6 @@
           </div>
         </div>
 
-        <!-- Grid de las 6 Referencias Oficiales Aprobadas (REF-01 a REF-06) -->
         <div id="corporate-catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 
         <!-- Tabla Oficial Resumen de Precios y Escalas Corporativas -->
@@ -365,9 +462,9 @@
               <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">3. Resumen Oficial de Precios</span>
               <h3 class="font-serif text-3xl text-ink-950">Tabla de Escalas Corporativas (Desde 100 Unidades)</h3>
             </div>
-            <a href="https://docs.google.com/document/d/1T-wUzzqyEzWGar2O5vy_1Oo8UnEZBEiC-zRvlUzHUDo/export?format=pdf" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition">
+            <button type="button" onclick="openCatalogLeadModal()" class="px-5 py-2.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-sm">
               ⬇ Descargar Catálogo Corporativo en PDF
-            </a>
+            </button>
           </div>
 
           <table class="w-full text-left border-collapse">
@@ -437,14 +534,14 @@
     </section>
 
     <!-- ===================================================================
-         SECCIÓN 3: LÍNEA PERMANENTE HOGAR & VACÍO (LQ-01 A LQ-07)
+         SECCIÓN 3: LÍNEA PERMANENTE HOGAR & VACÍO (LQ-01 A LQ-06)
          =================================================================== -->
     <section id="linea-hogar" class="py-20 px-4 sm:px-8 bg-white hairline-b">
       <div class="max-w-7xl mx-auto">
         <div class="mb-10">
           <span class="font-mono text-xs uppercase tracking-[0.28em] text-bijao-700">03 · Línea Permanente para el Hogar y Puntos de Venta</span>
           <h2 class="font-serif text-4xl sm:text-5xl text-ink-950 mt-1 leading-none">
-            Tamales al Vacío, Mantequilla Artesanal &amp; Acompañantes
+            Tamales al Vacío, Fiambre, Mantequilla Artesanal &amp; Acompañantes
           </h2>
         </div>
 
@@ -540,21 +637,104 @@
     </section>
   </main>
 
-  <!-- Pie de Página Oficial -->
-  <footer class="bg-white hairline-t py-14 px-4 sm:px-8 pb-24">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-xs text-ink-600">
-      <div class="space-y-1">
-        <strong class="font-serif text-2xl text-ink-950 block">La Querendona Foods — "Reconstruyendo el Sabor"</strong>
-        <p>Pereira · Dosquebradas · Armenia | @laquerendonafoods</p>
+  <!-- =====================================================================
+       PIE DE PÁGINA OFICIAL CON EL LOGOTIPO DE LA QUERENDONA
+       ===================================================================== -->
+  <footer class="bg-querendona-700 text-white hairline-t py-16 px-4 sm:px-8 pb-28">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+        <img
+          src="logo.JPG"
+          alt="Logotipo Oficial La Querendona"
+          data-is-logo="true"
+          data-fallback-id="footer-svg-logo"
+          onerror="tryNextExt(this)"
+          class="w-48 sm:w-56 h-auto rounded-2xl border border-panela-400/40 shadow-lg object-contain"
+        />
+        <div id="footer-svg-logo" class="hidden px-5 py-3 rounded-2xl border border-panela-400 text-center">
+          <span class="block font-serif text-2xl text-panela-400 font-bold">LA QUERENDONA®</span>
+          <span class="block font-mono text-[10px] text-panela-400/80 uppercase tracking-widest">Reconstruyendo el sabor</span>
+        </div>
+        <div class="space-y-1">
+          <strong class="font-serif text-2xl sm:text-3xl text-panela-400 block">La Querendona Foods</strong>
+          <p class="text-xs text-white/80">Soluciones Gastronómicas Corporativas y Familiares · Pereira · Dosquebradas · Armenia</p>
+          <p class="font-mono text-[11px] text-panela-400">@laquerendonafoods · www.laquerendonafoods.com</p>
+        </div>
       </div>
-      <div class="flex flex-wrap items-center gap-6 font-mono text-[11px]">
-        <a href="mailto:Comercial@laquerendonafoods.com" class="hover:text-ink-950 underline">Comercial@laquerendonafoods.com</a>
-        <a href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="text-querendona-700 font-semibold hover:underline">
+
+      <div class="flex flex-col sm:items-end gap-2 font-mono text-xs">
+        <button type="button" onclick="openCatalogLeadModal()" class="px-5 py-2.5 rounded-full bg-panela-400 text-ink-950 font-bold uppercase tracking-wider hover:bg-white transition">
+          ⬇ Descargar Catálogo PDF
+        </button>
+        <a href="mailto:Comercial@laquerendonafoods.com" class="text-white/90 hover:text-panela-400 underline mt-1">Comercial@laquerendonafoods.com</a>
+        <a href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="text-panela-400 font-semibold hover:underline">
           WhatsApp Compras: +57 311 648 8685 ↗
         </a>
       </div>
     </div>
   </footer>
+
+  <!-- =====================================================================
+       MODAL DE CAPTURA DE DATOS PARA DESCARGAR EL CATÁLOGO PDF EN VERCEL
+       ===================================================================== -->
+  <div id="catalog-lead-modal" class="fixed inset-0 z-[110] bg-ink-950/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-lg rounded-[2rem] bg-white hairline-box p-6 sm:p-9 shadow-2xl relative">
+      <button type="button" onclick="closeCatalogLeadModal()" class="absolute top-5 right-5 px-3 py-1.5 rounded-full bg-alabaster hairline-box font-mono text-xs hover:bg-ink-950 hover:text-white transition">
+        ✕
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-querendona-700 text-panela-400 flex items-center justify-center font-serif italic text-xl font-bold">
+          Q
+        </div>
+        <div>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700 block">Catálogo Oficial Navidad 2026</span>
+          <h3 class="font-serif text-3xl text-ink-950 leading-none">Descarga Inmediata en PDF</h3>
+        </div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-ink-600 leading-relaxed mb-5">
+        Déjanos tus datos de contacto para iniciar la descarga directa de nuestro <strong>Catálogo Corporativo Navidad 2026</strong> y brindarte atención prioritaria en tus cotizaciones.
+      </p>
+
+      <form id="catalog-lead-form" onsubmit="submitCatalogLead(event)" class="space-y-3.5">
+        <div>
+          <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Nombre Completo *</label>
+          <input id="lead-name" type="text" required placeholder="Ej. María Fernanda Gómez" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Empresa o Entidad *</label>
+            <input id="lead-company" type="text" required placeholder="Nombre de tu empresa o Familia" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
+          </div>
+          <div>
+            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">WhatsApp / Celular *</label>
+            <input id="lead-phone" type="tel" required placeholder="Ej. 311 648 8685" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Correo Electrónico *</label>
+            <input id="lead-email" type="email" required placeholder="compras@empresa.com" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
+          </div>
+          <div>
+            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Cantidad Estimada</label>
+            <select id="lead-volume" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700">
+              <option value="100 a 500 unidades (Escala 1)">100 a 500 unidades (Escala 1)</option>
+              <option value="501+ unidades (Escala 2 -4% Dto.)">501+ unidades (Escala 2 · -4%)</option>
+              <option value="Pedido Hogar / Familiar">Pedido Hogar / Familiar</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="lead-submit-btn" type="submit" class="w-full py-4 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider font-semibold hover:bg-ink-950 transition shadow-lg mt-2">
+          ⬇ Registrar Datos y Descargar Catálogo PDF Ahora
+        </button>
+      </form>
+    </div>
+  </div>
 
   <!-- Carrito Lateral -->
   <div id="cart-drawer" class="fixed inset-0 z-[95] bg-ink-950/40 backdrop-blur-sm hidden justify-end">
@@ -603,7 +783,7 @@
     setTimeout(() => {
       const p = document.getElementById('brand-preloader');
       if (p && !p.classList.contains('curtain-up')) enterExperience();
-    }, 1400);
+    }, 1800);
 
     try {
       const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
@@ -625,7 +805,7 @@
       el.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateY(0px)';
     }
 
-    // 6 PRODUCTOS CORPORATIVOS APROBADOS (REF-01 A REF-06)
+    // 6 PRODUCTOS CORPORATIVOS APROBADOS (CON .JPG POR DEFECTO Y DETECTOR AUTOMÁTICO)
     const CORPORATE_REFS = [
       {
         sku: 'REF-01',
@@ -677,14 +857,14 @@
       }
     ];
 
-    // LÍNEA PERMANENTE HOGAR & VACÍO (CON TUS FOTOS PROPIAS Y DE DRIVE)
+    // 6 PRODUCTOS LÍNEA HOGAR & VACÍO (CON SUS FOTOS PROPIAS LQ-01.JPG A LQ-06.JPG)
     const PERMANENT_SKUS = [
-      { sku: 'LQ-01', name: 'Pack ×3 Tamales al Vacío', specs: '3 tamales pereiranos en hoja de bijao empacados al vacío listos en 8 minutos.', scale1Price: 28000, scale2Price: 28000, img: 'hero-tamal.JPG' },
-      { sku: 'LQ-02', name: 'Tamal Individual Caliente', specs: 'Tamal pereirano tradicional recién salido de vaporera.', scale1Price: 16000, scale2Price: 16000, img: 'ref-05.JPG' },
-      { sku: 'LQ-03', name: 'Fiambre Tradicional en Hoja', specs: 'Auténtico fiambre montañero en hoja de bijao soasada.', scale1Price: 25000, scale2Price: 25000, img: 'hero-tamal.JPG' },
-      { sku: 'LQ-04', name: 'Mantequilla Artesanal 250 g', specs: 'Tarrina de 250 g de mantequilla batida artesanalmente.', scale1Price: 14000, scale2Price: 14000, img: 'hero-mantequilla.JPG' },
-      { sku: 'LQ-05', name: 'Guacamole Rústico 250 g', specs: 'Aguacate Hass del Eje Cafetero en textura rústica.', scale1Price: 12000, scale2Price: 12000, img: 'hero-tamal.jpg' },
-      { sku: 'LQ-06', name: 'Pan Aliñado (Don Gerardo)', specs: 'Horneado artesanal en colaboración con Panadería Don Gerardo.', scale1Price: 12000, scale2Price: 12000, img: 'hero-mantequilla.JPG' }
+      { sku: 'LQ-01', name: 'Pack ×3 Tamales al Vacío', specs: '3 tamales pereiranos en hoja de bijao empacados al vacío listos en 8 minutos.', scale1Price: 28000, scale2Price: 28000, img: 'lq-01.JPG' },
+      { sku: 'LQ-02', name: 'Tamal Individual Caliente', specs: 'Tamal pereirano tradicional recién salido de vaporera.', scale1Price: 16000, scale2Price: 16000, img: 'lq-02.JPG' },
+      { sku: 'LQ-03', name: 'Fiambre Tradicional en Hoja', specs: 'Auténtico fiambre montañero en hoja de bijao con arroz blanco, carne en hogao, mazorca, yuca y papa.', scale1Price: 25000, scale2Price: 25000, img: 'lq-03.JPG' },
+      { sku: 'LQ-04', name: 'Mantequilla Artesanal 250 g', specs: 'Tarrina de 250 g de mantequilla batida artesanalmente.', scale1Price: 14000, scale2Price: 14000, img: 'lq-04.JPG' },
+      { sku: 'LQ-05', name: 'Guacamole Rústico 250 g', specs: 'Aguacate Hass del Eje Cafetero en textura rústica.', scale1Price: 12000, scale2Price: 12000, img: 'lq-05.JPG' },
+      { sku: 'LQ-06', name: 'Pan Aliñado (Don Gerardo)', specs: 'Horneado artesanal en colaboración con Panadería Don Gerardo.', scale1Price: 12000, scale2Price: 12000, img: 'lq-06.JPG' }
     ];
 
     const ALL_PRODUCTS = [...CORPORATE_REFS, ...PERMANENT_SKUS];
@@ -715,7 +895,7 @@
             <article class="luxury-card rounded-3xl bg-white hairline-box overflow-hidden flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
               <div>
                 <div class="aspect-[4/5] overflow-hidden bg-alabaster relative">
-                  <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" />
+                  <img src="${item.img}" alt="${item.name}" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
                   <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-querendona-700 font-mono text-[10px] uppercase font-bold shadow-sm">
                     ${item.sku}
                   </span>
@@ -751,7 +931,7 @@
           <article class="luxury-card rounded-3xl bg-alabaster/70 hairline-box overflow-hidden flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div>
               <div class="aspect-[16/11] overflow-hidden bg-white relative">
-                <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" />
+                <img src="${item.img}" alt="${item.name}" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
                 <span class="absolute bottom-3 right-3 px-3.5 py-1 rounded-full bg-ink-950 text-white font-mono text-xs font-semibold">
                   ${formatCOP(item.scale1Price)}
                 </span>
@@ -769,6 +949,96 @@
           </article>
         `).join('');
       }
+    }
+
+    // LÓGICA DEL MODAL DE REGISTRO Y DESCARGA DEL CATÁLOGO PDF DESDE VERCEL
+    function openCatalogLeadModal() {
+      const m = document.getElementById('catalog-lead-modal');
+      if (m) {
+        m.classList.remove('hidden');
+        m.classList.add('flex');
+      }
+    }
+
+    function closeCatalogLeadModal() {
+      const m = document.getElementById('catalog-lead-modal');
+      if (m) {
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+      }
+    }
+
+    async function triggerVercelPdfDownload() {
+      const pdfCandidates = [
+        'catalogo.pdf',
+        'Catalogo_Corporativo_Navidad_2026_La_Querendona.pdf',
+        'CATALOGO.PDF',
+        'catalogo-la-querendona.pdf'
+      ];
+      for (const candidate of pdfCandidates) {
+        try {
+          const res = await fetch(candidate, { method: 'HEAD' });
+          if (res.ok) {
+            const a = document.createElement('a');
+            a.href = candidate;
+            a.download = 'Catalogo_Corporativo_Navidad_2026_La_Querendona.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            return;
+          }
+        } catch (err) {}
+      }
+      // Respaldo directo de descarga en caso de que el archivo PDF aún se esté subiendo a GitHub
+      window.open('https://docs.google.com/document/d/1T-wUzzqyEzWGar2O5vy_1Oo8UnEZBEiC-zRvlUzHUDo/export?format=pdf', '_blank');
+    }
+
+    async function submitCatalogLead(e) {
+      e.preventDefault();
+      const name = document.getElementById('lead-name').value.trim();
+      const company = document.getElementById('lead-company').value.trim();
+      const phone = document.getElementById('lead-phone').value.trim();
+      const email = document.getElementById('lead-email').value.trim();
+      const volume = document.getElementById('lead-volume').value;
+      const btn = document.getElementById('lead-submit-btn');
+
+      if (btn) btn.textContent = 'Procesando y Descargando PDF...';
+
+      // 1. Guardar respaldo en localStorage
+      try {
+        const leads = JSON.parse(localStorage.getItem('lq_catalog_leads') || '[]');
+        leads.push({ fecha: new Date().toISOString(), name, company, phone, email, volume });
+        localStorage.setItem('lq_catalog_leads', JSON.stringify(leads));
+      } catch (err) {}
+
+      // 2. Enviar datos del cliente al correo corporativo Comercial@laquerendonafoods.com
+      try {
+        fetch('https://formsubmit.co/ajax/Comercial@laquerendonafoods.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Nuevo Cliente Descargó el Catálogo Navidad 2026 — ' + company,
+            Nombre: name,
+            Empresa: company,
+            WhatsApp: phone,
+            Correo: email,
+            Volumen_Estimado: volume
+          })
+        });
+      } catch (err) {}
+
+      // 3. Descargar inmediatamente el PDF alojado en Vercel
+      await triggerVercelPdfDownload();
+
+      // 4. Notificar registro en WhatsApp corporativo (+57 311 648 8685)
+      const waLeadText = `Hola La Querendona Foods, acabo de descargar el Catálogo Corporativo Navidad 2026 desde la web:\n• Nombre: ${name}\n• Empresa: ${company}\n• WhatsApp: ${phone}\n• Correo: ${email}\n• Volumen estimado: ${volume}`;
+      window.open('https://wa.me/573116488685?text=' + encodeURIComponent(waLeadText), '_blank');
+
+      if (btn) btn.textContent = '✓ Catálogo Descargado';
+      setTimeout(() => {
+        closeCatalogLeadModal();
+        if (btn) btn.textContent = '⬇ Registrar Datos y Descargar Catálogo PDF Ahora';
+      }, 1200);
     }
 
     function addToCart(sku, qtyToAdd) {
