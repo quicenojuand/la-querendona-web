@@ -17,6 +17,9 @@
     body {
       background-color: #000000;
       font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
     }
 
     /* Ocultar controles nativos de video */
@@ -25,7 +28,7 @@
       -webkit-appearance: none !important;
     }
 
-    /* Video maximizado y fundido perfecto */
+    /* Video con tus tamaños exactos (90dvh en móvil, 100dvh en computador) y fundido perfecto */
     .flow-video-seamless {
       mix-blend-mode: lighten;
       filter: contrast(1.16) brightness(0.96);
@@ -93,13 +96,13 @@
 </head>
 <body class="bg-black text-white antialiased overflow-hidden select-none">
 
-  <!-- PORTADA PRINCIPAL (Usa min-h-[100dvh] y padding seguro para evitar que la barra de Safari pise los botones) -->
-  <main class="relative min-h-[100dvh] w-full bg-black flex flex-col items-center justify-between pb-8 sm:pb-8 pt-0 overflow-hidden px-4">
+  <!-- PORTADA PRINCIPAL (Altura fija de 100dvh para que todo entre en el primer pantallazo sin scroll) -->
+  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between py-3 sm:py-4 overflow-hidden px-4">
 
-    <!-- 1. Contenedor Superior: Video Maximizado + Frase "HECHO CON AMOR" (subida de posición) -->
+    <!-- 1. Contenedor Superior: Video (90dvh / 100dvh) + Frase "HECHO CON AMOR" -->
     <div class="relative z-25 w-full max-w-5xl flex flex-col items-center justify-start pointer-events-none">
       
-      <!-- Video (mantiene tus tamaños personalizados de 80 en móvil / 100 en página) -->
+      <!-- Video respetando tus tamaños de 90 en móvil y 100 en PC -->
       <video
         id="querendona-intro-video"
         src="./logo-intro.mp4"
@@ -110,12 +113,12 @@
         webkit-playsinline="true"
         preload="auto"
         disablePictureInPicture
-        class="flow-video-seamless w-full h-[90dvh] sm:h-[100dvh] object-contain object-top -mb-12 sm:-mb-14"
+        class="flow-video-seamless w-full h-[90dvh] sm:h-[100dvh] object-contain object-top -mb-14 sm:-mb-20"
       ></video>
 
-      <!-- Frase "HECHO CON AMOR" subida para que quede cerca del logo -->
-      <div class="relative z-30 text-center -mt-2 sm:-mt-3">
-        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-lg sm:text-xl md:text-2xl tracking-[0.12em] uppercase">
+      <!-- Frase "HECHO CON AMOR" reubicada para subirla elegantemente -->
+      <div class="relative z-30 text-center -mt-6 sm:-mt-8">
+        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-base sm:text-xl md:text-2xl tracking-[0.12em] uppercase">
           Hecho con amor
         </p>
       </div>
@@ -123,7 +126,7 @@
     </div>
 
     <!-- 2. Haz de Luz Dorado y Partículas -->
-    <div id="sparkles-stage" class="w-full max-w-[50rem] h-12 sm:h-14 relative z-10 opacity-0 transition-opacity duration-1000">
+    <div id="sparkles-stage" class="w-full max-w-[46rem] h-10 sm:h-12 relative z-10 opacity-0 transition-opacity duration-1000">
       <div class="absolute inset-x-6 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-11/12 mx-auto blur-sm opacity-90"></div>
       <div class="absolute inset-x-6 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-11/12 mx-auto"></div>
       <div class="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[3px] w-2/3 mx-auto blur-sm opacity-80"></div>
@@ -132,16 +135,16 @@
       <canvas id="sparkles-canvas" class="w-full h-full block"></canvas>
 
       <!-- Máscara Radial -->
-      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_70px_at_top,transparent_10%,white)]"></div>
+      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_60px_at_top,transparent_10%,white)]"></div>
     </div>
 
-    <!-- 3. Dos Botones Blancos Gemelos 3D (Subidos en móvil para evitar que la barra de Safari los pise) -->
-    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700 pb-4 sm:pb-2">
+    <!-- 3. Dos Botones Blancos Gemelos 3D (Subidos para asegurar visibilidad en móviles) -->
+    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-5 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700 pb-1 sm:pb-2">
 
       <!-- Botón 1: Clientes Corporativos -->
       <a
         href="./corporativos.html"
-        class="w-56 h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_8px_20px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-pointer"
+        class="w-52 sm:w-56 h-10 sm:h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_6px_16px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-pointer"
       >
         Clientes Corporativos
       </a>
@@ -150,7 +153,7 @@
       <button
         type="button"
         onclick="lockedUnidadesNotice(this)"
-        class="w-56 h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_8px_20px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-not-allowed"
+        class="w-52 sm:w-56 h-10 sm:h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_6px_16px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-not-allowed"
       >
         <span id="unidades-btn-text">Unidades</span>
       </button>
@@ -159,7 +162,7 @@
 
   </main>
 
-  <!-- Script de Sincronización Retrasada y Partículas -->
+  <!-- Script de Sincronización (Frase retrasada a 7.0s) y Partículas -->
   <script>
     function lockedUnidadesNotice(button) {
       const label = button.querySelector("#unidades-btn-text");
@@ -202,7 +205,7 @@
         const playPromise = video.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
-            video.currentTime = 7.0;
+            video.currentTime = 7.5;
             triggerStageAndButtons();
             triggerPhrase();
           });
@@ -216,7 +219,7 @@
       }
 
       const unlockOnTouch = () => {
-        if (video.paused && video.currentTime >= 6.8) {
+        if (video.paused && video.currentTime >= 7.2) {
           video.currentTime = 0;
           video.play().catch(() => {});
         } else if (video.paused) {
@@ -230,13 +233,13 @@
 
       video.addEventListener("timeupdate", () => {
         if (video.currentTime >= 2.2) triggerStageAndButtons();
-        // RETRASADO A 6.8s: Para que la frase aparezca justo cuando el brillo de la luz termina de recorrer la catedral
-        if (video.currentTime >= 6.8) triggerPhrase();
+        // RETRASADO EXACTAMENTE A 7.0s: Justo al terminar el brillo del video
+        if (video.currentTime >= 7.0) triggerPhrase();
       });
 
-      // Respaldo por temporizador ajustado
+      // Respaldo por temporizador
       setTimeout(triggerStageAndButtons, 2300);
-      setTimeout(triggerPhrase, 6300);
+      setTimeout(triggerPhrase, 7100);
     })();
 
     // Motor Sparkles Core
@@ -261,7 +264,7 @@
 
       function createParticles() {
         particles = [];
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < 110; i++) {
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
