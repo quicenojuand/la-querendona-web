@@ -3,1135 +3,161 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Querendona Foods — Reconstruyendo el Sabor | Catálogo Oficial &amp; Pedidos | Pereira</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <title>La Querendona Foods | Reconstruyendo el Sabor</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cormorant Garamond, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <!-- =====================================================================
-       DETECTOR INTELIGENTE DE IMÁGENES (.JPG / .jpg / .jpeg / .PNG / MAYÚSCULAS)
-       Se ejecuta antes de cargar la página para que el formato del iPad nunca falle
-       ===================================================================== -->
-  <script>
-    window.tryNextExt = function (img) {
-      if (!img) return;
-      const raw = img.getAttribute('data-base') || img.getAttribute('src') || '';
-      const cleanBase = raw.split('?')[0].replace(/\.(JPG|jpg|JPEG|jpeg|PNG|png|WEBP|webp)$/, '');
-      if (!cleanBase) return;
-      img.setAttribute('data-base', cleanBase);
-
-      const upperBase = cleanBase.toUpperCase();
-      const lowerBase = cleanBase.toLowerCase();
-      const candidates = [
-        lowerBase + '.JPG',
-        lowerBase + '.jpg',
-        upperBase + '.JPG',
-        upperBase + '.jpg',
-        lowerBase + '.jpeg',
-        lowerBase + '.JPEG',
-        upperBase + '.JPEG',
-        lowerBase + '.png',
-        lowerBase + '.PNG',
-        upperBase + '.PNG'
-      ];
-
-      let idx = parseInt(img.getAttribute('data-ext-idx') || '0', 10);
-      while (idx < candidates.length && img.src.endsWith('/' + candidates[idx])) {
-        idx++;
-      }
-      if (idx < candidates.length) {
-        img.setAttribute('data-ext-idx', String(idx + 1));
-        img.src = candidates[idx];
-      } else if (img.getAttribute('data-is-logo') === 'true') {
-        img.style.display = 'none';
-        const fallbackId = img.getAttribute('data-fallback-id');
-        if (fallbackId && document.getElementById(fallbackId)) {
-          document.getElementById(fallbackId).classList.remove('hidden');
-        }
-      }
-    };
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            alabaster: '#FAF8F5',
-            travertine: '#F2ECE4',
-            stoneborder: '#E6E1DA',
-            ink: { 950: '#121211', 800: '#2C2B29', 600: '#575551', 400: '#8C8881' },
-            bijao: { 900: '#162A1C', 700: '#24442E', 500: '#3B6948', 100: '#EAF2EC' },
-            querendona: { 700: '#4A121A', 600: '#5B1D28', 100: '#F9EFF0' },
-            panela: { 600: '#B5801D', 400: '#D4AF37', 100: '#FBF6E8' }
-          },
           fontFamily: {
-            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-            sans: ['"Inter"', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace']
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
       }
     };
   </script>
-  <style>
-    body {
-      background-color: #FFFFFF;
-      color: #121211;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    .hairline-b { border-bottom: 1px solid #E6E1DA; }
-    .hairline-t { border-top: 1px solid #E6E1DA; }
-    .hairline-box { border: 1px solid #E6E1DA; }
-
-    .luxury-card {
-      transform-style: preserve-3d;
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
-    }
-    .luxury-card:hover {
-      box-shadow: 0 28px 60px -15px rgba(74, 18, 26, 0.16);
-    }
-    .luxury-card img, .luxury-card video {
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .luxury-card:hover img, .luxury-card:hover video {
-      transform: scale(1.04);
-    }
-
-    @keyframes marqueeEditorial {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-      display: flex;
-      width: max-content;
-      animation: marqueeEditorial 36s linear infinite;
-    }
-    .animate-marquee:hover {
-      animation-play-state: paused;
-    }
-
-    #brand-preloader {
-      transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    #brand-preloader.curtain-up {
-      transform: translateY(-100%);
-    }
-  </style>
 </head>
-<body class="bg-white text-ink-950 selection:bg-querendona-700 selection:text-white">
+<body class="bg-black text-white font-sans antialiased overflow-hidden select-none">
 
-  <!-- =====================================================================
-       CORTINA DE ENTRADA CON EL LOGOTIPO OFICIAL DE LA QUERENDONA
-       ===================================================================== -->
-  <div id="brand-preloader" class="fixed inset-0 z-[100] bg-querendona-700 text-white flex flex-col justify-between p-6 sm:p-12">
-    <div class="flex items-center justify-between text-[11px] font-mono tracking-[0.25em] text-panela-400 uppercase">
-      <span>LA QUERENDONA FOODS</span>
-      <span>PEREIRA · DOSQUEBRADAS · ARMENIA</span>
+  <!-- PORTADA PRINCIPAL EN NEGRO ABSOLUTO -->
+  <main class="relative min-h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden px-6">
+
+    <!-- Logotipo La Querendona en Dorado Luminoso -->
+    <div class="relative z-20 flex flex-col items-center text-center">
+      <span class="font-mono text-[10px] md:text-xs uppercase tracking-[0.45em] text-[#D4AF37]/85 mb-3">
+        Reconstruyendo el Sabor
+      </span>
+      <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-center bg-clip-text text-transparent bg-gradient-to-b from-[#FFF8DC] via-[#D4AF37] to-[#9A7418] drop-shadow-[0_0_35px_rgba(212,175,55,0.55)]">
+        La Querendona
+      </h1>
     </div>
 
-    <div class="my-auto text-center max-w-2xl mx-auto flex flex-col items-center">
-      <!-- Imagen del Logotipo Oficial (logo.JPG / logo.jpg / logo.png) -->
-      <img
-        src="logo.JPG"
-        alt="Logotipo Oficial La Querendona — Reconstruyendo el Sabor"
-        data-is-logo="true"
-        data-fallback-id="preloader-svg-logo"
-        onerror="tryNextExt(this)"
-        class="w-72 sm:w-96 h-auto rounded-3xl border border-panela-400/40 shadow-2xl mb-6 object-contain"
-      />
+    <!-- Efecto Aceternity Sparkles (Haces de Luz + Partículas Doradas) -->
+    <div class="w-full max-w-[42rem] h-36 relative mt-3">
+      <!-- Gradients Superiores en Oro Luminoso -->
+      <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-3/4 mx-auto blur-sm"></div>
+      <div class="absolute inset-x-16 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-3/4 mx-auto"></div>
+      <div class="absolute inset-x-48 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[5px] w-1/4 mx-auto blur-sm"></div>
+      <div class="absolute inset-x-48 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-1/4 mx-auto"></div>
 
-      <!-- Respaldo Vectorial Automático con el Viaducto y la Catedral si aún no se ha subido logo.JPG -->
-      <div id="preloader-svg-logo" class="hidden mb-6 px-8 py-6 rounded-[2.5rem] border-2 border-panela-400 bg-querendona-700 shadow-2xl">
-        <svg viewBox="0 0 420 120" class="w-64 sm:w-80 h-auto mx-auto stroke-panela-400 fill-none" stroke-width="1.8">
-          <!-- Viaducto César Gaviria Trujillo -->
-          <line x1="20" y1="82" x2="220" y2="82" />
-          <path d="M75 88 L80 28 L86 28 L91 88 M165 88 L170 28 L176 28 L181 88" />
-          <line x1="80" y1="34" x2="35" y2="82" /><line x1="80" y1="42" x2="50" y2="82" /><line x1="80" y1="50" x2="64" y2="82" />
-          <line x1="86" y1="34" x2="128" y2="82" /><line x1="86" y1="42" x2="115" y2="82" /><line x1="86" y1="50" x2="102" y2="82" />
-          <line x1="170" y1="34" x2="130" y2="82" /><line x1="170" y1="42" x2="144" y2="82" />
-          <line x1="176" y1="34" x2="218" y2="82" /><line x1="176" y1="42" x2="204" y2="82" />
-          <!-- Arcos Centrales -->
-          <path d="M215 82 Q240 60 265 82 Q290 60 315 82" />
-          <!-- Catedral de Pereira -->
-          <rect x="320" y="52" width="18" height="30" />
-          <path d="M320 52 Q329 30 338 52 M329 30 L329 22 M326 25 L332 25" />
-          <path d="M348 82 L348 64 L390 64 L390 82 M354 64 Q369 34 384 64 M369 34 L369 26" />
-        </svg>
-        <span class="block font-serif text-3xl sm:text-5xl tracking-wider text-panela-400 font-bold mt-1">LA QUERENDONA®</span>
-        <span class="block font-sans text-xs tracking-[0.22em] text-panela-400/90 mt-1">Reconstruyendo el sabor</span>
-      </div>
+      <!-- Lienzo de Partículas -->
+      <canvas id="sparkles-canvas" class="w-full h-full block opacity-0 transition-opacity duration-1000"></canvas>
 
-      <div class="w-48 h-[1px] bg-white/25 mx-auto overflow-hidden mb-6">
-        <div id="preloader-fill" class="h-full bg-panela-400 w-0 transition-all duration-700"></div>
-      </div>
-
-      <button type="button" onclick="enterExperience()" class="px-8 py-3.5 rounded-full bg-panela-400 text-ink-950 font-mono text-xs uppercase tracking-[0.2em] font-bold hover:bg-white transition shadow-lg">
-        Ingresar a La Querendona →
-      </button>
+      <!-- Máscara Radial Negra para fundir bordes -->
+      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
     </div>
 
-    <div class="flex items-center justify-between text-[10px] font-mono text-white/70 uppercase tracking-widest">
-      <span>WhatsApp Compras: +57 311 648 8685</span>
-      <span>Comercial@laquerendonafoods.com</span>
-    </div>
-  </div>
+    <!-- Dos Botones Blancos Minimalistas -->
+    <div class="relative z-20 mt-4 flex flex-col sm:flex-row items-center justify-center gap-6 w-full max-w-xl">
 
-  <!-- =====================================================================
-       BARRA SUPERIOR CON EL LOGOTIPO OFICIAL Y ACCESO AL CATÁLOGO
-       ===================================================================== -->
-  <header class="sticky top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md hairline-b">
-    <div class="bg-alabaster hairline-b px-4 sm:px-8 py-2 text-[11px] font-mono text-ink-600 flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-        <span>SOLUCIONES GASTRONÓMICAS CORPORATIVAS Y FAMILIARES · <strong>PEREIRA · DOSQUEBRADAS · ARMENIA</strong></span>
-      </div>
-      <div class="flex flex-wrap items-center gap-4">
-        <a href="mailto:Comercial@laquerendonafoods.com" class="text-ink-600 hover:text-ink-950">Comercial@laquerendonafoods.com</a>
-        <a href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="text-querendona-700 font-semibold hover:underline">
-          📲 WhatsApp Compras: +57 311 648 8685 ↗
-        </a>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-3">
-      <a href="#inicio" class="text-left group flex items-center gap-3">
-        <img
-          src="logo.JPG"
-          alt="La Querendona"
-          data-is-logo="true"
-          data-fallback-id="header-fallback-badge"
-          onerror="tryNextExt(this)"
-          class="h-12 sm:h-14 w-auto rounded-xl object-contain shadow-sm"
-        />
-        <div id="header-fallback-badge" class="hidden w-10 h-10 rounded-full bg-querendona-700 text-panela-400 border border-panela-400 flex items-center justify-center font-serif italic text-xl shadow-sm">
-          Q
-        </div>
-        <div>
-          <span class="block font-serif text-2xl sm:text-3xl tracking-tight text-ink-950 leading-none">La Querendona</span>
-          <span class="block font-mono text-[9px] tracking-[0.24em] text-ink-600 uppercase mt-0.5">Reconstruyendo el Sabor</span>
-        </div>
+      <!-- Botón 1: Clientes Corporativos (Abre corporativos.html) -->
+      <a
+        href="./corporativos.html"
+        class="w-full sm:w-64 py-4 px-8 rounded-full bg-white text-black font-sans font-semibold text-xs md:text-sm uppercase tracking-[0.18em] text-center transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_45px_rgba(255,255,255,0.85)] active:scale-100 cursor-pointer block"
+      >
+        Clientes Corporativos
       </a>
 
-      <nav aria-label="Menú Principal" class="hidden lg:flex items-center gap-1.5">
-        <a href="#inicio" class="px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider bg-ink-950 text-white">Inicio</a>
-        <a href="#experiencia" class="px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider text-ink-600 hover:text-ink-950 transition">Arte Culinario</a>
-        <a href="#catalogo" class="px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider text-ink-600 hover:text-ink-950 transition">Catálogo Navidad 2026</a>
-        <a href="#linea-hogar" class="px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider text-ink-600 hover:text-ink-950 transition">Línea Hogar &amp; Vacío</a>
-        <a href="#calculador" class="px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider text-ink-600 hover:text-ink-950 transition">Calculador de Precios</a>
-      </nav>
-
-      <div class="flex items-center gap-2.5">
-        <button type="button" onclick="openCatalogLeadModal()" class="px-4 py-2.5 rounded-full bg-panela-100 border border-panela-400/70 text-ink-950 text-xs font-mono uppercase tracking-wider font-semibold hover:bg-panela-400 transition">
-          ⬇ Catálogo PDF
-        </button>
-        <button type="button" onclick="toggleCartDrawer()" class="px-5 py-2.5 rounded-full bg-querendona-700 text-white text-xs font-mono uppercase tracking-wider hover:bg-ink-950 transition flex items-center gap-2 shadow-sm">
-          <span>Mi Pedido</span>
-          <span id="cart-count-badge" class="px-2 py-0.5 rounded-full bg-panela-400 text-ink-950 font-bold text-[11px]">100</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- ===================================================================
-         PORTADA EDITORIAL CON LEVITACIÓN EN ESTUDIO BLANCO INFINITO (#FFFFFF)
-         =================================================================== -->
-    <section id="inicio" class="py-12 sm:py-20 px-4 sm:px-8 bg-white hairline-b overflow-hidden">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div class="lg:col-span-6 space-y-6">
-            <div class="hero-anim flex flex-wrap items-center gap-2">
-              <span class="px-3.5 py-1 rounded-full bg-querendona-100 text-querendona-700 font-mono text-[11px] uppercase tracking-widest">
-                Catálogo Corporativo Navidad 2026
-              </span>
-              <span class="px-3.5 py-1 rounded-full bg-bijao-100 text-bijao-700 font-mono text-[11px] uppercase tracking-widest">
-                Pereira · Dosquebradas · Armenia
-              </span>
-            </div>
-
-            <h1 class="hero-anim font-serif text-5xl sm:text-7xl text-ink-950 leading-[0.95] tracking-tight">
-              Recetas ancestrales con <span class="italic font-normal text-querendona-700">ejecución artesanal moderna.</span>
-            </h1>
-
-            <p class="hero-anim text-base sm:text-lg text-ink-600 leading-relaxed">
-              En <strong>La Querendona Foods</strong> rescatamos las recetas ancestrales del Eje Cafetero con estándares de calidad institucional. Elaboramos cada producto en fresco con maíz trillado, carnes seleccionadas en cocción lenta, panela de trapiche, mora de Castilla y quesos regionales, entregándolos en empaques térmicos de colección inspirados en los íconos de Pereira.
-            </p>
-
-            <div class="hero-anim flex flex-wrap items-center gap-3 pt-2">
-              <a href="#catalogo" class="px-7 py-3.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-md">
-                Ver Portafolio Navidad (REF-01 a REF-06) →
-              </a>
-              <button type="button" onclick="openCatalogLeadModal()" class="px-7 py-3.5 rounded-full bg-panela-100 border border-panela-400 text-ink-950 font-mono text-xs uppercase tracking-wider font-semibold hover:bg-panela-400 transition">
-                ⬇ Descargar Catálogo Corporativo PDF
-              </button>
-            </div>
-
-            <div class="hero-anim grid grid-cols-3 gap-4 pt-6 hairline-t">
-              <div>
-                <span class="font-serif text-3xl sm:text-4xl text-querendona-700 font-semibold block">100+</span>
-                <span class="font-mono text-[10px] uppercase tracking-wider text-ink-600">Unidades pedido mínimo corporativo</span>
-              </div>
-              <div>
-                <span class="font-serif text-3xl sm:text-4xl text-querendona-700 font-semibold block">-4% Dto.</span>
-                <span class="font-mono text-[10px] uppercase tracking-wider text-ink-600">En escala de 501+ unidades</span>
-              </div>
-              <div>
-                <span class="font-serif text-3xl sm:text-4xl text-querendona-700 font-semibold block">2 a 3 h</span>
-                <span class="font-mono text-[10px] uppercase tracking-wider text-ink-600">Conservación de calor en caja térmica</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Imagen / Video Maestro en Fondo Blanco Infinito -->
-          <div class="lg:col-span-6">
-            <div class="luxury-card relative rounded-[2rem] overflow-hidden bg-white p-2" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
-              <video
-                autoplay
-                loop
-                muted
-                playsinline
-                class="w-full h-auto rounded-[1.75rem] object-cover hidden"
-                onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');"
-              >
-                <source src="web-hero-bunuelos.mp4" type="video/mp4" />
-                <source src="web-hero-bunuelos.MP4" type="video/mp4" />
-              </video>
-              <img
-                src="hero-bunuelos.JPG"
-                alt="Buñuelos dorados y reducción de mora La Querendona"
-                onerror="tryNextExt(this)"
-                class="w-full h-auto rounded-[1.75rem] object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Cinta Editorial -->
-    <div class="py-4 hairline-b overflow-hidden bg-alabaster">
-      <div class="animate-marquee flex items-center gap-12 text-ink-800">
-        <span class="font-serif italic text-2xl">Cono Gourmet Novena</span>
-        <span class="font-mono text-xs text-querendona-700">✦</span>
-        <span class="font-mono text-xs uppercase tracking-[0.25em]">Tamal Antojito Caliente</span>
-        <span class="font-mono text-xs text-bijao-700">✦</span>
-        <span class="font-serif italic text-2xl">Cajita Tradición Pesebre</span>
-        <span class="font-mono text-xs text-querendona-700">✦</span>
-        <span class="font-mono text-xs uppercase tracking-[0.25em]">Cajita Farolito Día de Velitas con Vela LED</span>
-        <span class="font-mono text-xs text-bijao-700">✦</span>
-        <span class="font-serif italic text-2xl">Tamal Mini Personal &amp; Combo Trío Tradición 3 en 1</span>
-        <span class="font-mono text-xs text-querendona-700">✦</span>
-        <span class="font-serif italic text-2xl">Cono Gourmet Novena</span>
-      </div>
-    </div>
-
-    <!-- ===================================================================
-         SECCIÓN 1: ARTE CULINARIO EN GRAVEDAD CERO (SIN BOTÓN DE VIDEO ANTIGUO)
-         =================================================================== -->
-    <section id="experiencia" class="py-20 px-4 sm:px-8 bg-white hairline-b">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
-          <div>
-            <span class="font-mono text-xs uppercase tracking-[0.28em] text-querendona-700">01 · Ingredientes de Origen en Alta Velocidad</span>
-            <h2 class="font-serif text-4xl sm:text-6xl text-ink-950 mt-2 leading-none">
-              La anatomía de nuestro sabor
-            </h2>
-            <p class="text-sm sm:text-base text-ink-600 mt-3 max-w-2xl">
-              Maíz trillado, carnes seleccionadas en cocción lenta, panela de trapiche, mora de Castilla, queso costeño y mantequilla batida artesanalmente.
-            </p>
-          </div>
-          <button type="button" onclick="openCatalogLeadModal()" class="shrink-0 px-6 py-3 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition">
-            ⬇ Solicitar Catálogo Corporativo PDF
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Escena 1: Buñuelos & Mora -->
-          <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
-            <div class="aspect-video rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
-                <source src="web-hero-bunuelos.mp4" type="video/mp4" />
-                <source src="web-hero-bunuelos.MP4" type="video/mp4" />
-              </video>
-              <img src="hero-bunuelos.JPG" alt="Buñuelos dorados y reducción de mora" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
-            </div>
-            <div class="flex items-end justify-between gap-4">
-              <div>
-                <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Corteza Dorada &amp; Queso Costeño</span>
-                <h3 class="font-serif text-3xl text-ink-950 mt-1">Buñuelos Crocantes &amp; Reducción de Mora</h3>
-              </div>
-              <a href="#catalogo" class="shrink-0 px-4 py-2 rounded-full bg-alabaster hairline-box font-mono text-xs hover:bg-ink-950 hover:text-white transition">Ver en Catálogo →</a>
-            </div>
-          </div>
-
-          <!-- Escena 2: Tamal en Hoja de Bijao -->
-          <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
-            <div class="aspect-video rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
-                <source src="web-tamal-3d.mp4" type="video/mp4" />
-                <source src="web-tamal-3d.MP4" type="video/mp4" />
-              </video>
-              <img src="hero-tamal.JPG" alt="Tamal Pereirano en hoja de bijao" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
-            </div>
-            <div class="flex items-end justify-between gap-4">
-              <div>
-                <span class="font-mono text-[10px] uppercase tracking-widest text-bijao-700">Cocción Lenta en Hoja de Bijao</span>
-                <h3 class="font-serif text-3xl text-ink-950 mt-1">Tamal Pereirano Caliente &amp; Línea al Vacío</h3>
-              </div>
-              <a href="#catalogo" class="shrink-0 px-4 py-2 rounded-full bg-alabaster hairline-box font-mono text-xs hover:bg-ink-950 hover:text-white transition">Ver en Catálogo →</a>
-            </div>
-          </div>
-
-          <!-- Escena 3: Mantequilla Artesanal & Pan Don Gerardo -->
-          <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
-            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
-                <source src="web-mantequilla-3d.mp4" type="video/mp4" />
-                <source src="web-mantequilla-3d.MP4" type="video/mp4" />
-              </video>
-              <img src="hero-mantequilla.JPG" alt="Mantequilla Artesanal y Pan Aliñado Don Gerardo" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
-            </div>
-            <div class="flex items-end justify-between gap-4">
-              <div>
-                <span class="font-mono text-[10px] uppercase tracking-widest text-panela-600">Alianza Tradicional</span>
-                <h3 class="font-serif text-3xl text-ink-950 mt-1">Mantequilla Artesanal 250 g &amp; Pan Don Gerardo</h3>
-              </div>
-              <button type="button" onclick="addToCart('LQ-04', 1)" class="shrink-0 px-4 py-2 rounded-full bg-ink-950 text-white font-mono text-xs hover:bg-querendona-700 transition">+ Pedir ($14.000)</button>
-            </div>
-          </div>
-
-          <!-- Escena 4: Natilla Imperial & Mini Buñuelos -->
-          <div class="luxury-card rounded-3xl bg-white hairline-box p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
-            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-white mb-5">
-              <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
-                <source src="web-natilla-3d.mp4" type="video/mp4" />
-                <source src="web-natilla-3d.MP4" type="video/mp4" />
-              </video>
-              <img src="hero-natilla.JPG" alt="Natilla Imperial de panela con mora y mini buñuelos" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
-            </div>
-            <div class="flex items-end justify-between gap-4">
-              <div>
-                <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Panela de Trapiche &amp; Mora de Castilla</span>
-                <h3 class="font-serif text-3xl text-ink-950 mt-1">Natilla Imperial con Mora, Coco &amp; Buñuelos</h3>
-              </div>
-              <a href="#calculador" class="shrink-0 px-4 py-2 rounded-full bg-querendona-700 text-white font-mono text-xs hover:bg-ink-950 transition">Cotizar Novena →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         SECCIÓN 2: PORTAFOLIO CORPORATIVO NAVIDAD 2026 (REF-01 A REF-06 APROBADAS)
-         =================================================================== -->
-    <section id="catalogo" class="py-20 px-4 sm:px-8 bg-alabaster hairline-b">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
-          <div>
-            <span class="font-mono text-xs uppercase tracking-[0.28em] text-querendona-700">02 · Portafolio de Productos Corporativos Navidad 2026</span>
-            <h2 class="font-serif text-4xl sm:text-6xl text-ink-950 mt-1 leading-none">
-              Referencias Oficiales (REF-01 a REF-06)
-            </h2>
-            <p class="text-sm text-ink-600 mt-2 max-w-2xl">
-              Pedidos corporativos desde <strong>100 unidades</strong>. Alterna entre la <strong>Escala 1 (100 a 500 unidades — Precio Base)</strong> y la <strong>Escala 2 (501+ unidades con -4 % de descuento)</strong>.
-            </p>
-          </div>
-
-          <div class="p-2 rounded-2xl bg-white hairline-box flex items-center gap-2 self-start lg:self-auto shadow-sm">
-            <button type="button" id="scale-btn-1" onclick="setCorporateScale(1)" class="px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-querendona-700 text-white transition">
-              Escala 1: 100 a 500 unds (Base)
-            </button>
-            <button type="button" id="scale-btn-2" onclick="setCorporateScale(2)" class="px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider text-ink-600 hover:text-ink-950 transition">
-              ★ Escala 2: 501+ unds (-4% Dto.)
-            </button>
-          </div>
-        </div>
-
-        <div id="corporate-catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-
-        <!-- Tabla Oficial Resumen de Precios y Escalas Corporativas -->
-        <div class="mt-14 rounded-3xl bg-white hairline-box p-6 sm:p-10 shadow-sm overflow-x-auto">
-          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">3. Resumen Oficial de Precios</span>
-              <h3 class="font-serif text-3xl text-ink-950">Tabla de Escalas Corporativas (Desde 100 Unidades)</h3>
-            </div>
-            <button type="button" onclick="openCatalogLeadModal()" class="px-5 py-2.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-sm">
-              ⬇ Descargar Catálogo Corporativo en PDF
-            </button>
-          </div>
-
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="hairline-b text-[11px] font-mono uppercase text-ink-600">
-                <th class="py-3 pr-4">Código</th>
-                <th class="py-3 pr-4">Producto en Catálogo</th>
-                <th class="py-3 pr-4">Especificación Resumida</th>
-                <th class="py-3 pr-4">Escala 1 (100–500 Unds)</th>
-                <th class="py-3 pr-4">Escala 2 (501+ Unds · -4%)</th>
-                <th class="py-3 text-right">Acción Directa</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-stoneborder text-xs sm:text-sm">
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-01</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Cono Gourmet Novena</td>
-                <td class="py-3.5 pr-4 text-ink-600">3 Buñuelos (45 g) + Natilla (45 g) + Cucharita de madera</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$5.900 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$5.664 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-01', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-02</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Tamal Antojito (Se Entrega Caliente)</td>
-                <td class="py-3.5 pr-4 text-ink-600">Tamal caliente (150 g) + 1 Buñuelo (15 g) + Tenedor de madera</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$5.500 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$5.280 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-02', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-03</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Cajita Tradición Pesebre</td>
-                <td class="py-3.5 pr-4 text-ink-600">3 Buñuelos (45 g) + Natilla (60 g) + Cucharita de madera</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$6.500 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$6.240 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-03', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-04</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Cajita Farolito Día de Velitas</td>
-                <td class="py-3.5 pr-4 text-ink-600">3 Buñuelos (45 g) + Natilla (60 g) + Cucharita + Vela LED incluida</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$8.850 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$8.500 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-04', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-05</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Tamal Mini Personal Caliente</td>
-                <td class="py-3.5 pr-4 text-ink-600">Tamal caliente + Tenedor de madera</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$9.800 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$9.408 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-05', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-06</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Combo Trío Tradición 3 en 1</td>
-                <td class="py-3.5 pr-4 text-ink-600">Tamal Antojito (150 g) + 2 Buñuelos (15 g c/u) + Natilla (60 g) + Tenedor</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$10.000 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$9.600 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-06', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         SECCIÓN 3: LÍNEA PERMANENTE HOGAR & VACÍO (LQ-01 A LQ-06)
-         =================================================================== -->
-    <section id="linea-hogar" class="py-20 px-4 sm:px-8 bg-white hairline-b">
-      <div class="max-w-7xl mx-auto">
-        <div class="mb-10">
-          <span class="font-mono text-xs uppercase tracking-[0.28em] text-bijao-700">03 · Línea Permanente para el Hogar y Puntos de Venta</span>
-          <h2 class="font-serif text-4xl sm:text-5xl text-ink-950 mt-1 leading-none">
-            Tamales al Vacío, Fiambre, Mantequilla Artesanal &amp; Acompañantes
-          </h2>
-        </div>
-
-        <div id="permanent-catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"></div>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         SECCIÓN 4: CALCULADOR INTERACTIVO DE PRECIOS CORPORATIVOS Y NOVENAS
-         =================================================================== -->
-    <section id="calculador" class="py-20 px-4 sm:px-8 bg-alabaster hairline-b">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        <div class="lg:col-span-5 space-y-5">
-          <span class="px-3.5 py-1 rounded-full bg-querendona-100 text-querendona-700 font-mono text-[11px] uppercase tracking-widest inline-block">
-            Cotizador en Tiempo Real
-          </span>
-          <h2 class="font-serif text-4xl sm:text-6xl text-ink-950 leading-none">
-            Calculador de Precios Corporativos
-          </h2>
-          <p class="text-sm sm:text-base text-ink-600 leading-relaxed">
-            Selecciona cualquiera de nuestras <strong>6 referencias oficiales de Navidad (REF-01 a REF-06)</strong> y ajusta el número de unidades: de <strong>100 a 500 unidades</strong> aplica la Tarifa Base y desde <strong>501 unidades en adelante</strong> se descuenta automáticamente el <strong>-4 % corporativo</strong>.
-          </p>
-          <div class="p-5 rounded-3xl bg-white hairline-box space-y-2 text-xs text-ink-600 leading-relaxed">
-            <strong class="font-mono text-[11px] uppercase text-querendona-700 block">Condiciones Corporativas Oficiales:</strong>
-            <p>• Pedidos corporativos desde <strong>100 unidades</strong>.</p>
-            <p>• Reserva con el <strong>50 % de anticipo</strong> (mínimo 8 días antes del evento) y el <strong>50 % restante el día anterior al despacho</strong> (debe estar cancelado para poder hacer el envío).</p>
-            <p>• Los precios no incluyen IVA, somos régimen simplificado.</p>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 rounded-[2rem] bg-white hairline-box p-6 sm:p-10 shadow-xl space-y-6">
-          <div class="flex items-center justify-between pb-4 hairline-b">
-            <div>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Simulador Oficial Navidad 2026</span>
-              <h3 class="font-serif text-3xl text-ink-950">Calcula tu Pedido</h3>
-            </div>
-            <span id="concierge-tier-pill" class="px-3.5 py-1.5 rounded-full bg-querendona-100 text-querendona-700 font-mono text-[11px] font-semibold">
-              Escala 1: 100 a 500 unds
-            </span>
-          </div>
-
-          <div class="space-y-2">
-            <label for="concierge-ref" class="font-mono text-xs uppercase tracking-wider text-ink-600 block">1. Selecciona la referencia del catálogo:</label>
-            <select id="concierge-ref" onchange="updateConciergeSummary()" class="w-full px-4 py-3.5 rounded-2xl bg-alabaster hairline-box text-sm font-medium text-ink-950 focus:outline-none focus:border-ink-950">
-              <option value="REF-01" data-scale1="5900" data-scale2="5664">REF-01 · Cono Gourmet Novena (3 Buñuelos 45g + Natilla 45g + Cucharita) — $5.900 / $5.664</option>
-              <option value="REF-02" data-scale1="5500" data-scale2="5280">REF-02 · Tamal Antojito Caliente (Tamal 150g + 1 Buñuelo 15g + Tenedor) — $5.500 / $5.280</option>
-              <option value="REF-03" data-scale1="6500" data-scale2="6240">REF-03 · Cajita Tradición Pesebre (3 Buñuelos 45g + Natilla 60g + Cucharita) — $6.500 / $6.240</option>
-              <option value="REF-04" data-scale1="8850" data-scale2="8500">REF-04 · Cajita Farolito Día de Velitas (Con Vela LED incluida) — $8.850 / $8.500</option>
-              <option value="REF-05" data-scale1="9800" data-scale2="9408">REF-05 · Tamal Mini Personal Caliente (Tamal caliente + Tenedor) — $9.800 / $9.408</option>
-              <option value="REF-06" data-scale1="10000" data-scale2="9600">REF-06 · Combo Trío Tradición 3 en 1 (Tamal 150g + 2 Buñuelos + Natilla 60g) — $10.000 / $9.600</option>
-            </select>
-          </div>
-
-          <div class="space-y-2">
-            <div class="flex justify-between items-center font-mono text-xs text-ink-600">
-              <span>2. Cantidad de unidades del pedido:</span>
-              <span id="concierge-qty-label" class="text-querendona-700 font-bold text-base">250 unidades</span>
-            </div>
-            <input id="concierge-qty" type="range" min="100" max="1000" step="10" value="250" oninput="updateConciergeSummary()" class="w-full accent-querendona-700 cursor-pointer h-2 rounded-lg" />
-            <div class="flex justify-between font-mono text-[10px] text-ink-400">
-              <span>100 unds (Mínimo)</span>
-              <span>300 unds</span>
-              <span>501+ unds (-4% Dto.)</span>
-              <span>1.000 unds</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 rounded-2xl bg-alabaster hairline-box">
-            <div>
-              <span class="font-mono text-[10px] uppercase text-ink-600 block">Precio Unitario</span>
-              <span id="concierge-unit-price" class="font-serif text-2xl font-bold text-ink-950">$5.900 COP</span>
-            </div>
-            <div>
-              <span class="font-mono text-[10px] uppercase text-ink-600 block">Anticipo 50% (Reserva)</span>
-              <span id="concierge-deposit" class="font-serif text-2xl font-bold text-bijao-700">$737.500 COP</span>
-            </div>
-            <div>
-              <span class="font-mono text-[10px] uppercase text-ink-600 block">Total Pedido</span>
-              <span id="concierge-total" class="font-serif text-3xl font-bold text-querendona-700">$1.475.000 COP</span>
-            </div>
-          </div>
-
-          <div class="flex flex-col sm:flex-row gap-3">
-            <button type="button" onclick="addConciergeSelectionToCart()" class="flex-1 py-4 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-md">
-              + Agregar al Pedido
-            </button>
-            <a id="concierge-wa-direct" href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="px-6 py-4 rounded-full bg-ink-950 text-white font-mono text-xs uppercase tracking-wider hover:bg-querendona-700 transition text-center">
-              📲 Solicitar por WhatsApp (+57 311 648 8685) ↗
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- =====================================================================
-       PIE DE PÁGINA OFICIAL CON EL LOGOTIPO DE LA QUERENDONA
-       ===================================================================== -->
-  <footer class="bg-querendona-700 text-white hairline-t py-16 px-4 sm:px-8 pb-28">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-      <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-        <img
-          src="logo.JPG"
-          alt="Logotipo Oficial La Querendona"
-          data-is-logo="true"
-          data-fallback-id="footer-svg-logo"
-          onerror="tryNextExt(this)"
-          class="w-48 sm:w-56 h-auto rounded-2xl border border-panela-400/40 shadow-lg object-contain"
-        />
-        <div id="footer-svg-logo" class="hidden px-5 py-3 rounded-2xl border border-panela-400 text-center">
-          <span class="block font-serif text-2xl text-panela-400 font-bold">LA QUERENDONA®</span>
-          <span class="block font-mono text-[10px] text-panela-400/80 uppercase tracking-widest">Reconstruyendo el sabor</span>
-        </div>
-        <div class="space-y-1">
-          <strong class="font-serif text-2xl sm:text-3xl text-panela-400 block">La Querendona Foods</strong>
-          <p class="text-xs text-white/80">Soluciones Gastronómicas Corporativas y Familiares · Pereira · Dosquebradas · Armenia</p>
-          <p class="font-mono text-[11px] text-panela-400">@laquerendonafoods · www.laquerendonafoods.com</p>
-        </div>
-      </div>
-
-      <div class="flex flex-col sm:items-end gap-2 font-mono text-xs">
-        <button type="button" onclick="openCatalogLeadModal()" class="px-5 py-2.5 rounded-full bg-panela-400 text-ink-950 font-bold uppercase tracking-wider hover:bg-white transition">
-          ⬇ Descargar Catálogo PDF
-        </button>
-        <a href="mailto:Comercial@laquerendonafoods.com" class="text-white/90 hover:text-panela-400 underline mt-1">Comercial@laquerendonafoods.com</a>
-        <a href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="text-panela-400 font-semibold hover:underline">
-          WhatsApp Compras: +57 311 648 8685 ↗
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =====================================================================
-       MODAL DE CAPTURA DE DATOS PARA DESCARGAR EL CATÁLOGO PDF EN VERCEL
-       ===================================================================== -->
-  <div id="catalog-lead-modal" class="fixed inset-0 z-[110] bg-ink-950/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-lg rounded-[2rem] bg-white hairline-box p-6 sm:p-9 shadow-2xl relative">
-      <button type="button" onclick="closeCatalogLeadModal()" class="absolute top-5 right-5 px-3 py-1.5 rounded-full bg-alabaster hairline-box font-mono text-xs hover:bg-ink-950 hover:text-white transition">
-        ✕
+      <!-- Botón 2: Unidades (Sobresale igual en hover, sin acceso por ahora) -->
+      <button
+        type="button"
+        onclick="lockedUnidadesNotice(this)"
+        class="w-full sm:w-64 py-4 px-8 rounded-full bg-white text-black font-sans font-semibold text-xs md:text-sm uppercase tracking-[0.18em] text-center transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_45px_rgba(255,255,255,0.85)] active:scale-100 cursor-not-allowed"
+      >
+        <span id="unidades-btn-text">Unidades</span>
       </button>
 
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-full bg-querendona-700 text-panela-400 flex items-center justify-center font-serif italic text-xl font-bold">
-          Q
-        </div>
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700 block">Catálogo Oficial Navidad 2026</span>
-          <h3 class="font-serif text-3xl text-ink-950 leading-none">Descarga Inmediata en PDF</h3>
-        </div>
-      </div>
-
-      <p class="text-xs sm:text-sm text-ink-600 leading-relaxed mb-5">
-        Déjanos tus datos de contacto para iniciar la descarga directa de nuestro <strong>Catálogo Corporativo Navidad 2026</strong> y brindarte atención prioritaria en tus cotizaciones.
-      </p>
-
-      <form id="catalog-lead-form" onsubmit="submitCatalogLead(event)" class="space-y-3.5">
-        <div>
-          <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Nombre Completo *</label>
-          <input id="lead-name" type="text" required placeholder="Ej. María Fernanda Gómez" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Empresa o Entidad *</label>
-            <input id="lead-company" type="text" required placeholder="Nombre de tu empresa o Familia" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
-          </div>
-          <div>
-            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">WhatsApp / Celular *</label>
-            <input id="lead-phone" type="tel" required placeholder="Ej. 311 648 8685" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Correo Electrónico *</label>
-            <input id="lead-email" type="email" required placeholder="compras@empresa.com" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700" />
-          </div>
-          <div>
-            <label class="font-mono text-[11px] uppercase text-ink-600 block mb-1">Cantidad Estimada</label>
-            <select id="lead-volume" class="w-full px-4 py-3 rounded-xl bg-alabaster hairline-box text-sm text-ink-950 focus:outline-none focus:border-querendona-700">
-              <option value="100 a 500 unidades (Escala 1)">100 a 500 unidades (Escala 1)</option>
-              <option value="501+ unidades (Escala 2 -4% Dto.)">501+ unidades (Escala 2 · -4%)</option>
-              <option value="Pedido Hogar / Familiar">Pedido Hogar / Familiar</option>
-            </select>
-          </div>
-        </div>
-
-        <button id="lead-submit-btn" type="submit" class="w-full py-4 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider font-semibold hover:bg-ink-950 transition shadow-lg mt-2">
-          ⬇ Registrar Datos y Descargar Catálogo PDF Ahora
-        </button>
-      </form>
     </div>
-  </div>
 
-  <!-- Carrito Lateral -->
-  <div id="cart-drawer" class="fixed inset-0 z-[95] bg-ink-950/40 backdrop-blur-sm hidden justify-end">
-    <div class="w-full max-w-md bg-white h-full hairline-box p-6 flex flex-col justify-between shadow-2xl overflow-y-auto">
-      <div>
-        <div class="flex items-center justify-between pb-4 hairline-b">
-          <div>
-            <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Resumen de Solicitud</span>
-            <h3 class="font-serif text-3xl text-ink-950">Tu Pedido La Querendona</h3>
-          </div>
-          <button type="button" onclick="toggleCartDrawer()" class="px-3 py-1.5 rounded-full bg-alabaster hairline-box font-mono text-xs">Cerrar ✕</button>
-        </div>
-        <div id="cart-items-list" class="divide-y divide-stoneborder my-4"></div>
-      </div>
+  </main>
 
-      <div class="pt-4 hairline-t space-y-4">
-        <div class="p-4 rounded-2xl bg-alabaster hairline-box space-y-1">
-          <div class="flex justify-between text-xs text-ink-600">
-            <span>Cantidad Total:</span>
-            <span id="cart-total-units" class="font-mono font-semibold text-ink-950">0 unidades</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-ink-600">Total Estimado:</span>
-            <span id="cart-total-price" class="font-serif text-2xl font-bold text-querendona-700">$0 COP</span>
-          </div>
-        </div>
-        <a id="wa-checkout-link" href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="block text-center w-full py-4 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-md">
-          Enviar Solicitud a WhatsApp (+57 311 648 8685) ↗
-        </a>
-      </div>
-    </div>
-  </div>
-
+  <!-- Motor Sparkles Core + Control del Botón Unidades -->
   <script>
-    function enterExperience() {
-      const pre = document.getElementById('brand-preloader');
-      if (pre) {
-        pre.classList.add('curtain-up');
-        setTimeout(() => pre.classList.add('hidden'), 900);
-      }
-    }
-    setTimeout(() => {
-      const f = document.getElementById('preloader-fill');
-      if (f) f.style.width = '100%';
-    }, 80);
-    setTimeout(() => {
-      const p = document.getElementById('brand-preloader');
-      if (p && !p.classList.contains('curtain-up')) enterExperience();
-    }, 1800);
-
-    try {
-      const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
-      function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
-      requestAnimationFrame(raf);
-      if (window.gsap && window.ScrollTrigger) {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.from('.hero-anim', { y: 24, opacity: 0, duration: 0.85, stagger: 0.12, ease: 'power3.out', delay: 0.25 });
-      }
-    } catch (e) {}
-
-    function tiltCard3D(e, el) {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      el.style.transform = `perspective(900px) rotateY(${(x * 6).toFixed(2)}deg) rotateX(${(-y * 6).toFixed(2)}deg) translateY(-4px)`;
-    }
-    function resetCard3D(el) {
-      el.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateY(0px)';
-    }
-
-    // 6 PRODUCTOS CORPORATIVOS APROBADOS (CON .JPG POR DEFECTO Y DETECTOR AUTOMÁTICO)
-    const CORPORATE_REFS = [
-      {
-        sku: 'REF-01',
-        name: 'Producto 1 (REF-01): Cono Gourmet Novena',
-        specs: '3 Buñuelos (45 g) + Natilla (45 g) + Cucharita de madera.',
-        scale1Price: 5900,
-        scale2Price: 5664,
-        img: 'ref-01.JPG'
-      },
-      {
-        sku: 'REF-02',
-        name: 'Producto 2 (REF-02): Tamal Antojito (Se Entrega Caliente)',
-        specs: 'Tamal caliente (150 g) + 1 Buñuelo (15 g) + Tenedor de madera.',
-        scale1Price: 5500,
-        scale2Price: 5280,
-        img: 'ref-02.JPG'
-      },
-      {
-        sku: 'REF-03',
-        name: 'Producto 3 (REF-03): Cajita Tradición Pesebre',
-        specs: '3 Buñuelos (45 g) + Natilla (60 g) + Cucharita de madera.',
-        scale1Price: 6500,
-        scale2Price: 6240,
-        img: 'ref-03.JPG'
-      },
-      {
-        sku: 'REF-04',
-        name: 'Producto 4 (REF-04): Cajita Farolito Día de Velitas (Doble Uso con Vela LED)',
-        specs: '3 Buñuelos (45 g) + Natilla (60 g) + Cucharita + Vela LED incluida.',
-        scale1Price: 8850,
-        scale2Price: 8500,
-        img: 'ref-04.JPG'
-      },
-      {
-        sku: 'REF-05',
-        name: 'Producto 5 (REF-05): Tamal Mini Personal Caliente',
-        specs: 'Tamal caliente + Tenedor de madera.',
-        scale1Price: 9800,
-        scale2Price: 9408,
-        img: 'ref-05.JPG'
-      },
-      {
-        sku: 'REF-06',
-        name: 'Producto 6 (REF-06): Combo Trío Tradición 3 en 1',
-        specs: 'Tamal Antojito (150 g) + 2 Buñuelos (15 g c/u) + Natilla (60 g) + Tenedor de madera.',
-        scale1Price: 10000,
-        scale2Price: 9600,
-        img: 'ref-06.JPG'
-      }
-    ];
-
-    // 6 PRODUCTOS LÍNEA HOGAR & VACÍO (CON SUS FOTOS PROPIAS LQ-01.JPG A LQ-06.JPG)
-    const PERMANENT_SKUS = [
-      { sku: 'LQ-01', name: 'Pack ×3 Tamales al Vacío', specs: '3 tamales pereiranos en hoja de bijao empacados al vacío listos en 8 minutos.', scale1Price: 28000, scale2Price: 28000, img: 'lq-01.JPG' },
-      { sku: 'LQ-02', name: 'Tamal Individual Caliente', specs: 'Tamal pereirano tradicional recién salido de vaporera.', scale1Price: 16000, scale2Price: 16000, img: 'lq-02.JPG' },
-      { sku: 'LQ-03', name: 'Fiambre Tradicional en Hoja', specs: 'Auténtico fiambre montañero en hoja de bijao con arroz blanco, carne en hogao, mazorca, yuca y papa.', scale1Price: 25000, scale2Price: 25000, img: 'lq-03.JPG' },
-      { sku: 'LQ-04', name: 'Mantequilla Artesanal 250 g', specs: 'Tarrina de 250 g de mantequilla batida artesanalmente.', scale1Price: 14000, scale2Price: 14000, img: 'lq-04.JPG' },
-      { sku: 'LQ-05', name: 'Guacamole Rústico 250 g', specs: 'Aguacate Hass del Eje Cafetero en textura rústica.', scale1Price: 12000, scale2Price: 12000, img: 'lq-05.JPG' },
-      { sku: 'LQ-06', name: 'Pan Aliñado (Don Gerardo)', specs: 'Horneado artesanal en colaboración con Panadería Don Gerardo.', scale1Price: 12000, scale2Price: 12000, img: 'lq-06.JPG' }
-    ];
-
-    const ALL_PRODUCTS = [...CORPORATE_REFS, ...PERMANENT_SKUS];
-    let currentCorporateScale = 1;
-    let cart = { 'REF-01': 100 };
-
-    function formatCOP(n) {
-      return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' COP';
-    }
-
-    function setCorporateScale(scale) {
-      currentCorporateScale = scale;
-      document.getElementById('scale-btn-1').className = scale === 1
-        ? 'px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-querendona-700 text-white transition'
-        : 'px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider text-ink-600 hover:text-ink-950 transition';
-      document.getElementById('scale-btn-2').className = scale === 2
-        ? 'px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider bg-querendona-700 text-white transition'
-        : 'px-4 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider text-ink-600 hover:text-ink-950 transition';
-      renderCatalogs();
-    }
-
-    function renderCatalogs() {
-      const corpGrid = document.getElementById('corporate-catalog-grid');
-      if (corpGrid) {
-        corpGrid.innerHTML = CORPORATE_REFS.map(item => {
-          const activePrice = currentCorporateScale === 2 ? item.scale2Price : item.scale1Price;
-          return `
-            <article class="luxury-card rounded-3xl bg-white hairline-box overflow-hidden flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
-              <div>
-                <div class="aspect-[4/5] overflow-hidden bg-alabaster relative">
-                  <img src="${item.img}" alt="${item.name}" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
-                  <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-querendona-700 font-mono text-[10px] uppercase font-bold shadow-sm">
-                    ${item.sku}
-                  </span>
-                  <span class="absolute bottom-3 right-3 px-4 py-1.5 rounded-full bg-querendona-700 text-white font-mono text-xs font-semibold shadow-md">
-                    ${formatCOP(activePrice)}
-                  </span>
-                </div>
-                <div class="p-6 pb-3">
-                  <h3 class="font-serif text-2xl text-ink-950 leading-snug">${item.name}</h3>
-                  <p class="text-xs text-ink-600 mt-2 leading-relaxed"><strong>Especificación:</strong> ${item.specs}</p>
-                  <div class="mt-3 pt-3 hairline-t font-mono text-[11px] text-ink-600 space-y-1">
-                    <div>• Escala 1 (100 a 500 unds): <strong>${formatCOP(item.scale1Price)}</strong></div>
-                    <div class="text-bijao-700">• Escala 2 (501+ unds, -4% Dto.): <strong>${formatCOP(item.scale2Price)}</strong></div>
-                  </div>
-                </div>
-              </div>
-              <div class="p-6 pt-3 flex flex-col gap-2">
-                <button type="button" onclick="addToCart('${item.sku}', 100)" class="w-full py-3 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition">
-                  + Agregar 100 Unidades al Pedido
-                </button>
-                <a href="https://wa.me/573116488685?text=${encodeURIComponent('Hola La Querendona Foods, quiero solicitar cotización de ' + item.name)}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-full bg-alabaster hairline-box text-center text-ink-950 font-mono text-[11px] uppercase hover:border-ink-950 transition">
-                  📲 Solicitar ${item.sku} por WhatsApp
-                </a>
-              </div>
-            </article>
-          `;
-        }).join('');
-      }
-
-      const permGrid = document.getElementById('permanent-catalog-grid');
-      if (permGrid) {
-        permGrid.innerHTML = PERMANENT_SKUS.map(item => `
-          <article class="luxury-card rounded-3xl bg-alabaster/70 hairline-box overflow-hidden flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
-            <div>
-              <div class="aspect-[16/11] overflow-hidden bg-white relative">
-                <img src="${item.img}" alt="${item.name}" onerror="tryNextExt(this)" class="w-full h-full object-cover" />
-                <span class="absolute bottom-3 right-3 px-3.5 py-1 rounded-full bg-ink-950 text-white font-mono text-xs font-semibold">
-                  ${formatCOP(item.scale1Price)}
-                </span>
-              </div>
-              <div class="p-6 pb-2">
-                <h3 class="font-serif text-2xl text-ink-950">${item.name}</h3>
-                <p class="text-xs text-ink-600 mt-2 leading-relaxed">${item.specs}</p>
-              </div>
-            </div>
-            <div class="p-6 pt-4">
-              <button type="button" onclick="addToCart('${item.sku}', 1)" class="w-full py-2.5 rounded-full bg-ink-950 text-white font-mono text-xs uppercase tracking-wider hover:bg-querendona-700 transition">
-                + Agregar a mi Pedido
-              </button>
-            </div>
-          </article>
-        `).join('');
-      }
-    }
-
-    // LÓGICA DEL MODAL DE REGISTRO Y DESCARGA DEL CATÁLOGO PDF DESDE VERCEL
-    function openCatalogLeadModal() {
-      const m = document.getElementById('catalog-lead-modal');
-      if (m) {
-        m.classList.remove('hidden');
-        m.classList.add('flex');
-      }
-    }
-
-    function closeCatalogLeadModal() {
-      const m = document.getElementById('catalog-lead-modal');
-      if (m) {
-        m.classList.add('hidden');
-        m.classList.remove('flex');
-      }
-    }
-
-    async function triggerVercelPdfDownload() {
-      const pdfCandidates = [
-        'catalogo.pdf',
-        'Catalogo_Corporativo_Navidad_2026_La_Querendona.pdf',
-        'CATALOGO.PDF',
-        'catalogo-la-querendona.pdf'
-      ];
-      for (const candidate of pdfCandidates) {
-        try {
-          const res = await fetch(candidate, { method: 'HEAD' });
-          if (res.ok) {
-            const a = document.createElement('a');
-            a.href = candidate;
-            a.download = 'Catalogo_Corporativo_Navidad_2026_La_Querendona.pdf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            return;
-          }
-        } catch (err) {}
-      }
-      // Respaldo directo de descarga en caso de que el archivo PDF aún se esté subiendo a GitHub
-      window.open('https://docs.google.com/document/d/1T-wUzzqyEzWGar2O5vy_1Oo8UnEZBEiC-zRvlUzHUDo/export?format=pdf', '_blank');
-    }
-
-    async function submitCatalogLead(e) {
-      e.preventDefault();
-      const name = document.getElementById('lead-name').value.trim();
-      const company = document.getElementById('lead-company').value.trim();
-      const phone = document.getElementById('lead-phone').value.trim();
-      const email = document.getElementById('lead-email').value.trim();
-      const volume = document.getElementById('lead-volume').value;
-      const btn = document.getElementById('lead-submit-btn');
-
-      if (btn) btn.textContent = 'Procesando y Descargando PDF...';
-
-      // 1. Guardar respaldo en localStorage
-      try {
-        const leads = JSON.parse(localStorage.getItem('lq_catalog_leads') || '[]');
-        leads.push({ fecha: new Date().toISOString(), name, company, phone, email, volume });
-        localStorage.setItem('lq_catalog_leads', JSON.stringify(leads));
-      } catch (err) {}
-
-      // 2. Enviar datos del cliente al correo corporativo Comercial@laquerendonafoods.com
-      try {
-        fetch('https://formsubmit.co/ajax/Comercial@laquerendonafoods.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            _subject: 'Nuevo Cliente Descargó el Catálogo Navidad 2026 — ' + company,
-            Nombre: name,
-            Empresa: company,
-            WhatsApp: phone,
-            Correo: email,
-            Volumen_Estimado: volume
-          })
-        });
-      } catch (err) {}
-
-      // 3. Descargar inmediatamente el PDF alojado en Vercel
-      await triggerVercelPdfDownload();
-
-      // 4. Notificar registro en WhatsApp corporativo (+57 311 648 8685)
-      const waLeadText = `Hola La Querendona Foods, acabo de descargar el Catálogo Corporativo Navidad 2026 desde la web:\n• Nombre: ${name}\n• Empresa: ${company}\n• WhatsApp: ${phone}\n• Correo: ${email}\n• Volumen estimado: ${volume}`;
-      window.open('https://wa.me/573116488685?text=' + encodeURIComponent(waLeadText), '_blank');
-
-      if (btn) btn.textContent = '✓ Catálogo Descargado';
+    function lockedUnidadesNotice(button) {
+      const label = button.querySelector("#unidades-btn-text");
+      if (!label) return;
+      label.textContent = "Próximamente";
       setTimeout(() => {
-        closeCatalogLeadModal();
-        if (btn) btn.textContent = '⬇ Registrar Datos y Descargar Catálogo PDF Ahora';
-      }, 1200);
+        label.textContent = "Unidades";
+      }, 1600);
     }
 
-    function addToCart(sku, qtyToAdd) {
-      cart[sku] = (cart[sku] || 0) + (qtyToAdd || 1);
-      updateCartUI();
-    }
+    (function initSparkles() {
+      const canvas = document.getElementById("sparkles-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function changeCartQty(sku, delta) {
-      const next = (cart[sku] || 0) + delta;
-      if (next <= 0) delete cart[sku];
-      else cart[sku] = next;
-      updateCartUI();
-    }
+      let width, height, particles = [];
+      const palette = ["#FFF8DC", "#D4AF37", "#F5D061", "#FFFFFF"];
 
-    function updateCartUI() {
-      let units = 0, total = 0, rows = [], waLines = ['Hola La Querendona Foods, quiero realizar el siguiente pedido:'];
-      Object.keys(cart).forEach(sku => {
-        const qty = cart[sku];
-        const item = ALL_PRODUCTS.find(x => x.sku === sku);
-        if (!item || qty <= 0) return;
-        const unitPrice = qty >= 501 ? item.scale2Price : item.scale1Price;
-        const sub = unitPrice * qty;
-        units += qty;
-        total += sub;
-        waLines.push(`• ${qty}x ${item.name} (${formatCOP(unitPrice)} c/u) = ${formatCOP(sub)}`);
-        rows.push(`
-          <div class="py-3.5 flex items-center justify-between gap-3">
-            <div class="min-w-0">
-              <span class="font-mono text-[10px] text-querendona-700 block">${item.sku} ${qty >= 501 && item.scale2Price < item.scale1Price ? '· ★ ESCALA 2 (-4%)' : ''}</span>
-              <h4 class="font-serif text-lg text-ink-950 truncate">${item.name}</h4>
-              <span class="font-mono text-xs text-ink-600">${formatCOP(unitPrice)} c/u · <strong>${formatCOP(sub)}</strong></span>
-            </div>
-            <div class="flex items-center gap-1.5 shrink-0">
-              <button type="button" onclick="changeCartQty('${item.sku}', -10)" class="w-7 h-7 rounded-full bg-alabaster hairline-box font-mono text-xs">-</button>
-              <span class="font-mono text-xs w-10 text-center">${qty}</span>
-              <button type="button" onclick="changeCartQty('${item.sku}', 10)" class="w-7 h-7 rounded-full bg-alabaster hairline-box font-mono text-xs">+</button>
-            </div>
-          </div>
-        `);
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        width = rect.width;
+        height = rect.height;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
+      }
+
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < 130; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: Math.random() * (1.2 - 0.4) + 0.4,
+            speedX: (Math.random() - 0.5) * 0.35,
+            speedY: (Math.random() - 0.5) * 0.35,
+            opacity: Math.random(),
+            opacitySpeed: (Math.random() * 0.018 + 0.005) * (Math.random() < 0.5 ? 1 : -1),
+            color: palette[Math.floor(Math.random() * palette.length)]
+          });
+        }
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+        for (const p of particles) {
+          if (!reduceMotion) {
+            p.x += p.speedX;
+            p.y += p.speedY;
+            p.opacity += p.opacitySpeed;
+            if (p.opacity <= 0.1 || p.opacity >= 1) p.opacitySpeed *= -1;
+            if (p.x < 0) p.x = width;
+            if (p.x > width) p.x = 0;
+            if (p.y < 0) p.y = height;
+            if (p.y > height) p.y = 0;
+          }
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0.1, Math.min(1, p.opacity));
+          ctx.fill();
+        }
+        if (!reduceMotion) requestAnimationFrame(render);
+      }
+
+      resize();
+      createParticles();
+      render();
+      requestAnimationFrame(() => canvas.classList.remove("opacity-0"));
+      window.addEventListener("resize", () => {
+        resize();
+        createParticles();
       });
-      waLines.push(`Total Estimado: ${formatCOP(total)}`);
-      document.getElementById('cart-count-badge').textContent = String(units);
-      document.getElementById('cart-total-units').textContent = `${units} unidades`;
-      document.getElementById('cart-total-price').textContent = formatCOP(total);
-      document.getElementById('cart-items-list').innerHTML = rows.join('') || '<p class="text-xs text-ink-400 py-8 text-center">Tu solicitud está vacía.</p>';
-      document.getElementById('wa-checkout-link').href = 'https://wa.me/573116488685?text=' + encodeURIComponent(waLines.join('\n'));
-    }
-
-    function toggleCartDrawer() {
-      const d = document.getElementById('cart-drawer');
-      if (!d) return;
-      d.classList.toggle('hidden');
-      d.classList.toggle('flex');
-    }
-
-    function updateConciergeSummary() {
-      const sel = document.getElementById('concierge-ref');
-      const qtyIn = document.getElementById('concierge-qty');
-      if (!sel || !qtyIn) return;
-      const opt = sel.options[sel.selectedIndex];
-      const scale1 = parseInt(opt.getAttribute('data-scale1'), 10) || 5900;
-      const scale2 = parseInt(opt.getAttribute('data-scale2'), 10) || 5664;
-      const qty = parseInt(qtyIn.value, 10) || 250;
-      const isScale2 = qty >= 501;
-      const unit = isScale2 ? scale2 : scale1;
-      const total = unit * qty;
-      const deposit = Math.round(total * 0.5);
-
-      document.getElementById('concierge-qty-label').textContent = `${qty} unidades`;
-      document.getElementById('concierge-unit-price').textContent = formatCOP(unit);
-      document.getElementById('concierge-deposit').textContent = formatCOP(deposit);
-      document.getElementById('concierge-total').textContent = formatCOP(total);
-      document.getElementById('concierge-tier-pill').textContent = isScale2
-        ? '★ Escala 2 Activa: 501+ unds (-4% Dto.)'
-        : 'Escala 1 Activa: 100 a 500 unds (Precio Base)';
-
-      const waMsg = `Hola La Querendona Foods, quiero solicitar cotización corporativa:\n• Producto: ${opt.text.split('—')[0].trim()}\n• Cantidad: ${qty} unidades\n• Valor unitario: ${formatCOP(unit)}\n• Total estimado: ${formatCOP(total)} (Anticipo 50%: ${formatCOP(deposit)})`;
-      document.getElementById('concierge-wa-direct').href = 'https://wa.me/573116488685?text=' + encodeURIComponent(waMsg);
-    }
-
-    function addConciergeSelectionToCart() {
-      const sku = document.getElementById('concierge-ref').value;
-      const qty = parseInt(document.getElementById('concierge-qty').value, 10) || 250;
-      cart[sku] = (cart[sku] || 0) + qty;
-      updateCartUI();
-      toggleCartDrawer();
-    }
-
-    window.onload = function () {
-      renderCatalogs();
-      updateCartUI();
-      updateConciergeSummary();
-    };
+    })();
   </script>
 </body>
 </html>
