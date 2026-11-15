@@ -96,10 +96,10 @@
 </head>
 <body class="bg-black text-white antialiased overflow-hidden select-none">
 
-  <!-- PORTADA PRINCIPAL (Altura fija de 100dvh para que todo entre en el primer pantallazo sin scroll) -->
-  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between py-3 sm:py-4 overflow-hidden px-4">
+  <!-- PORTADA PRINCIPAL (Altura fija de 100dvh para que todo quede perfectamente organizado en el primer pantallazo) -->
+  <main class="relative h-[100dvh] w-full bg-black flex flex-col items-center justify-between py-2 sm:py-3 overflow-hidden px-4">
 
-    <!-- 1. Contenedor Superior: Video (90dvh / 100dvh) + Frase "HECHO CON AMOR" -->
+    <!-- 1. Contenedor Superior: Video (90dvh / 100dvh) + Frase "HECHO CON AMOR" reubicada arriba -->
     <div class="relative z-25 w-full max-w-5xl flex flex-col items-center justify-start pointer-events-none">
       
       <!-- Video respetando tus tamaños de 90 en móvil y 100 en PC -->
@@ -113,20 +113,20 @@
         webkit-playsinline="true"
         preload="auto"
         disablePictureInPicture
-        class="flow-video-seamless w-full h-[90dvh] sm:h-[100dvh] object-contain object-top -mb-14 sm:-mb-20"
+        class="flow-video-seamless w-full h-[90dvh] sm:h-[100dvh] object-contain object-top -mb-20 sm:-mb-28"
       ></video>
 
-      <!-- Frase "HECHO CON AMOR" reubicada para subirla elegantemente -->
-      <div class="relative z-30 text-center -mt-6 sm:-mt-8">
-        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-base sm:text-xl md:text-2xl tracking-[0.12em] uppercase">
+      <!-- Frase "HECHO CON AMOR" subida justo debajo de "Reconstruyendo el Sabor" -->
+      <div class="relative z-30 text-center -mt-16 sm:-mt-22">
+        <p id="hecho-con-amor-text" class="hecho-con-amor-reveal italic font-semibold text-sm sm:text-lg md:text-xl tracking-[0.14em] uppercase">
           Hecho con amor
         </p>
       </div>
 
     </div>
 
-    <!-- 2. Haz de Luz Dorado y Partículas -->
-    <div id="sparkles-stage" class="w-full max-w-[46rem] h-10 sm:h-12 relative z-10 opacity-0 transition-opacity duration-1000">
+    <!-- 2. Haz de Luz Dorado y Partículas (Reubicados en la zona intermedia) -->
+    <div id="sparkles-stage" class="w-full max-w-[44rem] h-10 sm:h-12 relative z-10 -mt-4 opacity-0 transition-opacity duration-1000">
       <div class="absolute inset-x-6 top-0 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent h-[2px] w-11/12 mx-auto blur-sm opacity-90"></div>
       <div class="absolute inset-x-6 top-0 bg-gradient-to-r from-transparent via-[#FFF8DC] to-transparent h-px w-11/12 mx-auto"></div>
       <div class="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#F5D061] to-transparent h-[3px] w-2/3 mx-auto blur-sm opacity-80"></div>
@@ -135,11 +135,11 @@
       <canvas id="sparkles-canvas" class="w-full h-full block"></canvas>
 
       <!-- Máscara Radial -->
-      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_60px_at_top,transparent_10%,white)]"></div>
+      <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_50px_at_top,transparent_10%,white)]"></div>
     </div>
 
-    <!-- 3. Dos Botones Blancos Gemelos 3D (Subidos para asegurar visibilidad en móviles) -->
-    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-5 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700 pb-1 sm:pb-2">
+    <!-- 3. Dos Botones Blancos Gemelos 3D (Subidos para garantizar visibilidad total en móviles) -->
+    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700 pb-2 sm:pb-3">
 
       <!-- Botón 1: Clientes Corporativos -->
       <a
@@ -162,7 +162,7 @@
 
   </main>
 
-  <!-- Script de Sincronización (Frase retrasada a 7.0s) y Partículas -->
+  <!-- Script de Sincronización (Frase a 7.0s) y Partículas -->
   <script>
     function lockedUnidadesNotice(button) {
       const label = button.querySelector("#unidades-btn-text");
@@ -264,7 +264,7 @@
 
       function createParticles() {
         particles = [];
-        for (let i = 0; i < 110; i++) {
+        for (let i = 0; i < 100; i++) {
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
