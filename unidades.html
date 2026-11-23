@@ -128,7 +128,7 @@
         </h1>
 
         <p class="text-sm sm:text-base text-[#5A4E47] max-w-xl leading-relaxed">
-          Novenas familiares, antojos de tarde y clásicos colombianos hechos al día. A partir de <strong class="text-borgona">12 unidades</strong> activas automáticamente el <strong class="text-bijao">Pack Familiar (-8%)</strong> y desde <strong class="text-borgona">$80.000</strong> tu domicilio es gratis.
+          Novenas familiares, antojos de tarde y clásicos colombianos hechos al día. A partir de <strong class="text-borgona">50 unidades</strong> activas automáticamente el <strong class="text-bijao">Pack Familiar (-8%)</strong> y desde <strong class="text-borgona">$300.000</strong> tu domicilio es gratis.
         </p>
 
         <div class="flex flex-wrap items-center gap-3 pt-2">
@@ -143,11 +143,11 @@
         <div class="grid grid-cols-3 gap-3 pt-4 border-t border-[#EFE8DE] max-w-lg">
           <div>
             <p class="font-mono text-sm sm:text-base font-bold text-borgona">-8%</p>
-            <p class="text-[11px] text-[#6E625A]">Pack desde 12 unds</p>
+            <p class="text-[11px] text-[#6E625A]">Pack desde 50 unds</p>
           </div>
           <div>
             <p class="font-mono text-sm sm:text-base font-bold text-bijao">Gratis</p>
-            <p class="text-[11px] text-[#6E625A]">Envío desde $80.000</p>
+            <p class="text-[11px] text-[#6E625A]">Envío desde $300.000</p>
           </div>
           <div>
             <p class="font-mono text-sm sm:text-base font-bold text-dorado">100%</p>
@@ -187,7 +187,7 @@
           <p class="text-sm text-[#645850] mt-1">Elige cuántos invitados tienes y el estilo de tu reunión; calculamos la combinación ideal al instante.</p>
         </div>
         <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-bijao/10 text-bijao text-xs font-semibold">
-          <span>Ahorro automático -8% desde 12 unidades</span>
+          <span>Ahorro automático -8% desde 50 unidades</span>
         </div>
       </div>
 
@@ -200,9 +200,9 @@
                 <span id="guest-count-label">15</span> personas
               </span>
             </div>
-            <input id="guest-slider" type="range" min="2" max="50" value="15" class="w-full" oninput="updatePlanner()" />
+            <input id="guest-slider" type="range" min="2" max="80" value="15" class="w-full" oninput="updatePlanner()" />
             <div class="flex justify-between text-[11px] text-[#8A7D73] font-mono mt-1.5">
-              <span>2</span><span>12 (Activa -8%)</span><span>25</span><span>50</span>
+              <span>2</span><span>25</span><span>50 (Activa -8%)</span><span>80</span>
             </div>
           </div>
 
@@ -232,7 +232,7 @@
         <div class="lg:col-span-5 bg-marfil rounded-2xl border border-[#E6DCCF] p-5 sm:p-6 space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-[11px] uppercase tracking-[0.16em] font-semibold text-dorado">Sugerencia para tu mesa</span>
-            <span id="planner-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-bijao text-white">Pack -8% Activo</span>
+            <span id="planner-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-champana text-borgona">Faltan 35 para -8%</span>
           </div>
 
           <div id="planner-items-list" class="space-y-2 text-sm text-[#3A312C]"></div>
@@ -350,8 +350,8 @@
     <div class="px-6 py-3.5 bg-crema/60 border-b border-[#EFE8DE] space-y-2.5 text-xs">
       <div>
         <div class="flex justify-between mb-1">
-          <span id="pack-progress-text" class="font-medium text-borgona">Agrega 12 unds para activar -8%</span>
-          <span id="pack-progress-count" class="font-mono font-semibold text-borgona">0/12</span>
+          <span id="pack-progress-text" class="font-medium text-borgona">Agrega 50 unds para activar -8%</span>
+          <span id="pack-progress-count" class="font-mono font-semibold text-borgona">0/50</span>
         </div>
         <div class="w-full h-1.5 bg-[#E6DCCF] rounded-full overflow-hidden">
           <div id="pack-progress-bar" class="h-full bg-bijao transition-all duration-300" style="width: 0%"></div>
@@ -359,7 +359,7 @@
       </div>
       <div>
         <div class="flex justify-between mb-1">
-          <span id="shipping-progress-text" class="font-medium text-[#5A4E47]">Envío gratis desde $80.000</span>
+          <span id="shipping-progress-text" class="font-medium text-[#5A4E47]">Envío gratis desde $300.000</span>
           <span id="shipping-progress-pct" class="font-mono font-semibold text-dorado">0%</span>
         </div>
         <div class="w-full h-1.5 bg-[#E6DCCF] rounded-full overflow-hidden">
@@ -402,6 +402,12 @@
   </aside>
 
   <script>
+    // Reglas comerciales configurables
+    const PACK_THRESHOLD = 50;
+    const PACK_DISCOUNT = 0.08;
+    const FREE_SHIPPING_THRESHOLD = 300000;
+
+    // Mapa exacto de fotos (coincide con archivos en GitHub)
     const IMAGE_CONFIG = {
       "REF-01": "./ref-01.JPG",
       "REF-02": "./ref-02.JPG",
@@ -409,12 +415,12 @@
       "REF-04": "./ref-04.JPG",
       "REF-05": "./ref-05.JPG",
       "REF-06": "./ref-06.JPG",
-      "CLA-01": "./lq-01.JPG",
-      "CLA-02": "./lq-02.JPG",
-      "CLA-03": "./lq-03.JPG",
-      "CLA-04": "./lq-04.JPG",
-      "CLA-05": "./lq-05.JPG",
-      "CLA-06": "./lq-06.JPG"
+      "CLA-01": "./lq-02.JPG",          // Tamal Tradicional servido en hoja de bijao
+      "CLA-02": "./natilla-bandeja.JPG", // Nueva foto: Bandeja aluminio con mora
+      "CLA-03": "./bunuelos-kraft.JPG",  // Nueva foto: Docena buñuelos bolsa kraft
+      "CLA-04": "./lq-04.JPG",          // Mantequilla de Ajo
+      "CLA-05": "./lq-05.JPG",          // Guacamole de la Casa
+      "CLA-06": "./lq-03.JPG"           // Fiambre en Hoja de Bijao (corregida)
     };
 
     function getFallbackSVG(title) {
@@ -435,8 +441,8 @@
       { id: "REF-05", category: "navidad", badge: "Caja Térmica", name: "Tamal Mini Personal", price: 12700, shortDesc: "1 Tamal Mini Personal de receta tradicional servido en caja térmica conservadora.", includes: "Incluye: 1 Tamal Mini Personal en hoja de bijao y caja térmica para mantener temperatura." },
       { id: "REF-06", category: "navidad", badge: "Más Completo", name: "Combo Trío Tradición 3 en 1", price: 13100, shortDesc: "1 Tamal Antojito + 2 buñuelos de 15 g + 60 g de natilla en caja térmica.", includes: "Incluye: 1 Tamal Antojito, 2 buñuelos (15 g c/u), 60 g de natilla artesanal y caja térmica." },
       { id: "CLA-01", category: "clasicos", badge: "Receta de Casa", name: "Tamal Tradicional (500 g)", price: 17500, shortDesc: "Tamal colombiano completo en hoja de bijao, jugoso y empacado al vacío listo para calentar.", includes: "Presentación: 500 g empacado al vacío. Conservación en refrigeración o congelación." },
-      { id: "CLA-02", category: "clasicos", badge: "Para Compartir", name: "Bandeja Familiar de Natilla (500 g)", price: 16500, shortDesc: "Natilla artesanal cremosa con dulce de mora y coco rallado, rinde 6 a 8 porciones.", includes: "Presentación: Bandeja sellada de 500 g con topping artesanal de mora y coco." },
-      { id: "CLA-03", category: "clasicos", badge: "Crocantes", name: "Docena de Buñuelos Artesanales", price: 21900, shortDesc: "12 buñuelos medianos (35 g c/u) con queso costeño y dorado parejo.", includes: "Presentación: Caja con 12 buñuelos recién hechos." },
+      { id: "CLA-02", category: "clasicos", badge: "Para Compartir", name: "Bandeja Familiar de Natilla (500 g)", price: 16500, shortDesc: "Natilla artesanal cremosa con dulce de mora y coco rallado en práctico empaque de aluminio, rinde 6 a 8 porciones.", includes: "Presentación: Bandeja práctica de aluminio sellada de 500 g con dulce artesanal de mora y coco." },
+      { id: "CLA-03", category: "clasicos", badge: "Crocantes", name: "Docena de Buñuelos Artesanales", price: 21900, shortDesc: "12 buñuelos medianos (35 g c/u) con queso costeño y dorado parejo en bolsa kraft.", includes: "Presentación: Bolsa de papel kraft con 12 buñuelos recién hechos." },
       { id: "CLA-04", category: "clasicos", badge: "Gourmet", name: "Mantequilla de Ajo Artesanal (200 g)", price: 13900, shortDesc: "Mantequilla batida con ajo rostizado y hierbas finas, ideal para pan y carnes.", includes: "Presentación: Frasco/envase de 200 g refrigerado." },
       { id: "CLA-05", category: "clasicos", badge: "Fresco del Día", name: "Guacamole de la Casa (250 g)", price: 11500, shortDesc: "Aguacate Hass machacado al momento con cilantro, cebolla roja y toque cítrico.", includes: "Presentación: Envase hermético de 250 g." },
       { id: "CLA-06", category: "clasicos", badge: "Tradición Paisa", name: "Fiambre en Hoja de Bijao", price: 24900, shortDesc: "Fiambre tradicional envuelto en hoja de bijao con arroz, carnes, huevo, plátano y arepa.", includes: "Presentación: Porción generosa envuelta en hoja natural de bijao." }
@@ -455,7 +461,7 @@
 
       grid.innerHTML = list.map(p => {
         const qty = cart[p.id] || 0;
-        const packPrice = Math.round(p.price * 0.92);
+        const packPrice = Math.round(p.price * (1 - PACK_DISCOUNT));
         const imgSrc = IMAGE_CONFIG[p.id] || getFallbackSVG(p.name);
 
         return `
@@ -473,7 +479,7 @@
               <div class="pt-3 border-t border-[#F0E9DF] flex items-end justify-between gap-2">
                 <div>
                   <p class="font-mono text-lg font-bold text-borgona leading-none">${fmt(p.price)}</p>
-                  <p class="text-[11px] text-bijao font-semibold mt-1">Pack 12+: ${fmt(packPrice)}</p>
+                  <p class="text-[11px] text-bijao font-semibold mt-1">Pack 50+: ${fmt(packPrice)}</p>
                 </div>
                 ${qty === 0 ? `
                   <button onclick="updateQty('${p.id}', 1)" class="px-4 py-2.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-[11px] font-semibold uppercase tracking-wider transition-all active:scale-95">+ Agregar</button>
@@ -539,8 +545,8 @@
         </div>`;
       }).join("");
 
-      const hasPack = totalUnits >= 12;
-      const total = hasPack ? subtotal * 0.92 : subtotal;
+      const hasPack = totalUnits >= PACK_THRESHOLD;
+      const total = hasPack ? subtotal * (1 - PACK_DISCOUNT) : subtotal;
 
       document.getElementById("planner-items-list").innerHTML = html;
       document.getElementById("planner-subtotal").textContent = fmt(subtotal);
@@ -553,7 +559,7 @@
         badge.textContent = "Pack -8% Activo";
         badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-bijao text-white";
       } else {
-        badge.textContent = `Faltan ${12 - totalUnits} para -8%`;
+        badge.textContent = `Faltan ${PACK_THRESHOLD - totalUnits} para -8%`;
         badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-champana text-borgona";
       }
     }
@@ -615,20 +621,20 @@
         }).join("");
       }
 
-      const hasPack = totalUnits >= 12;
-      const discount = hasPack ? subtotal * 0.08 : 0;
+      const hasPack = totalUnits >= PACK_THRESHOLD;
+      const discount = hasPack ? subtotal * PACK_DISCOUNT : 0;
       const total = subtotal - discount;
-      const freeShipping = total >= 80000;
+      const freeShipping = total >= FREE_SHIPPING_THRESHOLD;
 
       document.getElementById("header-cart-count").textContent = totalUnits;
-      document.getElementById("pack-progress-bar").style.width = Math.min(100, (totalUnits / 12) * 100) + "%";
-      document.getElementById("pack-progress-count").textContent = `${Math.min(totalUnits, 12)}/12`;
-      document.getElementById("pack-progress-text").textContent = hasPack ? "¡Pack Familiar (-8%) desbloqueado!" : `Agrega ${12 - totalUnits} unds más para activar -8%`;
+      document.getElementById("pack-progress-bar").style.width = Math.min(100, (totalUnits / PACK_THRESHOLD) * 100) + "%";
+      document.getElementById("pack-progress-count").textContent = `${Math.min(totalUnits, PACK_THRESHOLD)}/${PACK_THRESHOLD}`;
+      document.getElementById("pack-progress-text").textContent = hasPack ? "¡Pack Familiar (-8%) desbloqueado!" : `Agrega ${PACK_THRESHOLD - totalUnits} unds más para activar -8%`;
 
-      const shipPct = Math.min(100, Math.round((total / 80000) * 100));
+      const shipPct = Math.min(100, Math.round((total / FREE_SHIPPING_THRESHOLD) * 100));
       document.getElementById("shipping-progress-bar").style.width = shipPct + "%";
       document.getElementById("shipping-progress-pct").textContent = shipPct + "%";
-      document.getElementById("shipping-progress-text").textContent = freeShipping ? "¡Tienes Domicilio Gratis en Pereira/Dosquebradas!" : `Te faltan ${fmt(80000 - total)} para Domicilio Gratis`;
+      document.getElementById("shipping-progress-text").textContent = freeShipping ? "¡Tienes Domicilio Gratis en Pereira/Dosquebradas!" : `Te faltan ${fmt(FREE_SHIPPING_THRESHOLD - total)} para Domicilio Gratis`;
 
       document.getElementById("corp-bridge-alert").classList.toggle("hidden", totalUnits < 80);
       document.getElementById("cart-total-units").textContent = totalUnits;
@@ -664,8 +670,8 @@
         lines.push(`• ${qty}× ${p.name} (${p.id}) — ${fmt(p.price * qty)}`);
       });
 
-      const hasPack = totalUnits >= 12;
-      const discount = hasPack ? subtotal * 0.08 : 0;
+      const hasPack = totalUnits >= PACK_THRESHOLD;
+      const discount = hasPack ? subtotal * PACK_DISCOUNT : 0;
       const total = subtotal - discount;
 
       lines.push("--------------------------------");
@@ -673,7 +679,7 @@
       lines.push(`Subtotal: ${fmt(subtotal)}`);
       if (hasPack) lines.push(`Descuento Pack Familiar (-8%): -${fmt(discount)}`);
       lines.push(`*TOTAL ESTIMADO: ${fmt(total)}*`);
-      if (total >= 80000) lines.push("Beneficio: Domicilio GRATIS (Pereira/Dosquebradas)");
+      if (total >= FREE_SHIPPING_THRESHOLD) lines.push("Beneficio: Domicilio GRATIS (Pereira/Dosquebradas)");
       lines.push("", "Hola, quiero confirmar disponibilidad y horario de entrega para este pedido.");
 
       window.open("https://wa.me/573116488685?text=" + encodeURIComponent(lines.join("\n")), "_blank");
@@ -690,7 +696,7 @@
       document.getElementById("modal-code").textContent = p.id;
       document.getElementById("modal-title").textContent = p.name;
       document.getElementById("modal-price").textContent = fmt(p.price);
-      document.getElementById("modal-pack-price").textContent = `Pack 12+ (-8%): ${fmt(p.price * 0.92)}`;
+      document.getElementById("modal-pack-price").textContent = `Pack 50+ (-8%): ${fmt(p.price * (1 - PACK_DISCOUNT))}`;
       document.getElementById("modal-desc").textContent = p.shortDesc;
       document.getElementById("modal-includes").textContent = p.includes;
 
