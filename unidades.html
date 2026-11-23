@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Unidades & Pedidos Familiares | La Querendona Foods</title>
+  <meta name="description" content="Catálogo por unidades de La Querendona Foods. Novenas, tamales, buñuelos, natilla con mora y coco y clásicos artesanales en Pereira y Dosquebradas." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            marfil: '#FAF8F5',
+            crema: '#F4EFE6',
+            borgona: '#4A121A',
+            borgonaOscuro: '#340B11',
+            dorado: '#C59B27',
+            champana: '#F5E6C8',
+            bijao: '#2D4A36'
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #FAF8F5;
+      color: #1F1A17;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: #E7DFD3;
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #4A121A;
+      border: 3px solid #FAF8F5;
+      box-shadow: 0 2px 10px rgba(74, 18, 26, 0.35);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+    }
+
+    .card-hover {
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px -16px rgba(74, 18, 26, 0.14);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-marfil text-[#1F1A17] selection:bg-borgona selection:text-white">
+
+  <!-- BARRA SUPERIOR EDITORIAL -->
+  <header class="sticky top-0 z-40 bg-marfil/90 backdrop-blur-md border-b border-[#E8E0D5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+      <a href="./index.html" class="flex items-center gap-3 group">
+        <img src="./logo.JPG" alt="La Querendona Foods" onerror="this.style.display='none'" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border border-dorado/40 shadow-sm" />
+        <div class="leading-tight">
+          <span class="font-serif font-bold text-lg sm:text-xl tracking-wide text-borgona block">La Querendona</span>
+          <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-dorado font-semibold block">Reconstruyendo el Sabor</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-xs uppercase tracking-[0.16em] font-semibold text-[#5A4E47]">
+        <a href="#armador" class="hover:text-borgona transition-colors">Armador de Novena</a>
+        <a href="#catalogo" class="hover:text-borgona transition-colors">Catálogo</a>
+        <a href="./corporativos.html" class="text-borgona border-b border-dorado pb-0.5 hover:opacity-80 transition-opacity">¿Más de 80 unds? Corporativos</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="./index.html" class="hidden sm:inline-flex items-center px-3.5 py-2 rounded-full border border-[#DDD3C5] text-[11px] uppercase tracking-[0.14em] font-semibold text-[#5A4E47] hover:border-borgona hover:text-borgona transition-colors">
+          Inicio
+        </a>
+        <button onclick="openCart()" class="relative inline-flex items-center gap-2.5 bg-borgona hover:bg-borgonaOscuro text-white px-4 sm:px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase shadow-md transition-all active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span class="hidden sm:inline">Mi Pedido</span>
+          <span id="header-cart-count" class="font-mono bg-dorado text-borgonaOscuro font-bold text-[11px] px-2 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO EDITORIAL CON VIDEO AMBIENTAL -->
+  <section class="relative overflow-hidden border-b border-[#E8E0D5] bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div class="lg:col-span-7 space-y-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-champana/60 border border-dorado/30 text-borgona text-[11px] uppercase tracking-[0.18em] font-semibold">
+          <span class="w-2 h-2 rounded-full bg-dorado"></span>
+          Catálogo por Unidades · Pereira & Dosquebradas
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-borgona leading-[1.06] tracking-tight">
+          Tradición artesanal <span class="italic font-normal text-dorado">servida en casa</span>, desde 1 unidad.
+        </h1>
+
+        <p class="text-sm sm:text-base text-[#5A4E47] max-w-xl leading-relaxed">
+          Novenas familiares, antojos de tarde y clásicos colombianos hechos al día. A partir de <strong class="text-borgona">12 unidades</strong> activas automáticamente el <strong class="text-bijao">Pack Familiar (-8%)</strong> y desde <strong class="text-borgona">$80.000</strong> tu domicilio es gratis.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <a href="#catalogo" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] shadow-lg shadow-borgona/20 transition-all">
+            Explorar Catálogo
+          </a>
+          <a href="#armador" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-marfil hover:bg-crema border border-[#D8CDBE] text-borgona text-xs font-semibold uppercase tracking-[0.16em] transition-all">
+            Armar mi Novena
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 pt-4 border-t border-[#EFE8DE] max-w-lg">
+          <div>
+            <p class="font-mono text-sm sm:text-base font-bold text-borgona">-8%</p>
+            <p class="text-[11px] text-[#6E625A]">Pack desde 12 unds</p>
+          </div>
+          <div>
+            <p class="font-mono text-sm sm:text-base font-bold text-bijao">Gratis</p>
+            <p class="text-[11px] text-[#6E625A]">Envío desde $80.000</p>
+          </div>
+          <div>
+            <p class="font-mono text-sm sm:text-base font-bold text-dorado">100%</p>
+            <p class="text-[11px] text-[#6E625A]">Hecho con amor</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-[#E6DCCF] bg-borgonaOscuro aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/5]">
+          <video
+            src="./web-hero-bunuelos.mp4"
+            poster="./ref-01.JPG"
+            autoplay
+            muted
+            loop
+            playsinline
+            class="w-full h-full object-cover"
+          ></video>
+          <div class="absolute inset-0 bg-gradient-to-t from-borgonaOscuro/85 via-transparent to-transparent"></div>
+          <div class="absolute bottom-5 left-5 right-5 text-white">
+            <p class="text-[10px] uppercase tracking-[0.22em] text-champana font-semibold">Recién Salidos de Cocina</p>
+            <p class="font-serif italic text-2xl sm:text-3xl leading-tight mt-0.5">Buñuelos, Natilla & Tamales</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARMADOR INTELIGENTE DE NOVENA FAMILIAR -->
+  <section id="armador" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <div class="bg-white rounded-3xl border border-[#E6DCCF] shadow-sm p-6 sm:p-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#EFE8DE]">
+        <div>
+          <span class="text-[11px] uppercase tracking-[0.2em] text-dorado font-semibold">Asistente Interactivo</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-borgona mt-1">Armador de Novena Familiar</h2>
+          <p class="text-sm text-[#645850] mt-1">Elige cuántos invitados tienes y el estilo de tu reunión; calculamos la combinación ideal al instante.</p>
+        </div>
+        <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-bijao/10 text-bijao text-xs font-semibold">
+          <span>Ahorro automático -8% desde 12 unidades</span>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 pt-7 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="guest-slider" class="text-xs uppercase tracking-[0.15em] font-semibold text-[#5A4E47]">¿Cuántos invitados esperas?</label>
+              <span class="font-mono text-lg font-bold text-borgona bg-marfil px-3 py-1 rounded-xl border border-[#E6DCCF]">
+                <span id="guest-count-label">15</span> personas
+              </span>
+            </div>
+            <input id="guest-slider" type="range" min="2" max="50" value="15" class="w-full" oninput="updatePlanner()" />
+            <div class="flex justify-between text-[11px] text-[#8A7D73] font-mono mt-1.5">
+              <span>2</span><span>12 (Activa -8%)</span><span>25</span><span>50</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-xs uppercase tracking-[0.15em] font-semibold text-[#5A4E47] mb-3">Elige el estilo de experiencia</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="planner-styles">
+              <button type="button" data-style="novena" onclick="selectPlannerStyle('novena')" class="planner-style-btn text-left p-3.5 rounded-2xl border-2 border-borgona bg-borgona/5 transition-all">
+                <p class="font-semibold text-xs text-borgona">Novena Clásica</p>
+                <p class="text-[11px] text-[#6E625A] mt-0.5">Cono Gourmet</p>
+              </button>
+              <button type="button" data-style="velitas" onclick="selectPlannerStyle('velitas')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
+                <p class="font-semibold text-xs text-borgona">Día de Velitas</p>
+                <p class="text-[11px] text-[#6E625A] mt-0.5">Farolito + Vela</p>
+              </button>
+              <button type="button" data-style="cena" onclick="selectPlannerStyle('cena')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
+                <p class="font-semibold text-xs text-borgona">Cena Completa</p>
+                <p class="text-[11px] text-[#6E625A] mt-0.5">Trío 3 en 1</p>
+              </button>
+              <button type="button" data-style="mix" onclick="selectPlannerStyle('mix')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
+                <p class="font-semibold text-xs text-borgona">Mix Familiar</p>
+                <p class="text-[11px] text-[#6E625A] mt-0.5">Tamal + Pesebre</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 bg-marfil rounded-2xl border border-[#E6DCCF] p-5 sm:p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] uppercase tracking-[0.16em] font-semibold text-dorado">Sugerencia para tu mesa</span>
+            <span id="planner-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-bijao text-white">Pack -8% Activo</span>
+          </div>
+
+          <div id="planner-items-list" class="space-y-2 text-sm text-[#3A312C]"></div>
+
+          <div class="pt-3 border-t border-[#E6DCCF] space-y-1">
+            <div class="flex justify-between text-xs text-[#7A6D64]">
+              <span>Precio lista</span>
+              <span id="planner-subtotal" class="font-mono line-through">$0</span>
+            </div>
+            <div class="flex justify-between items-baseline">
+              <span class="text-sm font-semibold text-borgona">Total estimado</span>
+              <span id="planner-total" class="font-mono text-2xl font-bold text-borgona">$0</span>
+            </div>
+            <p id="planner-per-person" class="text-[11px] text-bijao font-medium text-right"></p>
+          </div>
+
+          <button onclick="addPlannerToCart()" class="w-full py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] shadow-md transition-all active:scale-95">
+            Agregar combinación al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO PRINCIPAL -->
+  <section id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div>
+        <span class="text-[11px] uppercase tracking-[0.2em] text-dorado font-semibold">Selección Artesanal 2026</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-borgona mt-1">Catálogo por Unidades</h2>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="setFilter('todos')" data-filter="todos" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-borgona text-white transition-all whitespace-nowrap">Todos (12)</button>
+        <button onclick="setFilter('navidad')" data-filter="navidad" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-white border border-[#E2D8CA] text-[#5A4E47] hover:border-borgona transition-all whitespace-nowrap">Navidad & Novenas (6)</button>
+        <button onclick="setFilter('clasicos')" data-filter="clasicos" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-white border border-[#E2D8CA] text-[#5A4E47] hover:border-borgona transition-all whitespace-nowrap">Clásicos de la Casa (6)</button>
+      </div>
+    </div>
+
+    <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <div class="mt-14 rounded-3xl bg-borgona text-white p-7 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl">
+      <div class="space-y-2 max-w-xl">
+        <span class="text-[11px] uppercase tracking-[0.2em] text-champana font-semibold">Eventos & Empresas</span>
+        <h3 class="font-serif text-2xl sm:text-3xl font-semibold">¿Necesitas más de 80 o 100 unidades para tu empresa?</h3>
+        <p class="text-sm text-champana/85">Accede a tarifas preferenciales corporativas, facturación, programación anticipada y logística térmica garantizada.</p>
+      </div>
+      <a href="./corporativos.html" class="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-champana hover:bg-white text-borgonaOscuro text-xs font-bold uppercase tracking-[0.16em] transition-all">
+        Ir a Clientes Corporativos
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#E8E0D5] bg-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6E625A]">
+      <div class="text-center sm:text-left">
+        <p class="font-serif font-bold text-base text-borgona">La Querendona Foods</p>
+        <p>Reconstruyendo el Sabor · Pereira & Dosquebradas, Risaralda</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-4 font-medium">
+        <a href="https://wa.me/573116488685" target="_blank" class="hover:text-borgona">WhatsApp +57 311 648 8685</a>
+        <span>·</span>
+        <a href="mailto:Comercial@laquerendonafoods.com" class="hover:text-borgona">Comercial@laquerendonafoods.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE DETALLE -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/55 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-[#E6DCCF]">
+      <div class="relative aspect-[16/10] bg-crema">
+        <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
+        <button onclick="closeModal()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-borgona flex items-center justify-center shadow">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <span id="modal-badge" class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-borgona/90 text-champana text-[10px] uppercase tracking-widest font-semibold"></span>
+      </div>
+      <div class="p-6 space-y-4">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p id="modal-code" class="font-mono text-[11px] text-dorado font-semibold"></p>
+            <h3 id="modal-title" class="font-serif text-2xl sm:text-3xl font-semibold text-borgona leading-tight"></h3>
+          </div>
+          <div class="text-right shrink-0">
+            <p id="modal-price" class="font-mono text-xl font-bold text-borgona"></p>
+            <p id="modal-pack-price" class="font-mono text-[11px] text-bijao font-semibold"></p>
+          </div>
+        </div>
+        <p id="modal-desc" class="text-sm text-[#5A4E47] leading-relaxed"></p>
+        <div id="modal-includes" class="bg-marfil rounded-2xl p-3.5 border border-[#EFE8DE] text-xs text-[#4A3F39]"></div>
+        <div class="flex items-center gap-3 pt-2">
+          <button id="modal-add-btn" class="flex-1 py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] transition-all">
+            Agregar al Carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARRITO DESLIZABLE -->
+  <div id="cart-backdrop" onclick="closeCart()" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden"></div>
+  <aside id="cart-drawer" class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="px-6 py-5 border-b border-[#EFE8DE] flex items-center justify-between bg-marfil">
+      <div>
+        <h3 class="font-serif text-2xl font-semibold text-borgona">Tu Pedido</h3>
+        <p class="text-[11px] text-[#7A6D64]">Despacho directo por WhatsApp</p>
+      </div>
+      <button onclick="closeCart()" class="w-9 h-9 rounded-full bg-white border border-[#E6DCCF] flex items-center justify-center text-borgona hover:bg-crema">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="px-6 py-3.5 bg-crema/60 border-b border-[#EFE8DE] space-y-2.5 text-xs">
+      <div>
+        <div class="flex justify-between mb-1">
+          <span id="pack-progress-text" class="font-medium text-borgona">Agrega 12 unds para activar -8%</span>
+          <span id="pack-progress-count" class="font-mono font-semibold text-borgona">0/12</span>
+        </div>
+        <div class="w-full h-1.5 bg-[#E6DCCF] rounded-full overflow-hidden">
+          <div id="pack-progress-bar" class="h-full bg-bijao transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1">
+          <span id="shipping-progress-text" class="font-medium text-[#5A4E47]">Envío gratis desde $80.000</span>
+          <span id="shipping-progress-pct" class="font-mono font-semibold text-dorado">0%</span>
+        </div>
+        <div class="w-full h-1.5 bg-[#E6DCCF] rounded-full overflow-hidden">
+          <div id="shipping-progress-bar" class="h-full bg-dorado transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="corp-bridge-alert" class="hidden mx-6 mt-3 p-3 rounded-2xl bg-borgona/5 border border-borgona/20 text-xs text-borgona">
+      <strong>¡Superas 80 unidades!</strong> Puedes cotizar con tarifa mayorista en <a href="./corporativos.html" class="underline font-bold">Clientes Corporativos</a>.
+    </div>
+
+    <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-4 space-y-3"></div>
+
+    <div class="p-6 border-t border-[#EFE8DE] bg-marfil space-y-3">
+      <div class="space-y-1.5 text-sm">
+        <div class="flex justify-between text-[#6E625A]">
+          <span>Subtotal (<span id="cart-total-units">0</span> unds)</span>
+          <span id="cart-subtotal" class="font-mono">$0</span>
+        </div>
+        <div id="cart-discount-row" class="hidden flex justify-between text-bijao font-semibold">
+          <span>Pack Familiar (-8%)</span>
+          <span id="cart-discount" class="font-mono">-$0</span>
+        </div>
+        <div class="flex justify-between text-xs text-[#6E625A]">
+          <span>Domicilio (Pereira/Dosquebradas)</span>
+          <span id="cart-shipping" class="font-mono font-semibold">Por confirmar</span>
+        </div>
+        <div class="flex justify-between items-baseline pt-2 border-t border-[#E6DCCF]">
+          <span class="font-semibold text-borgona">Total a Pagar</span>
+          <span id="cart-total" class="font-mono text-2xl font-bold text-borgona">$0</span>
+        </div>
+      </div>
+
+      <button onclick="sendWhatsAppOrder()" class="w-full py-3.5 rounded-full bg-bijao hover:bg-[#223929] text-white text-xs font-bold uppercase tracking-[0.16em] shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95">
+        <span>Pedir por WhatsApp</span>
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.391c1.469.797 3.125 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.828 14.125c-.25.703-1.453 1.344-2 1.422-.516.078-1.172.109-1.891-.125-.438-.141-1-.328-1.734-.641-3.047-1.312-5.031-4.391-5.188-4.594-.156-.203-1.234-1.641-1.234-3.141s.781-2.234 1.062-2.531c.281-.297.609-.375.812-.375.203 0 .406.016.578.016.188 0 .438-.078.688.516.25.609.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.344-.312.516-.156.172-.328.391-.469.516-.156.141-.312.297-.141.594.172.297.766 1.266 1.656 2.062 1.141 1.016 2.109 1.328 2.406 1.484.297.156.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.781.844 2.094 1 .312.156.516.234.594.359.078.125.078.734-.172 1.438z"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <script>
+    const IMAGE_CONFIG = {
+      "REF-01": "./ref-01.JPG",
+      "REF-02": "./ref-02.JPG",
+      "REF-03": "./ref-03.JPG",
+      "REF-04": "./ref-04.JPG",
+      "REF-05": "./ref-05.JPG",
+      "REF-06": "./ref-06.JPG",
+      "CLA-01": "./lq-01.JPG",
+      "CLA-02": "./lq-02.JPG",
+      "CLA-03": "./lq-03.JPG",
+      "CLA-04": "./lq-04.JPG",
+      "CLA-05": "./lq-05.JPG",
+      "CLA-06": "./lq-06.JPG"
+    };
+
+    function getFallbackSVG(title) {
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='450' viewBox='0 0 600 450'>
+        <rect width='600' height='450' fill='#F4EFE6'/>
+        <rect x='24' y='24' width='552' height='402' rx='18' fill='none' stroke='#C59B27' stroke-width='1.5' stroke-opacity='0.5'/>
+        <text x='300' y='215' text-anchor='middle' font-family='Georgia, serif' font-size='26' fill='#4A121A' font-style='italic'>La Querendona Foods</text>
+        <text x='300' y='250' text-anchor='middle' font-family='sans-serif' font-size='14' fill='#7A6D64'>${title}</text>
+      </svg>`;
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    }
+
+    const PRODUCTS = [
+      { id: "REF-01", category: "navidad", badge: "Favorito Novenas", name: "Cono Gourmet Novena", price: 7600, shortDesc: "3 buñuelos artesanales de 15 g + 45 g de natilla con mora y coco en cono gourmet.", includes: "Incluye: 3 buñuelos (15 g c/u), porción de 45 g de natilla artesanal con mora y coco, y empaque cono gourmet." },
+      { id: "REF-02", category: "navidad", badge: "Antojo Rápido", name: "Tamal Antojito", price: 7200, shortDesc: "1 Tamal Antojito tradicional acompañado de 1 buñuelo artesanal de 15 g.", includes: "Incluye: 1 Tamal Antojito tradicional, 1 buñuelo artesanal (15 g) y empaque individual." },
+      { id: "REF-03", category: "navidad", badge: "Edición Pesebre", name: "Cajita Tradición Pesebre", price: 8600, shortDesc: "3 buñuelos artesanales de 15 g + 60 g de natilla con mora y coco en cajita de regalo.", includes: "Incluye: 3 buñuelos (15 g c/u), 60 g de natilla artesanal con mora y coco, y cajita temática Pesebre." },
+      { id: "REF-04", category: "navidad", badge: "Día de Velitas", name: "Cajita Farolito Día de Velitas", price: 11600, shortDesc: "3 buñuelos de 15 g + 60 g de natilla en cajita farolito con vela LED incluida.", includes: "Incluye: 3 buñuelos (15 g c/u), 60 g de natilla artesanal, cajita farolito iluminable y vela LED." },
+      { id: "REF-05", category: "navidad", badge: "Caja Térmica", name: "Tamal Mini Personal", price: 12700, shortDesc: "1 Tamal Mini Personal de receta tradicional servido en caja térmica conservadora.", includes: "Incluye: 1 Tamal Mini Personal en hoja de bijao y caja térmica para mantener temperatura." },
+      { id: "REF-06", category: "navidad", badge: "Más Completo", name: "Combo Trío Tradición 3 en 1", price: 13100, shortDesc: "1 Tamal Antojito + 2 buñuelos de 15 g + 60 g de natilla en caja térmica.", includes: "Incluye: 1 Tamal Antojito, 2 buñuelos (15 g c/u), 60 g de natilla artesanal y caja térmica." },
+      { id: "CLA-01", category: "clasicos", badge: "Receta de Casa", name: "Tamal Tradicional (500 g)", price: 17500, shortDesc: "Tamal colombiano completo en hoja de bijao, jugoso y empacado al vacío listo para calentar.", includes: "Presentación: 500 g empacado al vacío. Conservación en refrigeración o congelación." },
+      { id: "CLA-02", category: "clasicos", badge: "Para Compartir", name: "Bandeja Familiar de Natilla (500 g)", price: 16500, shortDesc: "Natilla artesanal cremosa con dulce de mora y coco rallado, rinde 6 a 8 porciones.", includes: "Presentación: Bandeja sellada de 500 g con topping artesanal de mora y coco." },
+      { id: "CLA-03", category: "clasicos", badge: "Crocantes", name: "Docena de Buñuelos Artesanales", price: 21900, shortDesc: "12 buñuelos medianos (35 g c/u) con queso costeño y dorado parejo.", includes: "Presentación: Caja con 12 buñuelos recién hechos." },
+      { id: "CLA-04", category: "clasicos", badge: "Gourmet", name: "Mantequilla de Ajo Artesanal (200 g)", price: 13900, shortDesc: "Mantequilla batida con ajo rostizado y hierbas finas, ideal para pan y carnes.", includes: "Presentación: Frasco/envase de 200 g refrigerado." },
+      { id: "CLA-05", category: "clasicos", badge: "Fresco del Día", name: "Guacamole de la Casa (250 g)", price: 11500, shortDesc: "Aguacate Hass machacado al momento con cilantro, cebolla roja y toque cítrico.", includes: "Presentación: Envase hermético de 250 g." },
+      { id: "CLA-06", category: "clasicos", badge: "Tradición Paisa", name: "Fiambre en Hoja de Bijao", price: 24900, shortDesc: "Fiambre tradicional envuelto en hoja de bijao con arroz, carnes, huevo, plátano y arepa.", includes: "Presentación: Porción generosa envuelta en hoja natural de bijao." }
+    ];
+
+    let activeFilter = "todos";
+    let plannerStyle = "novena";
+    let cart = JSON.parse(localStorage.getItem("lq_unidades_cart_v2") || "{}");
+
+    const COP = new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
+    const fmt = (n) => COP.format(Math.round(n));
+
+    function renderCatalog() {
+      const grid = document.getElementById("catalog-grid");
+      const list = activeFilter === "todos" ? PRODUCTS : PRODUCTS.filter(p => p.category === activeFilter);
+
+      grid.innerHTML = list.map(p => {
+        const qty = cart[p.id] || 0;
+        const packPrice = Math.round(p.price * 0.92);
+        const imgSrc = IMAGE_CONFIG[p.id] || getFallbackSVG(p.name);
+
+        return `
+          <article class="card-hover bg-white rounded-3xl border border-[#E6DCCF] overflow-hidden flex flex-col">
+            <div class="relative aspect-[4/3] bg-crema overflow-hidden cursor-pointer group" onclick="openModal('${p.id}')">
+              <img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.src='${getFallbackSVG(p.name)}';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-borgona text-[10px] uppercase tracking-[0.14em] font-bold shadow-sm">${p.badge}</span>
+              <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-borgonaOscuro/80 text-champana font-mono text-[10px] font-semibold backdrop-blur-xs">${p.id}</span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between gap-4">
+              <div>
+                <h3 onclick="openModal('${p.id}')" class="font-serif text-2xl font-semibold text-borgona leading-snug cursor-pointer hover:text-dorado transition-colors">${p.name}</h3>
+                <p class="text-xs text-[#645850] mt-1.5 leading-relaxed">${p.shortDesc}</p>
+              </div>
+              <div class="pt-3 border-t border-[#F0E9DF] flex items-end justify-between gap-2">
+                <div>
+                  <p class="font-mono text-lg font-bold text-borgona leading-none">${fmt(p.price)}</p>
+                  <p class="text-[11px] text-bijao font-semibold mt-1">Pack 12+: ${fmt(packPrice)}</p>
+                </div>
+                ${qty === 0 ? `
+                  <button onclick="updateQty('${p.id}', 1)" class="px-4 py-2.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-[11px] font-semibold uppercase tracking-wider transition-all active:scale-95">+ Agregar</button>
+                ` : `
+                  <div class="inline-flex items-center gap-2 bg-marfil border border-[#DDD3C5] rounded-full p-1">
+                    <button onclick="updateQty('${p.id}', -1)" class="w-7 h-7 rounded-full bg-white text-borgona font-bold hover:bg-crema">−</button>
+                    <span class="font-mono text-xs font-bold text-borgona min-w-[20px] text-center">${qty}</span>
+                    <button onclick="updateQty('${p.id}', 1)" class="w-7 h-7 rounded-full bg-borgona text-white font-bold hover:bg-borgonaOscuro">+</button>
+                  </div>
+                `}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function setFilter(filter) {
+      activeFilter = filter;
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        const active = btn.dataset.filter === filter;
+        btn.className = active
+          ? "filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-borgona text-white transition-all whitespace-nowrap"
+          : "filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-white border border-[#E2D8CA] text-[#5A4E47] hover:border-borgona transition-all whitespace-nowrap";
+      });
+      renderCatalog();
+    }
+
+    function getPlannerPlan(guests, style) {
+      if (style === "novena") return [{ id: "REF-01", qty: guests }];
+      if (style === "velitas") return [{ id: "REF-04", qty: guests }];
+      if (style === "cena") return [{ id: "REF-06", qty: guests }];
+      const half = Math.ceil(guests / 2);
+      const rest = Math.max(1, guests - half);
+      return [{ id: "REF-03", qty: half }, { id: "REF-02", qty: rest }];
+    }
+
+    function selectPlannerStyle(style) {
+      plannerStyle = style;
+      document.querySelectorAll(".planner-style-btn").forEach(btn => {
+        const active = btn.dataset.style === style;
+        btn.className = active
+          ? "planner-style-btn text-left p-3.5 rounded-2xl border-2 border-borgona bg-borgona/5 transition-all"
+          : "planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all";
+      });
+      updatePlanner();
+    }
+
+    function updatePlanner() {
+      const guests = parseInt(document.getElementById("guest-slider").value, 10);
+      document.getElementById("guest-count-label").textContent = guests;
+
+      const plan = getPlannerPlan(guests, plannerStyle);
+      let subtotal = 0, totalUnits = 0;
+
+      const html = plan.map(item => {
+        const p = PRODUCTS.find(x => x.id === item.id);
+        subtotal += p.price * item.qty;
+        totalUnits += item.qty;
+        return `<div class="flex justify-between items-center bg-white px-3 py-2 rounded-xl border border-[#EFE8DE]">
+          <span><strong class="font-mono text-borgona">${item.qty}×</strong> ${p.name}</span>
+          <span class="font-mono text-xs text-[#6E625A]">${fmt(p.price * item.qty)}</span>
+        </div>`;
+      }).join("");
+
+      const hasPack = totalUnits >= 12;
+      const total = hasPack ? subtotal * 0.92 : subtotal;
+
+      document.getElementById("planner-items-list").innerHTML = html;
+      document.getElementById("planner-subtotal").textContent = fmt(subtotal);
+      document.getElementById("planner-subtotal").style.display = hasPack ? "inline" : "none";
+      document.getElementById("planner-total").textContent = fmt(total);
+      document.getElementById("planner-per-person").textContent = `Equivale a ${fmt(total / guests)} por invitado`;
+
+      const badge = document.getElementById("planner-badge");
+      if (hasPack) {
+        badge.textContent = "Pack -8% Activo";
+        badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-bijao text-white";
+      } else {
+        badge.textContent = `Faltan ${12 - totalUnits} para -8%`;
+        badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-champana text-borgona";
+      }
+    }
+
+    function addPlannerToCart() {
+      const guests = parseInt(document.getElementById("guest-slider").value, 10);
+      getPlannerPlan(guests, plannerStyle).forEach(item => {
+        cart[item.id] = (cart[item.id] || 0) + item.qty;
+      });
+      saveAndRenderCart();
+      openCart();
+    }
+
+    function updateQty(id, delta) {
+      const next = (cart[id] || 0) + delta;
+      if (next <= 0) delete cart[id];
+      else cart[id] = next;
+      saveAndRenderCart();
+    }
+
+    function saveAndRenderCart() {
+      localStorage.setItem("lq_unidades_cart_v2", JSON.stringify(cart));
+      renderCatalog();
+      renderCartDrawer();
+    }
+
+    function renderCartDrawer() {
+      const entries = Object.entries(cart).filter(([, q]) => q > 0);
+      let totalUnits = 0, subtotal = 0;
+      const container = document.getElementById("cart-items");
+
+      if (entries.length === 0) {
+        container.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center py-12 text-[#8A7D73]">
+            <p class="font-serif text-2xl text-borgona mb-1">Tu carrito está vacío</p>
+            <p class="text-xs max-w-[220px]">Agrega unidades del catálogo o usa el Armador de Novena Familiar.</p>
+          </div>`;
+      } else {
+        container.innerHTML = entries.map(([id, qty]) => {
+          const p = PRODUCTS.find(x => x.id === id);
+          if (!p) return "";
+          totalUnits += qty;
+          subtotal += p.price * qty;
+          const imgSrc = IMAGE_CONFIG[p.id] || getFallbackSVG(p.name);
+
+          return `
+            <div class="flex items-center gap-3 p-3 rounded-2xl border border-[#EFE8DE] bg-marfil/60">
+              <img src="${imgSrc}" onerror="this.onerror=null; this.src='${getFallbackSVG(p.name)}';" class="w-14 h-14 rounded-xl object-cover shrink-0" />
+              <div class="flex-1 min-w-0">
+                <p class="font-semibold text-xs text-borgona truncate">${p.name}</p>
+                <p class="font-mono text-xs text-[#6E625A]">${fmt(p.price)} c/u</p>
+              </div>
+              <div class="inline-flex items-center gap-1.5 bg-white border border-[#E2D8CA] rounded-full p-1">
+                <button onclick="updateQty('${p.id}', -1)" class="w-6 h-6 rounded-full text-borgona font-bold hover:bg-crema">−</button>
+                <span class="font-mono text-xs font-bold min-w-[18px] text-center">${qty}</span>
+                <button onclick="updateQty('${p.id}', 1)" class="w-6 h-6 rounded-full bg-borgona text-white font-bold">+</button>
+              </div>
+            </div>`;
+        }).join("");
+      }
+
+      const hasPack = totalUnits >= 12;
+      const discount = hasPack ? subtotal * 0.08 : 0;
+      const total = subtotal - discount;
+      const freeShipping = total >= 80000;
+
+      document.getElementById("header-cart-count").textContent = totalUnits;
+      document.getElementById("pack-progress-bar").style.width = Math.min(100, (totalUnits / 12) * 100) + "%";
+      document.getElementById("pack-progress-count").textContent = `${Math.min(totalUnits, 12)}/12`;
+      document.getElementById("pack-progress-text").textContent = hasPack ? "¡Pack Familiar (-8%) desbloqueado!" : `Agrega ${12 - totalUnits} unds más para activar -8%`;
+
+      const shipPct = Math.min(100, Math.round((total / 80000) * 100));
+      document.getElementById("shipping-progress-bar").style.width = shipPct + "%";
+      document.getElementById("shipping-progress-pct").textContent = shipPct + "%";
+      document.getElementById("shipping-progress-text").textContent = freeShipping ? "¡Tienes Domicilio Gratis en Pereira/Dosquebradas!" : `Te faltan ${fmt(80000 - total)} para Domicilio Gratis`;
+
+      document.getElementById("corp-bridge-alert").classList.toggle("hidden", totalUnits < 80);
+      document.getElementById("cart-total-units").textContent = totalUnits;
+      document.getElementById("cart-subtotal").textContent = fmt(subtotal);
+      document.getElementById("cart-discount-row").classList.toggle("hidden", !hasPack);
+      document.getElementById("cart-discount").textContent = "-" + fmt(discount);
+      document.getElementById("cart-shipping").textContent = total === 0 ? "Por confirmar" : (freeShipping ? "GRATIS" : "Según zona");
+      document.getElementById("cart-total").textContent = fmt(total);
+    }
+
+    function openCart() {
+      document.getElementById("cart-backdrop").classList.remove("hidden");
+      document.getElementById("cart-drawer").classList.remove("translate-x-full");
+    }
+
+    function closeCart() {
+      document.getElementById("cart-backdrop").classList.add("hidden");
+      document.getElementById("cart-drawer").classList.add("translate-x-full");
+    }
+
+    function sendWhatsAppOrder() {
+      const entries = Object.entries(cart).filter(([, q]) => q > 0);
+      if (entries.length === 0) { alert("Agrega al menos un producto a tu pedido."); return; }
+
+      let totalUnits = 0, subtotal = 0;
+      let lines = ["*PEDIDO POR UNIDADES — LA QUERENDONA FOODS*", "--------------------------------"];
+
+      entries.forEach(([id, qty]) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p) return;
+        totalUnits += qty;
+        subtotal += p.price * qty;
+        lines.push(`• ${qty}× ${p.name} (${p.id}) — ${fmt(p.price * qty)}`);
+      });
+
+      const hasPack = totalUnits >= 12;
+      const discount = hasPack ? subtotal * 0.08 : 0;
+      const total = subtotal - discount;
+
+      lines.push("--------------------------------");
+      lines.push(`Unidades totales: ${totalUnits}`);
+      lines.push(`Subtotal: ${fmt(subtotal)}`);
+      if (hasPack) lines.push(`Descuento Pack Familiar (-8%): -${fmt(discount)}`);
+      lines.push(`*TOTAL ESTIMADO: ${fmt(total)}*`);
+      if (total >= 80000) lines.push("Beneficio: Domicilio GRATIS (Pereira/Dosquebradas)");
+      lines.push("", "Hola, quiero confirmar disponibilidad y horario de entrega para este pedido.");
+
+      window.open("https://wa.me/573116488685?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+    }
+
+    function openModal(id) {
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p) return;
+      const img = document.getElementById("modal-img");
+      img.src = IMAGE_CONFIG[p.id] || getFallbackSVG(p.name);
+      img.onerror = () => { img.src = getFallbackSVG(p.name); };
+
+      document.getElementById("modal-badge").textContent = p.badge;
+      document.getElementById("modal-code").textContent = p.id;
+      document.getElementById("modal-title").textContent = p.name;
+      document.getElementById("modal-price").textContent = fmt(p.price);
+      document.getElementById("modal-pack-price").textContent = `Pack 12+ (-8%): ${fmt(p.price * 0.92)}`;
+      document.getElementById("modal-desc").textContent = p.shortDesc;
+      document.getElementById("modal-includes").textContent = p.includes;
+
+      document.getElementById("modal-add-btn").onclick = () => {
+        updateQty(p.id, 1);
+        closeModal();
+        openCart();
+      };
+
+      const modal = document.getElementById("product-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("product-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    updatePlanner();
+    renderCatalog();
+    renderCartDrawer();
+  </script>
+</body>
+</html>
