@@ -87,7 +87,7 @@
   <!-- BARRA SUPERIOR EDITORIAL -->
   <header class="sticky top-0 z-40 bg-marfil/90 backdrop-blur-md border-b border-[#E8E0D5]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
-      <a href="./index.html" class="flex items-center gap-3 group">
+      <a href="./index.html" class="flex items-center gap-3 shrink-0 group">
         <img src="./logo.JPG" alt="La Querendona Foods" onerror="this.style.display='none'" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border border-dorado/40 shadow-sm" />
         <div class="leading-tight">
           <span class="font-serif font-bold text-lg sm:text-xl tracking-wide text-borgona block">La Querendona</span>
@@ -95,13 +95,14 @@
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-7 text-xs uppercase tracking-[0.16em] font-semibold text-[#5A4E47]">
-        <a href="#armador" class="hover:text-borgona transition-colors">Armador de Novena</a>
-        <a href="#catalogo" class="hover:text-borgona transition-colors">Catálogo</a>
-        <a href="./corporativos.html" class="text-borgona border-b border-dorado pb-0.5 hover:opacity-80 transition-opacity">¿Más de 80 unds? Corporativos</a>
+      <!-- Navegación Desktop (visible desde lg para evitar superposición en iPad vertical) -->
+      <nav class="hidden lg:flex items-center gap-7 text-xs uppercase tracking-[0.16em] font-semibold text-[#5A4E47]">
+        <a href="#armador" class="hover:text-borgona transition-colors whitespace-nowrap">Armador de Novena</a>
+        <a href="#catalogo" class="hover:text-borgona transition-colors whitespace-nowrap">Catálogo</a>
+        <a href="./corporativos.html" class="text-borgona border-b border-dorado pb-0.5 hover:opacity-80 transition-opacity whitespace-nowrap">¿Más de 80 unds? Corporativos</a>
       </nav>
 
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <a href="./index.html" class="hidden sm:inline-flex items-center px-3.5 py-2 rounded-full border border-[#DDD3C5] text-[11px] uppercase tracking-[0.14em] font-semibold text-[#5A4E47] hover:border-borgona hover:text-borgona transition-colors">
           Inicio
         </a>
@@ -210,12 +211,12 @@
             <p class="text-xs uppercase tracking-[0.15em] font-semibold text-[#5A4E47] mb-3">Elige el estilo de experiencia</p>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="planner-styles">
               <button type="button" data-style="novena" onclick="selectPlannerStyle('novena')" class="planner-style-btn text-left p-3.5 rounded-2xl border-2 border-borgona bg-borgona/5 transition-all">
-                <p class="font-semibold text-xs text-borgona">Novena Clásica</p>
-                <p class="text-[11px] text-[#6E625A] mt-0.5">Cono Gourmet</p>
+                <p class="font-semibold text-xs text-borgona">Novena Práctica</p>
+                <p class="text-[11px] text-[#6E625A] mt-0.5">Domo Sellado</p>
               </button>
-              <button type="button" data-style="velitas" onclick="selectPlannerStyle('velitas')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
-                <p class="font-semibold text-xs text-borgona">Día de Velitas</p>
-                <p class="text-[11px] text-[#6E625A] mt-0.5">Farolito + Vela</p>
+              <button type="button" data-style="pesebre" onclick="selectPlannerStyle('pesebre')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
+                <p class="font-semibold text-xs text-borgona">Edición Regalo</p>
+                <p class="text-[11px] text-[#6E625A] mt-0.5">Cajita Pesebre</p>
               </button>
               <button type="button" data-style="cena" onclick="selectPlannerStyle('cena')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
                 <p class="font-semibold text-xs text-borgona">Cena Completa</p>
@@ -305,9 +306,12 @@
   <!-- MODAL DE DETALLE -->
   <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/55 backdrop-blur-sm p-4">
     <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-[#E6DCCF]">
-      <div class="relative aspect-[16/10] bg-crema">
+      <div class="relative aspect-[16/10] bg-crema overflow-hidden">
         <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
-        <button onclick="closeModal()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-borgona flex items-center justify-center shadow">
+        <div id="modal-soldout-overlay" class="hidden absolute inset-0 bg-borgonaOscuro/45 backdrop-blur-[1px] flex items-center justify-center">
+          <span class="px-6 py-2 rounded-full bg-borgona text-champana border-2 border-champana/80 text-sm font-bold uppercase tracking-[0.26em] shadow-xl">Agotado</span>
+        </div>
+        <button onclick="closeModal()" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-borgona flex items-center justify-center shadow">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
         <span id="modal-badge" class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-borgona/90 text-champana text-[10px] uppercase tracking-widest font-semibold"></span>
@@ -415,7 +419,7 @@
       "REF-04": "./ref-04.JPG",
       "REF-05": "./ref-05.JPG",
       "REF-06": "./ref-06.JPG",
-      "REF-07": "./ref-07.JPG",          // Nuevo: Domo Natilla, Mora & Buñuelos sellado
+      "REF-07": "./ref-07.JPG",          // Domo Natilla, Mora & Buñuelos sellado
       "CLA-01": "./lq-02.JPG",           // Tamal Tradicional en hoja de bijao
       "CLA-02": "./natilla-bandeja.JPG", // Bandeja aluminio con dulce de mora
       "CLA-03": "./bunuelos-kraft.JPG",  // Docena buñuelos bolsa kraft
@@ -434,28 +438,33 @@
       return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
     }
 
+    // Para volver a habilitar un producto agotado, cambia soldOut: true por soldOut: false
     const PRODUCTS = [
       // NAVIDAD & NOVENAS 2026
-      { id: "REF-01", category: "navidad", badge: "Favorito Novenas", name: "Cono Gourmet Novena", price: 7600, shortDesc: "3 buñuelos artesanales de 15 g + 45 g de natilla con mora y coco en cono gourmet.", includes: "Incluye: 3 buñuelos (15 g c/u), porción de 45 g de natilla artesanal con mora y coco, y empaque cono gourmet." },
-      { id: "REF-02", category: "navidad", badge: "Antojo Rápido", name: "Tamal Antojito", price: 7200, shortDesc: "1 Tamal Antojito tradicional acompañado de 1 buñuelo artesanal de 15 g.", includes: "Incluye: 1 Tamal Antojito tradicional, 1 buñuelo artesanal (15 g) y empaque individual." },
-      { id: "REF-03", category: "navidad", badge: "Edición Pesebre", name: "Cajita Tradición Pesebre", price: 8600, shortDesc: "3 buñuelos artesanales de 15 g + 60 g de natilla con mora y coco en cajita de regalo.", includes: "Incluye: 3 buñuelos (15 g c/u), 60 g de natilla artesanal con mora y coco, y cajita temática Pesebre." },
-      { id: "REF-04", category: "navidad", badge: "Día de Velitas", name: "Cajita Farolito Día de Velitas", price: 11600, shortDesc: "3 buñuelos de 15 g + 60 g de natilla en cajita farolito con vela LED incluida.", includes: "Incluye: 3 buñuelos (15 g c/u), 60 g de natilla artesanal, cajita farolito iluminable y vela LED." },
-      { id: "REF-05", category: "navidad", badge: "Caja Térmica", name: "Tamal Mini Personal", price: 12700, shortDesc: "1 Tamal Mini Personal de receta tradicional servido en caja térmica conservadora.", includes: "Incluye: 1 Tamal Mini Personal en hoja de bijao y caja térmica para mantener temperatura." },
-      { id: "REF-06", category: "navidad", badge: "Más Completo", name: "Combo Trío Tradición 3 en 1", price: 13100, shortDesc: "1 Tamal Antojito + 2 buñuelos de 15 g + 60 g de natilla en caja térmica.", includes: "Incluye: 1 Tamal Antojito, 2 buñuelos (15 g c/u), 60 g de natilla artesanal y caja térmica." },
-      { id: "REF-07", category: "navidad", badge: "Nuevo · Sellado", name: "Domo Natilla, Mora & Buñuelos", price: 7600, shortDesc: "Natilla artesanal en domo sellado de 100 grs con 2 buñuelitos de 15 g y vasito independiente de mermelada de mora.", includes: "Incluye: Porción individual de natilla tradicional, 2 buñuelos artesanales (15 g c/u), vasito de mermelada de mora y doble sello de seguridad La Querendona." },
+      { id: "REF-01", soldOut: true,  category: "navidad", badge: "Favorito Novenas", name: "Cono Gourmet Novena", price: 7600, shortDesc: "3 buñuelos artesanales de 15 g + 45 g de natilla con mora y coco en cono gourmet.", includes: "Incluye: 3 buñuelos (15 g c/u), porción de 45 g de natilla artesanal con mora y coco, y empaque cono gourmet." },
+      { id: "REF-02", soldOut: false, category: "navidad", badge: "Antojo Rápido", name: "Tamal Antojito", price: 7200, shortDesc: "1 Tamal Antojito tradicional acompañado de 1 buñuelo artesanal de 15 g.", includes: "Incluye: 1 Tamal Antojito tradicional, 1 buñuelo artesanal (15 g) y empaque individual." },
+      { id: "REF-03", soldOut: false, category: "navidad", badge: "Edición Pesebre", name: "Cajita Tradición Pesebre", price: 8600, shortDesc: "3 buñuelos artesanales de 15 g + 60 g de natilla con mora y coco en cajita de regalo.", includes: "Incluye: 3 buñuelos (15 g c/u), 60 g de natilla artesanal con mora y coco, y cajita temática Pesebre." },
+      { id: "REF-04", soldOut: true,  category: "navidad", badge: "Día de Velitas", name: "Cajita Farolito Día de Velitas", price: 11600, shortDesc: "3 buñuelos de 15 g + 60 g de natilla en cajita farolito con vela LED incluida.", includes: "Incluye: 3 buñuelos (15 g c/u), 60 g de natilla artesanal, cajita farolito iluminable y vela LED." },
+      { id: "REF-05", soldOut: false, category: "navidad", badge: "Caja Térmica", name: "Tamal Mini Personal", price: 12700, shortDesc: "1 Tamal Mini Personal de receta tradicional servido en caja térmica conservadora.", includes: "Incluye: 1 Tamal Mini Personal en hoja de bijao y caja térmica para mantener temperatura." },
+      { id: "REF-06", soldOut: false, category: "navidad", badge: "Más Completo", name: "Combo Trío Tradición 3 en 1", price: 13100, shortDesc: "1 Tamal Antojito + 2 buñuelos de 15 g + 60 g de natilla en caja térmica.", includes: "Incluye: 1 Tamal Antojito, 2 buñuelos (15 g c/u), 60 g de natilla artesanal y caja térmica." },
+      { id: "REF-07", soldOut: false, category: "navidad", badge: "Nuevo · Sellado", name: "Domo Natilla, Mora & Buñuelos", price: 7600, shortDesc: "Natilla artesanal en domo sellado con 2 buñuelitos de 15 g y vasito independiente de mermelada de mora.", includes: "Incluye: Porción individual de natilla tradicional, 2 buñuelos artesanales (15 g c/u), vasito de mermelada de mora y doble sello de seguridad La Querendona." },
 
       // CLÁSICOS DE LA CASA
-      { id: "CLA-01", category: "clasicos", badge: "Receta de Casa", name: "Tamal Tradicional (500 g)", price: 17500, shortDesc: "Tamal colombiano completo en hoja de bijao, jugoso y empacado al vacío listo para calentar.", includes: "Presentación: 500 g empacado al vacío. Conservación en refrigeración o congelación." },
-      { id: "CLA-02", category: "clasicos", badge: "Para Compartir", name: "Bandeja Familiar de Natilla (500 g)", price: 16500, shortDesc: "Natilla artesanal cremosa con dulce de mora en práctico empaque de aluminio, rinde 6 a 8 porciones.", includes: "Presentación: Bandeja práctica de aluminio sellada de 500 g con dulce artesanal de mora." },
-      { id: "CLA-03", category: "clasicos", badge: "Crocantes", name: "Docena de Buñuelos Artesanales", price: 21900, shortDesc: "12 buñuelos medianos (35 g c/u) con queso costeño y dorado parejo en bolsa kraft.", includes: "Presentación: Bolsa de papel kraft sellada con 12 buñuelos recién hechos." },
-      { id: "CLA-04", category: "clasicos", badge: "Gourmet", name: "Mantequilla de Ajo Artesanal (200 g)", price: 13900, shortDesc: "Mantequilla batida con ajo rostizado y hierbas finas, ideal para pan y carnes.", includes: "Presentación: Frasco/envase de 200 g refrigerado." },
-      { id: "CLA-05", category: "clasicos", badge: "Fresco del Día", name: "Guacamole de la Casa (250 g)", price: 11500, shortDesc: "Aguacate Hass machacado al momento con cilantro, cebolla roja y toque cítrico.", includes: "Presentación: Envase hermético de 250 g." },
-      { id: "CLA-06", category: "clasicos", badge: "Tradición Paisa", name: "Fiambre en Hoja de Bijao", price: 24900, shortDesc: "Fiambre tradicional envuelto en hoja de bijao con arroz, carnes, huevo, plátano y arepa.", includes: "Presentación: Porción generosa envuelta en hoja natural de bijao." }
+      { id: "CLA-01", soldOut: false, category: "clasicos", badge: "Receta de Casa", name: "Tamal Tradicional (500 g)", price: 17500, shortDesc: "Tamal colombiano completo en hoja de bijao, jugoso y empacado al vacío listo para calentar.", includes: "Presentación: 500 g empacado al vacío. Conservación en refrigeración o congelación." },
+      { id: "CLA-02", soldOut: false, category: "clasicos", badge: "Para Compartir", name: "Bandeja Familiar de Natilla (500 g)", price: 16500, shortDesc: "Natilla artesanal cremosa con dulce de mora en práctico empaque de aluminio, rinde 6 a 8 porciones.", includes: "Presentación: Bandeja práctica de aluminio sellada de 500 g con dulce artesanal de mora." },
+      { id: "CLA-03", soldOut: false, category: "clasicos", badge: "Crocantes", name: "Docena de Buñuelos Artesanales", price: 21900, shortDesc: "12 buñuelos medianos (35 g c/u) con queso costeño y dorado parejo en bolsa kraft.", includes: "Presentación: Bolsa de papel kraft sellada con 12 buñuelos recién hechos." },
+      { id: "CLA-04", soldOut: false, category: "clasicos", badge: "Gourmet", name: "Mantequilla de Ajo Artesanal (200 g)", price: 13900, shortDesc: "Mantequilla batida con ajo rostizado y hierbas finas, ideal para pan y carnes.", includes: "Presentación: Frasco/envase de 200 g refrigerado." },
+      { id: "CLA-05", soldOut: false, category: "clasicos", badge: "Fresco del Día", name: "Guacamole de la Casa (250 g)", price: 11500, shortDesc: "Aguacate Hass machacado al momento con cilantro, cebolla roja y toque cítrico.", includes: "Presentación: Envase hermético de 250 g." },
+      { id: "CLA-06", soldOut: false, category: "clasicos", badge: "Tradición Paisa", name: "Fiambre en Hoja de Bijao", price: 24900, shortDesc: "Fiambre tradicional envuelto en hoja de bijao con arroz, carnes, huevo, plátano y arepa.", includes: "Presentación: Porción generosa envuelta en hoja natural de bijao." }
     ];
 
     let activeFilter = "todos";
     let plannerStyle = "novena";
     let cart = JSON.parse(localStorage.getItem("lq_unidades_cart_v2") || "{}");
+
+    // Limpiar del carrito guardado cualquier producto que haya pasado a agotado
+    PRODUCTS.forEach(p => { if (p.soldOut && cart[p.id]) delete cart[p.id]; });
+    localStorage.setItem("lq_unidades_cart_v2", JSON.stringify(cart));
 
     const COP = new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
     const fmt = (n) => COP.format(Math.round(n));
@@ -468,14 +477,27 @@
         const qty = cart[p.id] || 0;
         const packPrice = Math.round(p.price * (1 - PACK_DISCOUNT));
         const imgSrc = IMAGE_CONFIG[p.id] || getFallbackSVG(p.name);
+        const isSoldOut = !!p.soldOut;
 
         return `
-          <article class="card-hover bg-white rounded-3xl border border-[#E6DCCF] overflow-hidden flex flex-col">
+          <article class="${isSoldOut ? 'opacity-85' : 'card-hover'} bg-white rounded-3xl border border-[#E6DCCF] overflow-hidden flex flex-col">
             <div class="relative aspect-[4/3] bg-crema overflow-hidden cursor-pointer group" onclick="openModal('${p.id}')">
-              <img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.src='${getFallbackSVG(p.name)}';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-borgona text-[10px] uppercase tracking-[0.14em] font-bold shadow-sm">${p.badge}</span>
+              <img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.src='${getFallbackSVG(p.name)}';" class="w-full h-full object-cover ${isSoldOut ? 'grayscale-[45%] brightness-75' : 'group-hover:scale-105'} transition-transform duration-500" />
+
+              ${isSoldOut ? `
+                <div class="absolute inset-0 bg-borgonaOscuro/35 flex items-center justify-center p-4">
+                  <div class="px-6 py-2 rounded-full bg-borgona text-champana border-2 border-champana/85 shadow-xl text-xs sm:text-sm font-bold uppercase tracking-[0.26em]">
+                    Agotado
+                  </div>
+                </div>
+              ` : ''}
+
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full ${isSoldOut ? 'bg-borgona text-champana' : 'bg-white/95 text-borgona'} text-[10px] uppercase tracking-[0.14em] font-bold shadow-sm">
+                ${isSoldOut ? 'Temporalmente Agotado' : p.badge}
+              </span>
               <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-borgonaOscuro/80 text-champana font-mono text-[10px] font-semibold backdrop-blur-xs">${p.id}</span>
             </div>
+
             <div class="p-5 flex-1 flex flex-col justify-between gap-4">
               <div>
                 <h3 onclick="openModal('${p.id}')" class="font-serif text-2xl font-semibold text-borgona leading-snug cursor-pointer hover:text-dorado transition-colors">${p.name}</h3>
@@ -483,10 +505,17 @@
               </div>
               <div class="pt-3 border-t border-[#F0E9DF] flex items-end justify-between gap-2">
                 <div>
-                  <p class="font-mono text-lg font-bold text-borgona leading-none">${fmt(p.price)}</p>
-                  <p class="text-[11px] text-bijao font-semibold mt-1">Pack 50+: ${fmt(packPrice)}</p>
+                  <p class="font-mono text-lg font-bold ${isSoldOut ? 'text-[#8A7D73] line-through' : 'text-borgona'} leading-none">${fmt(p.price)}</p>
+                  <p class="text-[11px] ${isSoldOut ? 'text-[#8A7D73]' : 'text-bijao'} font-semibold mt-1">
+                    ${isSoldOut ? 'Sin existencias' : `Pack 50+: ${fmt(packPrice)}`}
+                  </p>
                 </div>
-                ${qty === 0 ? `
+
+                ${isSoldOut ? `
+                  <button type="button" disabled class="px-4 py-2.5 rounded-full bg-[#E8E0D5] text-[#7A6D64] text-[11px] font-bold uppercase tracking-wider cursor-not-allowed">
+                    Agotado
+                  </button>
+                ` : (qty === 0 ? `
                   <button onclick="updateQty('${p.id}', 1)" class="px-4 py-2.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-[11px] font-semibold uppercase tracking-wider transition-all active:scale-95">+ Agregar</button>
                 ` : `
                   <div class="inline-flex items-center gap-2 bg-marfil border border-[#DDD3C5] rounded-full p-1">
@@ -494,7 +523,7 @@
                     <span class="font-mono text-xs font-bold text-borgona min-w-[20px] text-center">${qty}</span>
                     <button onclick="updateQty('${p.id}', 1)" class="w-7 h-7 rounded-full bg-borgona text-white font-bold hover:bg-borgonaOscuro">+</button>
                   </div>
-                `}
+                `)}
               </div>
             </div>
           </article>
@@ -514,8 +543,8 @@
     }
 
     function getPlannerPlan(guests, style) {
-      if (style === "novena") return [{ id: "REF-01", qty: guests }];
-      if (style === "velitas") return [{ id: "REF-04", qty: guests }];
+      if (style === "novena") return [{ id: "REF-07", qty: guests }];
+      if (style === "pesebre") return [{ id: "REF-03", qty: guests }];
       if (style === "cena") return [{ id: "REF-06", qty: guests }];
       const half = Math.ceil(guests / 2);
       const rest = Math.max(1, guests - half);
@@ -572,13 +601,18 @@
     function addPlannerToCart() {
       const guests = parseInt(document.getElementById("guest-slider").value, 10);
       getPlannerPlan(guests, plannerStyle).forEach(item => {
-        cart[item.id] = (cart[item.id] || 0) + item.qty;
+        const p = PRODUCTS.find(x => x.id === item.id);
+        if (p && !p.soldOut) {
+          cart[item.id] = (cart[item.id] || 0) + item.qty;
+        }
       });
       saveAndRenderCart();
       openCart();
     }
 
     function updateQty(id, delta) {
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p || p.soldOut) return;
       const next = (cart[id] || 0) + delta;
       if (next <= 0) delete cart[id];
       else cart[id] = next;
@@ -592,7 +626,10 @@
     }
 
     function renderCartDrawer() {
-      const entries = Object.entries(cart).filter(([, q]) => q > 0);
+      const entries = Object.entries(cart).filter(([id, q]) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        return q > 0 && p && !p.soldOut;
+      });
       let totalUnits = 0, subtotal = 0;
       const container = document.getElementById("cart-items");
 
@@ -661,7 +698,10 @@
     }
 
     function sendWhatsAppOrder() {
-      const entries = Object.entries(cart).filter(([, q]) => q > 0);
+      const entries = Object.entries(cart).filter(([id, q]) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        return q > 0 && p && !p.soldOut;
+      });
       if (entries.length === 0) { alert("Agrega al menos un producto a tu pedido."); return; }
 
       let totalUnits = 0, subtotal = 0;
@@ -693,23 +733,39 @@
     function openModal(id) {
       const p = PRODUCTS.find(x => x.id === id);
       if (!p) return;
+      const isSoldOut = !!p.soldOut;
       const img = document.getElementById("modal-img");
       img.src = IMAGE_CONFIG[p.id] || getFallbackSVG(p.name);
       img.onerror = () => { img.src = getFallbackSVG(p.name); };
+      img.className = isSoldOut ? "w-full h-full object-cover grayscale-[45%] brightness-75" : "w-full h-full object-cover";
 
-      document.getElementById("modal-badge").textContent = p.badge;
+      document.getElementById("modal-soldout-overlay").classList.toggle("hidden", !isSoldOut);
+      document.getElementById("modal-badge").textContent = isSoldOut ? "Temporalmente Agotado" : p.badge;
       document.getElementById("modal-code").textContent = p.id;
       document.getElementById("modal-title").textContent = p.name;
       document.getElementById("modal-price").textContent = fmt(p.price);
-      document.getElementById("modal-pack-price").textContent = `Pack 50+ (-8%): ${fmt(p.price * (1 - PACK_DISCOUNT))}`;
+      document.getElementById("modal-pack-price").textContent = isSoldOut
+        ? "Sin existencias"
+        : `Pack 50+ (-8%): ${fmt(p.price * (1 - PACK_DISCOUNT))}`;
       document.getElementById("modal-desc").textContent = p.shortDesc;
       document.getElementById("modal-includes").textContent = p.includes;
 
-      document.getElementById("modal-add-btn").onclick = () => {
-        updateQty(p.id, 1);
-        closeModal();
-        openCart();
-      };
+      const btn = document.getElementById("modal-add-btn");
+      if (isSoldOut) {
+        btn.disabled = true;
+        btn.textContent = "Producto Agotado";
+        btn.className = "flex-1 py-3.5 rounded-full bg-[#E8E0D5] text-[#7A6D64] text-xs font-bold uppercase tracking-[0.16em] cursor-not-allowed";
+        btn.onclick = null;
+      } else {
+        btn.disabled = false;
+        btn.textContent = "Agregar al Carrito";
+        btn.className = "flex-1 py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] transition-all";
+        btn.onclick = () => {
+          updateQty(p.id, 1);
+          closeModal();
+          openCart();
+        };
+      }
 
       const modal = document.getElementById("product-modal");
       modal.classList.remove("hidden");
