@@ -109,12 +109,7 @@
       width: max-content;
       animation: marqueeEditorial 36s linear infinite;
     }
-    .animate-marquee-fast {
-      display: flex;
-      width: max-content;
-      animation: marqueeEditorial 22s linear infinite;
-    }
-    .animate-marquee:hover, .animate-marquee-fast:hover {
+    .animate-marquee:hover {
       animation-play-state: paused;
     }
 
@@ -186,42 +181,45 @@
   </div>
 
   <!-- =====================================================================
-       BANNER SUPERIOR ANIMADO BLACK FRIDAY (SE APAGA CON BLACK_FRIDAY_ACTIVE)
+       BARRA SUPERIOR FIJA (INCLUYE CONTADOR BLACK FRIDAY SIEMPRE VISIBLE)
        ===================================================================== -->
-  <div id="bf-top-ribbon" class="bg-[#09090B] text-white border-b border-panela-400/40 overflow-hidden py-2">
-    <div class="animate-marquee-fast flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.18em]">
-      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">6% DE DESCUENTO ADICIONAL</strong> EN TODAS TUS COMPRAS · SOLO ESTA SEMANA</span>
-      <span class="text-panela-400">✦</span>
-      <span>ACUMULABLE CON ESCALA 2 (501+ UNDS)</span>
-      <span class="text-red-500">✦</span>
-      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">-6% EXTRA AUTOMÁTICO</strong> EN CALCULADOR Y CARRITO</span>
-      <span class="text-panela-400">✦</span>
-      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">6% DE DESCUENTO ADICIONAL</strong> EN TODAS TUS COMPRAS · SOLO ESTA SEMANA</span>
-      <span class="text-panela-400">✦</span>
-      <span>ACUMULABLE CON ESCALA 2 (501+ UNDS)</span>
-      <span class="text-red-500">✦</span>
-      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">-6% EXTRA AUTOMÁTICO</strong> EN CALCULADOR Y CARRITO</span>
-    </div>
-  </div>
+  <header class="sticky top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md hairline-b shadow-xs">
+    <!-- Franja Fija Black Friday con Contador Regresivo (Siempre visible en PC y Móvil) -->
+    <div id="bf-sticky-bar" class="bf-shimmer-bg text-white border-b border-panela-400/40 px-3 sm:px-8 py-1.5">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 font-mono text-[10px] sm:text-xs">
+        <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+          <span class="px-1.5 sm:px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-wider shrink-0 animate-pulse">
+            BLACK FRIDAY
+          </span>
+          <span class="truncate">
+            <strong class="text-panela-400">-6% EXTRA</strong>
+            <span class="hidden sm:inline text-white/85"> en todas tus compras · Solo esta semana</span>
+          </span>
+        </div>
 
-  <!-- =====================================================================
-       BARRA SUPERIOR RESPONSIVE
-       ===================================================================== -->
-  <header class="sticky top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md hairline-b">
-    <div class="bg-alabaster hairline-b px-4 sm:px-8 py-1.5 text-[10px] sm:text-[11px] font-mono text-ink-600 flex flex-wrap items-center justify-between gap-1.5">
+        <a href="#calculador" class="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-panela-400/50 rounded-full px-2.5 sm:px-3 py-0.5 shrink-0 transition">
+          <span class="hidden md:inline text-[10px] text-white/75 uppercase">Termina en:</span>
+          <span class="bf-countdown-val text-panela-400 font-bold tracking-wider">--d:--h:--m:--s</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Franja informativa (solo desktop para mantener el móvil ultra limpio) -->
+    <div class="hidden sm:flex bg-alabaster hairline-b px-8 py-1.5 text-[11px] font-mono text-ink-600 flex-wrap items-center justify-between gap-1.5">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse shrink-0"></span>
         <span>SOLUCIONES CORPORATIVAS · <strong>PEREIRA · DOSQUEBRADAS · ARMENIA</strong></span>
       </div>
-      <div class="flex flex-wrap items-center gap-3">
-        <a href="mailto:Comercial@laquerendonafoods.com" class="hidden sm:inline text-ink-600 hover:text-ink-950">Comercial@laquerendonafoods.com</a>
+      <div class="flex items-center gap-3">
+        <a href="mailto:Comercial@laquerendonafoods.com" class="text-ink-600 hover:text-ink-950">Comercial@laquerendonafoods.com</a>
         <a href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="text-querendona-700 font-semibold hover:underline">
           📲 WhatsApp: +57 311 648 8685 ↗
         </a>
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
+    <!-- Fila Principal: Logo + Navegación Desktop + Acciones -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
       <a href="./index.html" class="text-left group flex items-center gap-2.5 sm:gap-3 min-w-0 shrink">
         <img
           src="logo.JPG"
@@ -229,7 +227,7 @@
           data-is-logo="true"
           data-fallback-id="header-fallback-badge"
           onerror="tryNextExt(this)"
-          class="h-10 sm:h-12 w-auto rounded-xl object-contain shadow-sm shrink-0"
+          class="h-9 sm:h-12 w-auto rounded-xl object-contain shadow-sm shrink-0"
         />
         <div id="header-fallback-badge" class="hidden w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-querendona-700 text-panela-400 border border-panela-400 flex items-center justify-center font-serif italic text-lg shadow-sm shrink-0">
           Q
@@ -266,7 +264,7 @@
     </div>
 
     <!-- Barra Secundaria Móvil -->
-    <div class="md:hidden px-4 pb-2.5 pt-1 flex items-center justify-between gap-2 border-t border-stoneborder/60 bg-white">
+    <div class="md:hidden px-4 pb-2 pt-1 flex items-center justify-between gap-2 border-t border-stoneborder/60 bg-white">
       <a href="./index.html" class="flex-1 text-center py-1.5 px-2 rounded-full bg-alabaster hairline-box text-ink-800 font-mono text-[10px] uppercase tracking-wider font-semibold whitespace-nowrap">
         ← Inicio
       </a>
@@ -281,7 +279,7 @@
 
   <main>
     <!-- ===================================================================
-         BANNER DESTACADO BLACK FRIDAY WEEK CON CUENTA REGRESIVA EN VIVO
+         BANNER DESTACADO BLACK FRIDAY WEEK
          =================================================================== -->
     <section id="bf-hero-banner" class="bf-shimmer-bg text-white border-b border-panela-400/40 px-4 sm:px-8 py-5 sm:py-7">
       <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-5">
@@ -302,7 +300,7 @@
         <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
           <div class="flex items-center gap-1.5 bg-white/10 border border-panela-400/40 rounded-2xl px-4 py-2 font-mono text-xs">
             <span class="text-white/70 text-[10px] uppercase mr-1">Termina en:</span>
-            <span id="bf-countdown" class="text-panela-400 font-bold tracking-wider">--d : --h : --m : --s</span>
+            <span class="bf-countdown-val text-panela-400 font-bold tracking-wider">--d : --h : --m : --s</span>
           </div>
           <a href="#calculador" class="px-5 py-2.5 rounded-full bg-panela-400 text-ink-950 font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition shadow-lg">
             Aprovechar -6% Ahora →
@@ -525,31 +523,30 @@
 
         <div id="corporate-catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 
-        <!-- Tabla Oficial Resumen de Precios y Escalas Corporativas -->
-        <div class="mt-14 rounded-3xl bg-white hairline-box p-6 sm:p-10 shadow-sm overflow-x-auto">
-          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <!-- Cuadro Resumen de Precios (Práctico, sin redundancias y con miniatura) -->
+        <div class="mt-14 rounded-3xl bg-white hairline-box p-5 sm:p-8 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
             <div>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">3. Resumen Oficial de Precios</span>
-              <h3 class="font-serif text-3xl text-ink-950">Tabla de Escalas Corporativas (Desde 100 Unidades)</h3>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Resumen Rápido</span>
+              <h3 class="font-serif text-3xl text-ink-950">Lista de Precios Corporativos</h3>
             </div>
             <button type="button" onclick="openCatalogLeadModal()" class="px-5 py-2.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-sm">
-              ⬇ Descargar Catálogo Corporativo en PDF
+              ⬇ Catálogo PDF
             </button>
           </div>
 
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="hairline-b text-[11px] font-mono uppercase text-ink-600">
-                <th class="py-3 pr-4">Código</th>
-                <th class="py-3 pr-4">Producto en Catálogo</th>
-                <th class="py-3 pr-4">Especificación Resumida</th>
-                <th class="py-3 pr-4">Escala 1 (100–500 Unds)</th>
-                <th class="py-3 pr-4">Escala 2 (501+ Unds · -4%)</th>
-                <th class="py-3 text-right">Acción Directa</th>
-              </tr>
-            </thead>
-            <tbody id="corporate-price-table" class="divide-y divide-stoneborder text-xs sm:text-sm"></tbody>
-          </table>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="hairline-b text-[10px] sm:text-[11px] font-mono uppercase text-ink-600">
+                  <th class="py-2.5 pr-3">Producto</th>
+                  <th class="py-2.5 px-2 text-right whitespace-nowrap">100–500 unds</th>
+                  <th class="py-2.5 pl-2 text-right whitespace-nowrap">501+ (-4%)</th>
+                </tr>
+              </thead>
+              <tbody id="corporate-price-table" class="divide-y divide-stoneborder text-xs sm:text-sm"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -599,7 +596,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <!-- Checklist de Productos (Izquierda) -->
+          <!-- Checklist de Productos -->
           <div class="lg:col-span-7 rounded-[2rem] bg-white hairline-box p-5 sm:p-8 shadow-sm space-y-3">
             <div class="flex items-center justify-between pb-3 hairline-b">
               <span class="font-mono text-xs uppercase tracking-wider text-ink-600 font-semibold">1. Selecciona tus referencias y cantidades:</span>
@@ -608,8 +605,8 @@
             <div id="checklist-products" class="space-y-3"></div>
           </div>
 
-          <!-- Resumen en Vivo (Derecha) -->
-          <div class="lg:col-span-5 lg:sticky lg:top-28 rounded-[2rem] bg-white hairline-box p-6 sm:p-8 shadow-xl space-y-5">
+          <!-- Resumen en Vivo -->
+          <div class="lg:col-span-5 lg:sticky lg:top-32 rounded-[2rem] bg-white hairline-box p-6 sm:p-8 shadow-xl space-y-5">
             <div class="flex items-center justify-between pb-4 hairline-b">
               <div>
                 <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Resumen Corporativo</span>
@@ -621,7 +618,6 @@
               </div>
             </div>
 
-            <!-- Barra de progreso a Escala 2 (501+ unds) -->
             <div class="p-3.5 rounded-2xl bg-alabaster hairline-box space-y-1.5">
               <div class="flex justify-between font-mono text-[11px]">
                 <span id="calc-scale-msg" class="text-ink-800 font-medium">Suma 501 unds para activar Escala 2 (-4%)</span>
@@ -632,10 +628,8 @@
               </div>
             </div>
 
-            <!-- Desglose de productos marcados -->
             <div id="calc-selected-summary" class="space-y-2 max-h-52 overflow-y-auto pr-1 text-xs"></div>
 
-            <!-- Totales -->
             <div class="p-5 rounded-2xl bg-alabaster hairline-box space-y-2 text-sm">
               <div class="flex justify-between text-xs text-ink-600">
                 <span>Subtotal (según escala activa)</span>
@@ -655,12 +649,10 @@
               </div>
             </div>
 
-            <!-- Aviso si tiene menos de 100 unidades -->
             <div id="calc-min-alert" class="hidden p-3 rounded-2xl bg-panela-100 border border-panela-400/60 text-xs text-ink-800">
               El pedido mínimo corporativo es de <strong>100 unidades combinadas</strong>. Si necesitas menos, puedes pedir desde 1 unidad en <a href="./unidades.html" class="underline font-bold text-querendona-700">Catálogo por Unidades</a>.
             </div>
 
-            <!-- Acciones -->
             <div class="flex flex-col gap-2.5">
               <button type="button" onclick="addChecklistToCart()" class="w-full py-3.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider font-semibold hover:bg-ink-950 transition shadow-md">
                 + Agregar Selección al Pedido
@@ -848,7 +840,7 @@
     const BLACK_FRIDAY_END = new Date('2026-11-29T23:59:59-05:00').getTime();
 
     function initBlackFridayUI() {
-      const ribbon = document.getElementById('bf-top-ribbon');
+      const stickyBar = document.getElementById('bf-sticky-bar');
       const hero = document.getElementById('bf-hero-banner');
       const note = document.getElementById('bf-catalog-note');
       const calcPill = document.getElementById('calc-bf-pill');
@@ -856,7 +848,7 @@
       const cartRow = document.getElementById('cart-bf-row');
 
       if (!BLACK_FRIDAY_ACTIVE) {
-        [ribbon, hero, note, calcPill, calcRow, cartRow].forEach(el => el && el.classList.add('hidden'));
+        [stickyBar, hero, note, calcPill, calcRow, cartRow].forEach(el => el && el.classList.add('hidden'));
         return;
       }
 
@@ -866,10 +858,8 @@
         const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const m = Math.floor((diff / (1000 * 60)) % 60);
         const s = Math.floor((diff / 1000) % 60);
-        const el = document.getElementById('bf-countdown');
-        if (el) {
-          el.textContent = `${String(d).padStart(2, '0')}d : ${String(h).padStart(2, '0')}h : ${String(m).padStart(2, '0')}m : ${String(s).padStart(2, '0')}s`;
-        }
+        const txt = `${String(d).padStart(2, '0')}d : ${String(h).padStart(2, '0')}h : ${String(m).padStart(2, '0')}m : ${String(s).padStart(2, '0')}s`;
+        document.querySelectorAll('.bf-countdown-val').forEach(el => { el.textContent = txt; });
       }
       tickCountdown();
       setInterval(tickCountdown, 1000);
@@ -911,7 +901,7 @@
       el.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateY(0px)';
     }
 
-    // 7 PRODUCTOS CORPORATIVOS (REF-01 y REF-04 agotados · REF-07 nuevo)
+    // 7 PRODUCTOS CORPORATIVOS (REF-02 actualizado a $6.500 / $6.240 · REF-01 y REF-04 agotados · REF-07 nuevo)
     const CORPORATE_REFS = [
       {
         sku: 'REF-01',
@@ -929,8 +919,8 @@
         shortName: 'Tamal Antojito Caliente',
         name: 'Producto 2 (REF-02): Tamal Antojito (Se Entrega Caliente)',
         specs: 'Tamal caliente (150 g) + 1 Buñuelo (15 g) + Tenedor de madera.',
-        scale1Price: 5500,
-        scale2Price: 5280,
+        scale1Price: 6500,
+        scale2Price: 6240,
         img: 'ref-02.JPG'
       },
       {
@@ -999,7 +989,6 @@
     let currentCorporateScale = 1;
     let cart = {};
 
-    // Estado inicial del checklist multiproducto (ej. REF-07 y REF-03 preseleccionados para mostrar la suma combinada)
     let checklistState = {
       'REF-07': { checked: true, qty: 100 },
       'REF-03': { checked: true, qty: 100 }
@@ -1007,6 +996,10 @@
 
     function formatCOP(n) {
       return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' COP';
+    }
+
+    function formatShortCOP(n) {
+      return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
     function setCorporateScale(scale) {
@@ -1084,27 +1077,38 @@
         }).join('');
       }
 
-      // Render dinámico de la tabla de precios
+      // Tabla resumen simplificada: foto miniatura + nombre + 2 precios (sin botón "Cotizar 100+")
       const tableBody = document.getElementById('corporate-price-table');
       if (tableBody) {
         tableBody.innerHTML = CORPORATE_REFS.map(item => {
           const isSoldOut = !!item.soldOut;
           return `
-            <tr class="${isSoldOut ? 'bg-alabaster/60 opacity-75' : ''}">
-              <td class="py-3.5 pr-4 font-mono font-semibold ${isSoldOut ? 'text-ink-400' : 'text-querendona-700'}">${item.sku}</td>
-              <td class="py-3.5 pr-4 font-serif text-xl ${isSoldOut ? 'text-ink-600' : 'text-ink-950'} font-semibold">
-                ${item.shortName}
-                ${isSoldOut ? '<span class="ml-2 px-2 py-0.5 rounded-full bg-querendona-700 text-panela-400 font-mono text-[9px] uppercase tracking-widest align-middle">Agotado</span>' : ''}
-                ${item.isNew ? '<span class="ml-2 px-2 py-0.5 rounded-full bg-bijao-700 text-white font-mono text-[9px] uppercase tracking-widest align-middle">Nuevo</span>' : ''}
+            <tr class="${isSoldOut ? 'bg-alabaster/60 opacity-70' : 'hover:bg-alabaster/40 transition-colors'}">
+              <td class="py-3 pr-3">
+                <div class="flex items-center gap-3">
+                  <img
+                    src="${item.img}"
+                    alt="${item.shortName}"
+                    onerror="tryNextExt(this)"
+                    class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl object-cover border border-stoneborder shrink-0 ${isSoldOut ? 'grayscale' : ''}"
+                  />
+                  <div class="min-w-0">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                      <span class="font-mono text-[10px] font-bold ${isSoldOut ? 'text-ink-400' : 'text-querendona-700'}">${item.sku}</span>
+                      ${isSoldOut ? '<span class="px-1.5 py-0.5 rounded-full bg-querendona-700 text-panela-400 font-mono text-[8px] uppercase tracking-wider">Agotado</span>' : ''}
+                      ${item.isNew ? '<span class="px-1.5 py-0.5 rounded-full bg-bijao-700 text-white font-mono text-[8px] uppercase tracking-wider">Nuevo</span>' : ''}
+                    </div>
+                    <span class="font-serif text-lg sm:text-xl ${isSoldOut ? 'text-ink-600' : 'text-ink-950'} font-semibold leading-tight block">
+                      ${item.shortName}
+                    </span>
+                  </div>
+                </div>
               </td>
-              <td class="py-3.5 pr-4 ${isSoldOut ? 'text-ink-400' : 'text-ink-600'}">${item.specs}</td>
-              <td class="py-3.5 pr-4 font-mono ${isSoldOut ? 'line-through text-ink-400' : 'font-semibold'}">${formatCOP(item.scale1Price)}</td>
-              <td class="py-3.5 pr-4 font-mono ${isSoldOut ? 'line-through text-ink-400' : 'font-semibold text-bijao-700'}">${formatCOP(item.scale2Price)}</td>
-              <td class="py-3.5 text-right">
-                ${isSoldOut
-                  ? '<button type="button" disabled class="px-3.5 py-1.5 rounded-full bg-stoneborder text-ink-600 font-mono text-[11px] cursor-not-allowed">Agotado</button>'
-                  : `<button type="button" onclick="addToCart('${item.sku}', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button>`
-                }
+              <td class="py-3 px-2 text-right font-mono whitespace-nowrap ${isSoldOut ? 'line-through text-ink-400' : 'font-semibold text-ink-950'}">
+                ${formatShortCOP(item.scale1Price)}
+              </td>
+              <td class="py-3 pl-2 text-right font-mono whitespace-nowrap ${isSoldOut ? 'line-through text-ink-400' : 'font-bold text-bijao-700'}">
+                ${formatShortCOP(item.scale2Price)}
               </td>
             </tr>
           `;
@@ -1144,7 +1148,6 @@
       const container = document.getElementById('checklist-products');
       if (!container) return;
 
-      // Calcular unidades combinadas actuales para saber si aplica Escala 2
       let combinedUnits = 0;
       CORPORATE_REFS.forEach(item => {
         const st = checklistState[item.sku];
@@ -1411,7 +1414,6 @@
       let units = 0, corpUnits = 0, subtotal = 0, rows = [];
       const waLines = ['Hola La Querendona Foods, quiero realizar el siguiente pedido:'];
 
-      // Primero contamos unidades corporativas combinadas para Escala 2
       Object.keys(cart).forEach(sku => {
         if (sku.startsWith('REF-')) corpUnits += cart[sku] || 0;
       });
