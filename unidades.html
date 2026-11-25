@@ -46,30 +46,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      height: 6px;
-      border-radius: 999px;
-      background: #E7DFD3;
-      outline: none;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #4A121A;
-      border: 3px solid #FAF8F5;
-      box-shadow: 0 2px 10px rgba(74, 18, 26, 0.35);
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.12);
-    }
-
     .card-hover {
       transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
     }
@@ -117,7 +93,7 @@
           </span>
         </div>
 
-        <a href="#catalogo" class="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-[#D4AF37]/50 rounded-full px-2.5 sm:px-3 py-0.5 shrink-0 transition">
+        <a href="#armador" class="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-[#D4AF37]/50 rounded-full px-2.5 sm:px-3 py-0.5 shrink-0 transition">
           <span class="hidden md:inline text-[10px] text-white/75 uppercase">Termina en:</span>
           <span class="bf-countdown-val text-[#D4AF37] font-bold tracking-wider">--d:--h:--m:--s</span>
         </a>
@@ -135,7 +111,7 @@
       </a>
 
       <nav class="hidden lg:flex items-center gap-7 text-xs uppercase tracking-[0.16em] font-semibold text-[#5A4E47]">
-        <a href="#armador" class="hover:text-borgona transition-colors whitespace-nowrap">Armador de Novena</a>
+        <a href="#armador" class="hover:text-borgona transition-colors whitespace-nowrap">Cotizador Rápido</a>
         <a href="#catalogo" class="hover:text-borgona transition-colors whitespace-nowrap">Catálogo</a>
         <a href="./corporativos.html" class="text-borgona border-b border-dorado pb-0.5 hover:opacity-80 transition-opacity whitespace-nowrap">¿Más de 80 unds? Corporativos</a>
       </nav>
@@ -165,7 +141,7 @@
             <span class="bf-gold-text font-bold">6% de descuento adicional</span> en todo nuestro catálogo por unidades
           </h2>
           <p class="font-mono text-[11px] text-white/75 mt-0.5">
-            Solo esta semana · Se aplica automáticamente en el Armador y en tu carrito.
+            Solo esta semana · Se aplica automáticamente en el Cotizador y en tu carrito.
           </p>
         </div>
       </div>
@@ -175,8 +151,8 @@
           <span class="text-white/70 text-[10px] uppercase mr-1">Termina en:</span>
           <span class="bf-countdown-val text-[#D4AF37] font-bold tracking-wider">--d : --h : --m : --s</span>
         </div>
-        <a href="#catalogo" class="px-5 py-2.5 rounded-full bg-[#D4AF37] text-[#121211] font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition shadow-lg">
-          Aprovechar -6% →
+        <a href="#armador" class="px-5 py-2.5 rounded-full bg-[#D4AF37] text-[#121211] font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition shadow-lg">
+          Cotizar con -6% →
         </a>
       </div>
     </div>
@@ -200,11 +176,11 @@
         </p>
 
         <div class="flex flex-wrap items-center gap-3 pt-2">
-          <a href="#catalogo" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] shadow-lg shadow-borgona/20 transition-all">
-            Explorar Catálogo
+          <a href="#armador" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] shadow-lg shadow-borgona/20 transition-all">
+            Armar mi Pedido Rápido
           </a>
-          <a href="#armador" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-marfil hover:bg-crema border border-[#D8CDBE] text-borgona text-xs font-semibold uppercase tracking-[0.16em] transition-all">
-            Armar mi Novena
+          <a href="#catalogo" class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-marfil hover:bg-crema border border-[#D8CDBE] text-borgona text-xs font-semibold uppercase tracking-[0.16em] transition-all">
+            Ver Catálogo con Fotos
           </a>
         </div>
 
@@ -245,90 +221,122 @@
     </div>
   </section>
 
-  <!-- ARMADOR INTELIGENTE DE NOVENA FAMILIAR -->
+  <!-- ===================================================================
+       COTIZADOR RÁPIDO CON CHECKLIST MULTIPRODUCTO
+       =================================================================== -->
   <section id="armador" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-    <div class="bg-white rounded-3xl border border-[#E6DCCF] shadow-sm p-6 sm:p-10">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#EFE8DE]">
-        <div>
-          <span class="text-[11px] uppercase tracking-[0.2em] text-dorado font-semibold">Asistente Interactivo</span>
-          <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-borgona mt-1">Armador de Novena Familiar</h2>
-          <p class="text-sm text-[#645850] mt-1">Elige cuántos invitados tienes y el estilo de tu reunión; calculamos la combinación ideal al instante.</p>
-        </div>
-        <div class="flex flex-wrap items-center gap-2">
-          <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-bijao/10 text-bijao text-xs font-semibold">
-            <span>Pack -8% desde 50 unds</span>
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-7">
+      <div>
+        <span class="text-[11px] uppercase tracking-[0.2em] text-dorado font-semibold">Cotizador Interactivo</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-borgona mt-1">Arma y Cotiza tu Pedido Combinado</h2>
+        <p class="text-sm text-[#645850] mt-1 max-w-2xl">Marca los productos que quieres llevar y ajusta las unidades de cada uno. Todo se suma automáticamente para activar descuentos y domicilio gratis.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-bijao/10 text-bijao text-xs font-semibold">Pack -8% desde 50 unds</span>
+        <span id="planner-bf-pill" class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-[#09090B] text-[#D4AF37] font-mono text-[11px] font-bold">★ -6% BLACK FRIDAY</span>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-7 items-start">
+      <!-- Columna Izquierda: Checklist Multiproducto -->
+      <div class="lg:col-span-7 bg-white rounded-3xl border border-[#E6DCCF] shadow-sm p-5 sm:p-7 space-y-4">
+        <!-- Atajos rápidos + Limpiar -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#EFE8DE]">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-[10px] uppercase tracking-wider font-mono text-[#8A7D73] mr-1">Atajos:</span>
+            <button type="button" onclick="applyPreset('antojo')" class="px-3 py-1.5 rounded-full bg-marfil hover:bg-champana/60 border border-[#E6DCCF] text-[11px] font-semibold text-borgona transition">Antojo ×6</button>
+            <button type="button" onclick="applyPreset('novena')" class="px-3 py-1.5 rounded-full bg-marfil hover:bg-champana/60 border border-[#E6DCCF] text-[11px] font-semibold text-borgona transition">Novena ×15</button>
+            <button type="button" onclick="applyPreset('pack50')" class="px-3 py-1.5 rounded-full bg-bijao/10 hover:bg-bijao hover:text-white text-[11px] font-semibold text-bijao transition">Pack 50 (-8%)</button>
           </div>
-          <div id="planner-bf-pill" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-[#09090B] text-[#D4AF37] font-mono text-[11px] font-bold">
-            <span>★ -6% BLACK FRIDAY</span>
-          </div>
+          <button type="button" onclick="clearChecklist()" class="text-[11px] font-mono text-[#8A7D73] hover:text-borgona underline">Limpiar</button>
         </div>
+
+        <!-- Pestañas de categoría dentro del Checklist -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <button type="button" onclick="setChecklistTab('navidad')" data-ctab="navidad" class="ctab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-borgona text-white transition whitespace-nowrap">Navidad & Novenas (7)</button>
+          <button type="button" onclick="setChecklistTab('clasicos')" data-ctab="clasicos" class="ctab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-marfil border border-[#E6DCCF] text-[#5A4E47] hover:border-borgona transition whitespace-nowrap">Clásicos de la Casa (6)</button>
+          <button type="button" onclick="setChecklistTab('todos')" data-ctab="todos" class="ctab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-marfil border border-[#E6DCCF] text-[#5A4E47] hover:border-borgona transition whitespace-nowrap">Ver Todos (13)</button>
+        </div>
+
+        <!-- Lista de Productos con Checkbox -->
+        <div id="checklist-items" class="space-y-2.5 max-h-[540px] overflow-y-auto pr-1"></div>
       </div>
 
-      <div class="grid lg:grid-cols-12 gap-8 pt-7 items-center">
-        <div class="lg:col-span-7 space-y-6">
+      <!-- Columna Derecha: Resumen en Tiempo Real -->
+      <div class="lg:col-span-5 lg:sticky lg:top-32 bg-white rounded-3xl border border-[#E6DCCF] shadow-lg p-5 sm:p-7 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-[#EFE8DE]">
           <div>
-            <div class="flex items-center justify-between mb-2">
-              <label for="guest-slider" class="text-xs uppercase tracking-[0.15em] font-semibold text-[#5A4E47]">¿Cuántos invitados esperas?</label>
-              <span class="font-mono text-lg font-bold text-borgona bg-marfil px-3 py-1 rounded-xl border border-[#E6DCCF]">
-                <span id="guest-count-label">15</span> personas
-              </span>
+            <span class="text-[10px] uppercase tracking-[0.18em] font-semibold text-dorado block">Resumen en Vivo</span>
+            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-borgona leading-tight">Tu Cotización</h3>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] uppercase font-mono text-[#8A7D73] block">Unidades</span>
+            <span id="calc-units-total" class="font-mono text-xl font-bold text-borgona">0</span>
+          </div>
+        </div>
+
+        <!-- Barras de Progreso (Pack -8% y Envío Gratis) -->
+        <div class="p-3.5 rounded-2xl bg-marfil border border-[#EFE8DE] space-y-2.5 text-xs">
+          <div>
+            <div class="flex justify-between mb-1">
+              <span id="calc-pack-text" class="font-medium text-borgona">Suma 50 unds para activar -8%</span>
+              <span id="calc-pack-count" class="font-mono font-bold text-borgona">0/50</span>
             </div>
-            <input id="guest-slider" type="range" min="2" max="80" value="15" class="w-full" oninput="updatePlanner()" />
-            <div class="flex justify-between text-[11px] text-[#8A7D73] font-mono mt-1.5">
-              <span>2</span><span>25</span><span>50 (Activa -8%)</span><span>80</span>
+            <div class="w-full h-1.5 bg-[#E6DCCF] rounded-full overflow-hidden">
+              <div id="calc-pack-bar" class="h-full bg-bijao transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
-
           <div>
-            <p class="text-xs uppercase tracking-[0.15em] font-semibold text-[#5A4E47] mb-3">Elige el estilo de experiencia</p>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="planner-styles">
-              <button type="button" data-style="novena" onclick="selectPlannerStyle('novena')" class="planner-style-btn text-left p-3.5 rounded-2xl border-2 border-borgona bg-borgona/5 transition-all">
-                <p class="font-semibold text-xs text-borgona">Novena Práctica</p>
-                <p class="text-[11px] text-[#6E625A] mt-0.5">Domo Sellado</p>
-              </button>
-              <button type="button" data-style="pesebre" onclick="selectPlannerStyle('pesebre')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
-                <p class="font-semibold text-xs text-borgona">Edición Regalo</p>
-                <p class="text-[11px] text-[#6E625A] mt-0.5">Cajita Pesebre</p>
-              </button>
-              <button type="button" data-style="cena" onclick="selectPlannerStyle('cena')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
-                <p class="font-semibold text-xs text-borgona">Cena Completa</p>
-                <p class="text-[11px] text-[#6E625A] mt-0.5">Trío 3 en 1</p>
-              </button>
-              <button type="button" data-style="mix" onclick="selectPlannerStyle('mix')" class="planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all">
-                <p class="font-semibold text-xs text-borgona">Mix Familiar</p>
-                <p class="text-[11px] text-[#6E625A] mt-0.5">Tamal + Pesebre</p>
-              </button>
+            <div class="flex justify-between mb-1">
+              <span id="calc-ship-text" class="font-medium text-[#5A4E47]">Envío gratis desde $300.000</span>
+              <span id="calc-ship-pct" class="font-mono font-bold text-dorado">0%</span>
+            </div>
+            <div class="w-full h-1.5 bg-[#E6DCCF] rounded-full overflow-hidden">
+              <div id="calc-ship-bar" class="h-full bg-dorado transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-5 bg-marfil rounded-2xl border border-[#E6DCCF] p-5 sm:p-6 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] uppercase tracking-[0.16em] font-semibold text-dorado">Sugerencia para tu mesa</span>
-            <span id="planner-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-champana text-borgona">Faltan 35 para -8%</span>
+        <!-- Lista resumida de productos seleccionados -->
+        <div id="calc-selected-list" class="space-y-1.5 max-h-44 overflow-y-auto pr-1 text-xs"></div>
+
+        <!-- Totales -->
+        <div class="p-4 rounded-2xl bg-marfil border border-[#EFE8DE] space-y-1.5 text-sm">
+          <div class="flex justify-between text-xs text-[#6E625A]">
+            <span>Subtotal</span>
+            <span id="calc-subtotal" class="font-mono font-semibold text-borgona">$0</span>
           </div>
-
-          <div id="planner-items-list" class="space-y-2 text-sm text-[#3A312C]"></div>
-
-          <div class="pt-3 border-t border-[#E6DCCF] space-y-1">
-            <div class="flex justify-between text-xs text-[#7A6D64]">
-              <span>Precio lista</span>
-              <span id="planner-subtotal" class="font-mono line-through">$0</span>
-            </div>
-            <div id="planner-bf-row" class="flex justify-between text-xs text-red-700 font-semibold">
-              <span>Black Friday (-6% extra)</span>
-              <span id="planner-bf-discount" class="font-mono">-$0</span>
-            </div>
-            <div class="flex justify-between items-baseline pt-1">
-              <span class="text-sm font-semibold text-borgona">Total estimado</span>
-              <span id="planner-total" class="font-mono text-2xl font-bold text-borgona">$0</span>
-            </div>
-            <p id="planner-per-person" class="text-[11px] text-bijao font-medium text-right"></p>
+          <div id="calc-pack-row" class="hidden flex justify-between text-xs text-bijao font-semibold">
+            <span>Pack Familiar (-8%)</span>
+            <span id="calc-pack-discount" class="font-mono">-$0</span>
           </div>
+          <div id="calc-bf-row" class="flex justify-between text-xs text-red-700 font-semibold">
+            <span>Black Friday (-6% extra)</span>
+            <span id="calc-bf-discount" class="font-mono">-$0</span>
+          </div>
+          <div class="flex justify-between text-xs text-[#6E625A]">
+            <span>Domicilio</span>
+            <span id="calc-shipping" class="font-mono font-semibold">Según zona</span>
+          </div>
+          <div class="flex justify-between items-baseline pt-2 border-t border-[#E6DCCF]">
+            <span class="font-semibold text-borgona">Total Estimado</span>
+            <span id="calc-total" class="font-mono text-2xl font-bold text-borgona">$0</span>
+          </div>
+        </div>
 
-          <button onclick="addPlannerToCart()" class="w-full py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] shadow-md transition-all active:scale-95">
-            Agregar combinación al carrito
+        <!-- Aviso si supera 80 unds -->
+        <div id="calc-corp-hint" class="hidden p-3 rounded-2xl bg-borgona/5 border border-borgona/20 text-xs text-borgona">
+          <strong>¿Pides más de 80 unidades?</strong> También puedes ver tarifas mayoristas en <a href="./corporativos.html" class="underline font-bold">Clientes Corporativos</a>.
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="flex flex-col gap-2.5">
+          <button type="button" onclick="addChecklistToCart()" class="w-full py-3.5 rounded-full bg-borgona hover:bg-borgonaOscuro text-white text-xs font-semibold uppercase tracking-[0.16em] shadow-md transition-all active:scale-95">
+            + Agregar Selección al Carrito
           </button>
+          <a id="calc-wa-btn" href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-full bg-bijao hover:bg-[#223929] text-white text-xs font-bold uppercase tracking-[0.16em] shadow-md flex items-center justify-center gap-2 transition-all">
+            <span>Pedir esta Combinación por WhatsApp</span>
+          </a>
         </div>
       </div>
     </div>
@@ -491,7 +499,7 @@
     // CONFIGURACIÓN BLACK FRIDAY (Cambia a false la próxima semana para apagarlo)
     // =========================================================================
     const BLACK_FRIDAY_ACTIVE = true;
-    const BLACK_FRIDAY_RATE = 0.06; // 6% adicional
+    const BLACK_FRIDAY_RATE = 0.06;
     const BLACK_FRIDAY_END = new Date('2026-11-29T23:59:59-05:00').getTime();
 
     // Reglas comerciales configurables
@@ -504,10 +512,10 @@
       const heroBanner = document.getElementById('bf-hero-banner');
       const heroNote = document.getElementById('bf-hero-note');
       const plannerPill = document.getElementById('planner-bf-pill');
-      const plannerRow = document.getElementById('planner-bf-row');
+      const calcBfRow = document.getElementById('calc-bf-row');
 
       if (!BLACK_FRIDAY_ACTIVE) {
-        [stickyBar, heroBanner, heroNote, plannerPill, plannerRow].forEach(el => el && el.classList.add('hidden'));
+        [stickyBar, heroBanner, heroNote, plannerPill, calcBfRow].forEach(el => el && el.classList.add('hidden'));
         return;
       }
 
@@ -524,7 +532,6 @@
       setInterval(tickCountdown, 1000);
     }
 
-    // Mapa exacto de fotos (coincide con archivos en la raíz de GitHub)
     const IMAGE_CONFIG = {
       "REF-01": "./ref-01.JPG",
       "REF-02": "./ref-02.JPG",
@@ -532,13 +539,13 @@
       "REF-04": "./ref-04.JPG",
       "REF-05": "./ref-05.JPG",
       "REF-06": "./ref-06.JPG",
-      "REF-07": "./ref-07.JPG",          // Domo Natilla, Mora & Buñuelos sellado
-      "CLA-01": "./lq-02.JPG",           // Tamal Tradicional en hoja de bijao
-      "CLA-02": "./natilla-bandeja.JPG", // Bandeja aluminio con dulce de mora
-      "CLA-03": "./bunuelos-kraft.JPG",  // Docena buñuelos bolsa kraft
-      "CLA-04": "./lq-04.JPG",           // Mantequilla de Ajo
-      "CLA-05": "./lq-05.JPG",           // Guacamole de la Casa
-      "CLA-06": "./lq-03.JPG"            // Fiambre en Hoja de Bijao
+      "REF-07": "./ref-07.JPG",
+      "CLA-01": "./lq-02.JPG",
+      "CLA-02": "./natilla-bandeja.JPG",
+      "CLA-03": "./bunuelos-kraft.JPG",
+      "CLA-04": "./lq-04.JPG",
+      "CLA-05": "./lq-05.JPG",
+      "CLA-06": "./lq-03.JPG"
     };
 
     function getFallbackSVG(title) {
@@ -551,7 +558,7 @@
       return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
     }
 
-    // Para volver a habilitar un producto agotado, cambia soldOut: true por soldOut: false
+    // REF-02 actualizado a $8.200 (Pack 50+: $7.544) · REF-01 y REF-04 agotados
     const PRODUCTS = [
       // NAVIDAD & NOVENAS 2026
       { id: "REF-01", soldOut: true,  category: "navidad", badge: "Favorito Novenas", name: "Cono Gourmet Novena", price: 7600, shortDesc: "3 buñuelos artesanales de 15 g + 45 g de natilla con mora y coco en cono gourmet.", includes: "Incluye: 3 buñuelos (15 g c/u), porción de 45 g de natilla artesanal con mora y coco, y empaque cono gourmet." },
@@ -572,7 +579,11 @@
     ];
 
     let activeFilter = "todos";
-    let plannerStyle = "novena";
+    let checklistTab = "navidad";
+    let checklistState = {
+      "REF-07": { checked: true, qty: 6 },
+      "REF-03": { checked: true, qty: 4 }
+    };
     let cart = JSON.parse(localStorage.getItem("lq_unidades_cart_v2") || "{}");
 
     PRODUCTS.forEach(p => { if (p.soldOut && cart[p.id]) delete cart[p.id]; });
@@ -581,6 +592,219 @@
     const COP = new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
     const fmt = (n) => COP.format(Math.round(n));
 
+    // =========================================================================
+    // COTIZADOR RÁPIDO CON CHECKLIST MULTIPRODUCTO
+    // =========================================================================
+    function setChecklistTab(tab) {
+      checklistTab = tab;
+      document.querySelectorAll(".ctab-btn").forEach(btn => {
+        const active = btn.dataset.ctab === tab;
+        btn.className = active
+          ? "ctab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-borgona text-white transition whitespace-nowrap"
+          : "ctab-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-marfil border border-[#E6DCCF] text-[#5A4E47] hover:border-borgona transition whitespace-nowrap";
+      });
+      renderChecklist();
+    }
+
+    function applyPreset(preset) {
+      if (preset === "antojo") {
+        checklistState = { "REF-07": { checked: true, qty: 4 }, "REF-02": { checked: true, qty: 2 } };
+        setChecklistTab("navidad");
+      } else if (preset === "novena") {
+        checklistState = { "REF-07": { checked: true, qty: 10 }, "REF-03": { checked: true, qty: 5 } };
+        setChecklistTab("navidad");
+      } else if (preset === "pack50") {
+        checklistState = { "REF-07": { checked: true, qty: 25 }, "REF-03": { checked: true, qty: 15 }, "REF-02": { checked: true, qty: 10 } };
+        setChecklistTab("navidad");
+      }
+    }
+
+    function clearChecklist() {
+      checklistState = {};
+      renderChecklist();
+    }
+
+    function toggleChecklistItem(id, checked) {
+      if (!checklistState[id]) checklistState[id] = { checked, qty: 1 };
+      else checklistState[id].checked = checked;
+      if (checked && (!checklistState[id].qty || checklistState[id].qty < 1)) checklistState[id].qty = 1;
+      renderChecklist();
+    }
+
+    function adjustChecklistQty(id, delta) {
+      if (!checklistState[id]) checklistState[id] = { checked: true, qty: 1 };
+      checklistState[id].checked = true;
+      const next = (checklistState[id].qty || 0) + delta;
+      if (next <= 0) {
+        checklistState[id].checked = false;
+        checklistState[id].qty = 1;
+      } else {
+        checklistState[id].qty = next;
+      }
+      renderChecklist();
+    }
+
+    function setChecklistQty(id, rawVal) {
+      const val = Math.max(1, parseInt(rawVal, 10) || 1);
+      if (!checklistState[id]) checklistState[id] = { checked: true, qty: val };
+      else { checklistState[id].checked = true; checklistState[id].qty = val; }
+      renderChecklist();
+    }
+
+    function renderChecklist() {
+      const container = document.getElementById("checklist-items");
+      if (!container) return;
+
+      const list = checklistTab === "todos" ? PRODUCTS : PRODUCTS.filter(p => p.category === checklistTab);
+
+      container.innerHTML = list.map(p => {
+        const isSoldOut = !!p.soldOut;
+        const st = checklistState[p.id] || { checked: false, qty: 1 };
+        const active = !isSoldOut && st.checked;
+        const imgSrc = IMAGE_CONFIG[p.id] || getFallbackSVG(p.name);
+
+        return `
+          <div class="p-3 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${isSoldOut ? 'bg-marfil/60 border-[#EFE8DE] opacity-60' : (active ? 'bg-borgona/[0.04] border-borgona shadow-xs' : 'bg-white border-[#EFE8DE] hover:border-[#D4C7B8]')}">
+            <label class="flex items-center gap-3 flex-1 min-w-0 ${isSoldOut ? 'cursor-not-allowed' : 'cursor-pointer'}">
+              <input
+                type="checkbox"
+                ${active ? 'checked' : ''}
+                ${isSoldOut ? 'disabled' : ''}
+                onchange="toggleChecklistItem('${p.id}', this.checked)"
+                class="w-5 h-5 accent-[#4A121A] rounded cursor-pointer shrink-0"
+              />
+              <img src="${imgSrc}" alt="${p.name}" onerror="this.onerror=null; this.src='${getFallbackSVG(p.name)}';" class="w-12 h-12 rounded-xl object-cover border border-[#EFE8DE] shrink-0 ${isSoldOut ? 'grayscale' : ''}" />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="font-mono text-[10px] font-bold text-dorado">${p.id}</span>
+                  ${isSoldOut ? '<span class="px-1.5 py-0.5 rounded-full bg-borgona text-champana font-mono text-[8px] uppercase">Agotado</span>' : ''}
+                </div>
+                <p class="font-serif text-lg font-semibold text-borgona leading-tight truncate">${p.name}</p>
+                <p class="font-mono text-[11px] text-[#6E625A]">${fmt(p.price)} c/u</p>
+              </div>
+            </label>
+
+            ${isSoldOut ? `
+              <span class="font-mono text-[10px] text-[#8A7D73] uppercase px-2">Sin stock</span>
+            ` : `
+              <div class="flex items-center justify-between sm:justify-end gap-2.5 ${active ? '' : 'opacity-40 pointer-events-none'}">
+                <div class="inline-flex items-center bg-marfil border border-[#DDD3C5] rounded-full p-0.5">
+                  <button type="button" onclick="adjustChecklistQty('${p.id}', -1)" class="w-7 h-7 rounded-full bg-white text-borgona font-bold hover:bg-crema">−</button>
+                  <input
+                    type="number"
+                    min="1"
+                    value="${st.qty}"
+                    onchange="setChecklistQty('${p.id}', this.value)"
+                    class="w-11 text-center font-mono text-xs font-bold text-borgona bg-transparent focus:outline-none"
+                  />
+                  <button type="button" onclick="adjustChecklistQty('${p.id}', 1)" class="w-7 h-7 rounded-full bg-borgona text-white font-bold hover:bg-borgonaOscuro">+</button>
+                </div>
+                <span class="font-mono text-xs font-bold text-borgona min-w-[74px] text-right">
+                  ${active ? fmt(p.price * st.qty) : '$0'}
+                </span>
+              </div>
+            `}
+          </div>
+        `;
+      }).join("");
+
+      updateChecklistSummary();
+    }
+
+    function updateChecklistSummary() {
+      let totalUnits = 0, subtotal = 0;
+      const selected = [];
+
+      PRODUCTS.forEach(p => {
+        const st = checklistState[p.id];
+        if (!p.soldOut && st && st.checked && st.qty > 0) {
+          totalUnits += st.qty;
+          subtotal += p.price * st.qty;
+          selected.push({ p, qty: st.qty });
+        }
+      });
+
+      const hasPack = totalUnits >= PACK_THRESHOLD;
+      const packDiscount = hasPack ? Math.round(subtotal * PACK_DISCOUNT) : 0;
+      const afterPack = subtotal - packDiscount;
+      const bfDiscount = BLACK_FRIDAY_ACTIVE ? Math.round(afterPack * BLACK_FRIDAY_RATE) : 0;
+      const total = afterPack - bfDiscount;
+      const freeShipping = total >= FREE_SHIPPING_THRESHOLD;
+
+      document.getElementById("calc-units-total").textContent = `${totalUnits}`;
+      document.getElementById("calc-subtotal").textContent = fmt(subtotal);
+      document.getElementById("calc-pack-row").classList.toggle("hidden", !hasPack);
+      document.getElementById("calc-pack-discount").textContent = "-" + fmt(packDiscount);
+      document.getElementById("calc-bf-row").classList.toggle("hidden", !(BLACK_FRIDAY_ACTIVE && bfDiscount > 0));
+      document.getElementById("calc-bf-discount").textContent = "-" + fmt(bfDiscount);
+      document.getElementById("calc-shipping").textContent = total === 0 ? "Por confirmar" : (freeShipping ? "GRATIS" : "Según zona");
+      document.getElementById("calc-total").textContent = fmt(total);
+
+      // Barras de progreso
+      const packPct = Math.min(100, (totalUnits / PACK_THRESHOLD) * 100);
+      document.getElementById("calc-pack-bar").style.width = packPct + "%";
+      document.getElementById("calc-pack-count").textContent = `${Math.min(totalUnits, PACK_THRESHOLD)}/${PACK_THRESHOLD}`;
+      document.getElementById("calc-pack-text").textContent = hasPack
+        ? "¡Pack Familiar (-8%) desbloqueado!"
+        : `Suma ${PACK_THRESHOLD - totalUnits} unds más para activar -8%`;
+
+      const shipPct = Math.min(100, Math.round((total / FREE_SHIPPING_THRESHOLD) * 100));
+      document.getElementById("calc-ship-bar").style.width = shipPct + "%";
+      document.getElementById("calc-ship-pct").textContent = shipPct + "%";
+      document.getElementById("calc-ship-text").textContent = freeShipping
+        ? "¡Tienes Domicilio Gratis en Pereira/Dosquebradas!"
+        : `Te faltan ${fmt(FREE_SHIPPING_THRESHOLD - total)} para Domicilio Gratis`;
+
+      document.getElementById("calc-corp-hint").classList.toggle("hidden", totalUnits < 80);
+
+      // Desglose y enlace WhatsApp
+      const listEl = document.getElementById("calc-selected-list");
+      const waLines = ["*COTIZACIÓN POR UNIDADES — LA QUERENDONA FOODS*", "--------------------------------"];
+
+      if (selected.length === 0) {
+        listEl.innerHTML = '<p class="text-center text-[#8A7D73] py-3">Marca uno o más productos en la lista para calcular tu pedido.</p>';
+      } else {
+        listEl.innerHTML = selected.map(({ p, qty }) => {
+          waLines.push(`• ${qty}× ${p.name} (${p.id}) — ${fmt(p.price * qty)}`);
+          return `<div class="flex justify-between items-center py-1 border-b border-[#EFE8DE]/70">
+            <span class="truncate pr-2"><strong class="font-mono text-borgona">${qty}×</strong> ${p.name}</span>
+            <span class="font-mono font-semibold text-[#5A4E47] shrink-0">${fmt(p.price * qty)}</span>
+          </div>`;
+        }).join("");
+      }
+
+      waLines.push("--------------------------------");
+      waLines.push(`Unidades totales: ${totalUnits}`);
+      waLines.push(`Subtotal: ${fmt(subtotal)}`);
+      if (hasPack) waLines.push(`Descuento Pack Familiar (-8%): -${fmt(packDiscount)}`);
+      if (BLACK_FRIDAY_ACTIVE && bfDiscount > 0) waLines.push(`Descuento Black Friday (-6% adicional): -${fmt(bfDiscount)}`);
+      waLines.push(`*TOTAL ESTIMADO: ${fmt(total)}*`);
+      if (freeShipping) waLines.push("Beneficio: Domicilio GRATIS (Pereira/Dosquebradas)");
+      waLines.push("", "Hola, quiero confirmar disponibilidad y entrega para esta combinación.");
+
+      document.getElementById("calc-wa-btn").href = "https://wa.me/573116488685?text=" + encodeURIComponent(waLines.join("\n"));
+    }
+
+    function addChecklistToCart() {
+      let added = 0;
+      PRODUCTS.forEach(p => {
+        const st = checklistState[p.id];
+        if (!p.soldOut && st && st.checked && st.qty > 0) {
+          cart[p.id] = (cart[p.id] || 0) + st.qty;
+          added++;
+        }
+      });
+      if (added === 0) {
+        alert("Marca al menos un producto disponible en la lista.");
+        return;
+      }
+      saveAndRenderCart();
+      openCart();
+    }
+
+    // =========================================================================
+    // CATÁLOGO PRINCIPAL, CARRITO Y MODAL
+    // =========================================================================
     function renderCatalog() {
       const grid = document.getElementById("catalog-grid");
       const list = activeFilter === "todos" ? PRODUCTS : PRODUCTS.filter(p => p.category === activeFilter);
@@ -663,77 +887,6 @@
       renderCatalog();
     }
 
-    function getPlannerPlan(guests, style) {
-      if (style === "novena") return [{ id: "REF-07", qty: guests }];
-      if (style === "pesebre") return [{ id: "REF-03", qty: guests }];
-      if (style === "cena") return [{ id: "REF-06", qty: guests }];
-      const half = Math.ceil(guests / 2);
-      const rest = Math.max(1, guests - half);
-      return [{ id: "REF-03", qty: half }, { id: "REF-02", qty: rest }];
-    }
-
-    function selectPlannerStyle(style) {
-      plannerStyle = style;
-      document.querySelectorAll(".planner-style-btn").forEach(btn => {
-        const active = btn.dataset.style === style;
-        btn.className = active
-          ? "planner-style-btn text-left p-3.5 rounded-2xl border-2 border-borgona bg-borgona/5 transition-all"
-          : "planner-style-btn text-left p-3.5 rounded-2xl border border-[#E6DCCF] hover:border-dorado transition-all";
-      });
-      updatePlanner();
-    }
-
-    function updatePlanner() {
-      const guests = parseInt(document.getElementById("guest-slider").value, 10);
-      document.getElementById("guest-count-label").textContent = guests;
-
-      const plan = getPlannerPlan(guests, plannerStyle);
-      let subtotal = 0, totalUnits = 0;
-
-      const html = plan.map(item => {
-        const p = PRODUCTS.find(x => x.id === item.id);
-        subtotal += p.price * item.qty;
-        totalUnits += item.qty;
-        return `<div class="flex justify-between items-center bg-white px-3 py-2 rounded-xl border border-[#EFE8DE]">
-          <span><strong class="font-mono text-borgona">${item.qty}×</strong> ${p.name}</span>
-          <span class="font-mono text-xs text-[#6E625A]">${fmt(p.price * item.qty)}</span>
-        </div>`;
-      }).join("");
-
-      const hasPack = totalUnits >= PACK_THRESHOLD;
-      const afterPack = hasPack ? subtotal * (1 - PACK_DISCOUNT) : subtotal;
-      const bfDiscount = BLACK_FRIDAY_ACTIVE ? Math.round(afterPack * BLACK_FRIDAY_RATE) : 0;
-      const total = afterPack - bfDiscount;
-
-      document.getElementById("planner-items-list").innerHTML = html;
-      document.getElementById("planner-subtotal").textContent = fmt(subtotal);
-      document.getElementById("planner-subtotal").style.display = (hasPack || BLACK_FRIDAY_ACTIVE) ? "inline" : "none";
-      document.getElementById("planner-bf-discount").textContent = "-" + fmt(bfDiscount);
-      document.getElementById("planner-total").textContent = fmt(total);
-      document.getElementById("planner-per-person").textContent = `Equivale a ${fmt(total / guests)} por invitado`;
-
-      const badge = document.getElementById("planner-badge");
-      if (hasPack) {
-        badge.textContent = "Pack -8% Activo";
-        badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-bijao text-white";
-      } else {
-        badge.textContent = `Faltan ${PACK_THRESHOLD - totalUnits} para -8%`;
-        badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-champana text-borgona";
-      }
-    }
-
-    function addPlannerToCart() {
-      const guests = parseInt(document.getElementById("guest-slider").value, 10);
-      getPlannerPlan(guests, plannerStyle).forEach(item => {
-        const p = PRODUCTS.find(x => x.id === item.id);
-        if (p && !p.soldOut) {
-          cart[item.id] = (cart[item.id] || 0) + item.qty;
-        }
-      });
-      saveAndRenderCart();
-      openCart();
-    }
-
     function updateQty(id, delta) {
       const p = PRODUCTS.find(x => x.id === id);
       if (!p || p.soldOut) return;
@@ -761,7 +914,7 @@
         container.innerHTML = `
           <div class="h-full flex flex-col items-center justify-center text-center py-12 text-[#8A7D73]">
             <p class="font-serif text-2xl text-borgona mb-1">Tu carrito está vacío</p>
-            <p class="text-xs max-w-[220px]">Agrega unidades del catálogo o usa el Armador de Novena Familiar.</p>
+            <p class="text-xs max-w-[220px]">Agrega unidades del catálogo o arma tu combinación en el cotizador rápido.</p>
           </div>`;
       } else {
         container.innerHTML = entries.map(([id, qty]) => {
@@ -913,7 +1066,7 @@
     }
 
     initBlackFridayUI();
-    updatePlanner();
+    renderChecklist();
     renderCatalog();
     renderCartDrawer();
   </script>
