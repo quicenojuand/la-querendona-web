@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Querendona Foods — Reconstruyendo el Sabor | Catálogo Oficial &amp; Pedidos | Pereira</title>
+  <title>La Querendona Foods — Reconstruyendo el Sabor | Catálogo Corporativo &amp; Black Friday</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <!-- DETECTOR INTELIGENTE DE IMÁGENES (.JPG / .jpg / .jpeg / .PNG / MAYÚSCULAS) -->
   <script>
@@ -109,8 +109,31 @@
       width: max-content;
       animation: marqueeEditorial 36s linear infinite;
     }
-    .animate-marquee:hover {
+    .animate-marquee-fast {
+      display: flex;
+      width: max-content;
+      animation: marqueeEditorial 22s linear infinite;
+    }
+    .animate-marquee:hover, .animate-marquee-fast:hover {
       animation-play-state: paused;
+    }
+
+    @keyframes bfShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .bf-shimmer-bg {
+      background: linear-gradient(110deg, #09090B 0%, #1C0A0E 35%, #2B1217 50%, #1C0A0E 65%, #09090B 100%);
+      background-size: 200% 100%;
+      animation: bfShimmer 7s ease-in-out infinite;
+    }
+    .bf-gold-text {
+      background: linear-gradient(90deg, #D4AF37 0%, #FFF3C4 50%, #D4AF37 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: bfShimmer 4s linear infinite;
     }
 
     #brand-preloader {
@@ -143,18 +166,6 @@
       />
 
       <div id="preloader-svg-logo" class="hidden mb-6 px-8 py-6 rounded-[2.5rem] border-2 border-panela-400 bg-querendona-700 shadow-2xl">
-        <svg viewBox="0 0 420 120" class="w-64 sm:w-80 h-auto mx-auto stroke-panela-400 fill-none" stroke-width="1.8">
-          <line x1="20" y1="82" x2="220" y2="82" />
-          <path d="M75 88 L80 28 L86 28 L91 88 M165 88 L170 28 L176 28 L181 88" />
-          <line x1="80" y1="34" x2="35" y2="82" /><line x1="80" y1="42" x2="50" y2="82" /><line x1="80" y1="50" x2="64" y2="82" />
-          <line x1="86" y1="34" x2="128" y2="82" /><line x1="86" y1="42" x2="115" y2="82" /><line x1="86" y1="50" x2="102" y2="82" />
-          <line x1="170" y1="34" x2="130" y2="82" /><line x1="170" y1="42" x2="144" y2="82" />
-          <line x1="176" y1="34" x2="218" y2="82" /><line x1="176" y1="42" x2="204" y2="82" />
-          <path d="M215 82 Q240 60 265 82 Q290 60 315 82" />
-          <rect x="320" y="52" width="18" height="30" />
-          <path d="M320 52 Q329 30 338 52 M329 30 L329 22 M326 25 L332 25" />
-          <path d="M348 82 L348 64 L390 64 L390 82 M354 64 Q369 34 384 64 M369 34 L369 26" />
-        </svg>
         <span class="block font-serif text-3xl sm:text-5xl tracking-wider text-panela-400 font-bold mt-1">LA QUERENDONA®</span>
         <span class="block font-sans text-xs tracking-[0.22em] text-panela-400/90 mt-1">Reconstruyendo el sabor</span>
       </div>
@@ -175,10 +186,28 @@
   </div>
 
   <!-- =====================================================================
-       BARRA SUPERIOR RESPONSIVE (SIN SUPERPOSICIONES EN MÓVIL)
+       BANNER SUPERIOR ANIMADO BLACK FRIDAY (SE APAGA CON BLACK_FRIDAY_ACTIVE)
+       ===================================================================== -->
+  <div id="bf-top-ribbon" class="bg-[#09090B] text-white border-b border-panela-400/40 overflow-hidden py-2">
+    <div class="animate-marquee-fast flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.18em]">
+      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">6% DE DESCUENTO ADICIONAL</strong> EN TODAS TUS COMPRAS · SOLO ESTA SEMANA</span>
+      <span class="text-panela-400">✦</span>
+      <span>ACUMULABLE CON ESCALA 2 (501+ UNDS)</span>
+      <span class="text-red-500">✦</span>
+      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">-6% EXTRA AUTOMÁTICO</strong> EN CALCULADOR Y CARRITO</span>
+      <span class="text-panela-400">✦</span>
+      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">6% DE DESCUENTO ADICIONAL</strong> EN TODAS TUS COMPRAS · SOLO ESTA SEMANA</span>
+      <span class="text-panela-400">✦</span>
+      <span>ACUMULABLE CON ESCALA 2 (501+ UNDS)</span>
+      <span class="text-red-500">✦</span>
+      <span class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">BLACK FRIDAY</span> <strong class="text-panela-400">-6% EXTRA AUTOMÁTICO</strong> EN CALCULADOR Y CARRITO</span>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       BARRA SUPERIOR RESPONSIVE
        ===================================================================== -->
   <header class="sticky top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md hairline-b">
-    <!-- Franja informativa superior -->
     <div class="bg-alabaster hairline-b px-4 sm:px-8 py-1.5 text-[10px] sm:text-[11px] font-mono text-ink-600 flex flex-wrap items-center justify-between gap-1.5">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse shrink-0"></span>
@@ -192,9 +221,7 @@
       </div>
     </div>
 
-    <!-- Fila Principal: Logo + Navegación Desktop + Acciones -->
     <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
-      <!-- Logo (regresa a página principal) -->
       <a href="./index.html" class="text-left group flex items-center gap-2.5 sm:gap-3 min-w-0 shrink">
         <img
           src="logo.JPG"
@@ -213,7 +240,6 @@
         </div>
       </a>
 
-      <!-- Menú Desktop -->
       <nav aria-label="Menú Principal" class="hidden xl:flex items-center gap-1">
         <a href="./index.html" class="px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider text-ink-600 hover:text-ink-950 hover:bg-alabaster transition whitespace-nowrap">← Inicio</a>
         <a href="#catalogo" class="px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider bg-ink-950 text-white whitespace-nowrap">Navidad 2026</a>
@@ -222,7 +248,6 @@
         <a href="./unidades.html" class="px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider text-bijao-700 bg-bijao-100 hover:bg-bijao-700 hover:text-white font-semibold transition whitespace-nowrap">Ver Unidades →</a>
       </nav>
 
-      <!-- Botones Derecha -->
       <div class="flex items-center gap-2 shrink-0">
         <a href="./index.html" class="hidden sm:inline-flex xl:hidden px-3 py-2 rounded-full bg-alabaster hairline-box text-ink-800 text-[11px] font-mono uppercase tracking-wider hover:border-ink-950 transition whitespace-nowrap">
           ← Inicio
@@ -240,7 +265,7 @@
       </div>
     </div>
 
-    <!-- Barra Secundaria Exclusiva Móvil (Limpia, sin pisar el logo) -->
+    <!-- Barra Secundaria Móvil -->
     <div class="md:hidden px-4 pb-2.5 pt-1 flex items-center justify-between gap-2 border-t border-stoneborder/60 bg-white">
       <a href="./index.html" class="flex-1 text-center py-1.5 px-2 rounded-full bg-alabaster hairline-box text-ink-800 font-mono text-[10px] uppercase tracking-wider font-semibold whitespace-nowrap">
         ← Inicio
@@ -256,7 +281,38 @@
 
   <main>
     <!-- ===================================================================
-         PORTADA EDITORIAL CON LEVITACIÓN EN ESTUDIO BLANCO INFINITO (#FFFFFF)
+         BANNER DESTACADO BLACK FRIDAY WEEK CON CUENTA REGRESIVA EN VIVO
+         =================================================================== -->
+    <section id="bf-hero-banner" class="bf-shimmer-bg text-white border-b border-panela-400/40 px-4 sm:px-8 py-5 sm:py-7">
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-5">
+        <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+          <div class="px-4 py-2 rounded-2xl bg-red-600 text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-lg shadow-red-900/40 shrink-0 animate-pulse">
+            BLACK FRIDAY · -6% EXTRA
+          </div>
+          <div>
+            <h2 class="font-serif text-2xl sm:text-3xl leading-tight">
+              <span class="bf-gold-text font-bold">6% de descuento adicional</span> en todas tus compras corporativas y de hogar
+            </h2>
+            <p class="font-mono text-[11px] text-white/75 mt-0.5">
+              Válido solo esta semana · Se descuenta automáticamente en el calculador y en tu pedido.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
+          <div class="flex items-center gap-1.5 bg-white/10 border border-panela-400/40 rounded-2xl px-4 py-2 font-mono text-xs">
+            <span class="text-white/70 text-[10px] uppercase mr-1">Termina en:</span>
+            <span id="bf-countdown" class="text-panela-400 font-bold tracking-wider">--d : --h : --m : --s</span>
+          </div>
+          <a href="#calculador" class="px-5 py-2.5 rounded-full bg-panela-400 text-ink-950 font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition shadow-lg">
+            Aprovechar -6% Ahora →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         PORTADA EDITORIAL
          =================================================================== -->
     <section id="inicio" class="py-12 sm:py-20 px-4 sm:px-8 bg-white hairline-b overflow-hidden">
       <div class="max-w-7xl mx-auto">
@@ -297,8 +353,8 @@
                 <span class="font-mono text-[10px] uppercase tracking-wider text-ink-600">Unidades pedido mínimo corporativo</span>
               </div>
               <div>
-                <span class="font-serif text-2xl sm:text-4xl text-querendona-700 font-semibold block">-4% Dto.</span>
-                <span class="font-mono text-[10px] uppercase tracking-wider text-ink-600">En escala de 501+ unidades</span>
+                <span class="font-serif text-2xl sm:text-4xl text-querendona-700 font-semibold block">-4% / -6%</span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-ink-600">Escala 501+ y Extra Black Friday</span>
               </div>
               <div>
                 <span class="font-serif text-2xl sm:text-4xl text-querendona-700 font-semibold block">2 a 3 h</span>
@@ -335,7 +391,7 @@
     <!-- Cinta Editorial -->
     <div class="py-4 hairline-b overflow-hidden bg-alabaster">
       <div class="animate-marquee flex items-center gap-12 text-ink-800">
-        <span class="font-serif italic text-2xl">Cono Gourmet Novena</span>
+        <span class="font-serif italic text-2xl">Domo Natilla, Mora &amp; Buñuelos</span>
         <span class="font-mono text-xs text-querendona-700">✦</span>
         <span class="font-mono text-xs uppercase tracking-[0.25em]">Tamal Antojito Caliente</span>
         <span class="font-mono text-xs text-bijao-700">✦</span>
@@ -350,7 +406,7 @@
     </div>
 
     <!-- ===================================================================
-         SECCIÓN 1: ARTE CULINARIO EN GRAVEDAD CERO
+         SECCIÓN 1: ARTE CULINARIO
          =================================================================== -->
     <section id="experiencia" class="py-16 sm:py-20 px-4 sm:px-8 bg-white hairline-b">
       <div class="max-w-7xl mx-auto">
@@ -370,7 +426,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Escena 1 -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-5 sm:p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-video rounded-2xl overflow-hidden bg-white mb-5">
               <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
@@ -388,7 +443,6 @@
             </div>
           </div>
 
-          <!-- Escena 2 -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-5 sm:p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-video rounded-2xl overflow-hidden bg-white mb-5">
               <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
@@ -406,7 +460,6 @@
             </div>
           </div>
 
-          <!-- Escena 3 -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-5 sm:p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-white mb-5">
               <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
@@ -424,7 +477,6 @@
             </div>
           </div>
 
-          <!-- Escena 4 -->
           <div class="luxury-card rounded-3xl bg-white hairline-box p-5 sm:p-6 flex flex-col justify-between" onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)">
             <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-white mb-5">
               <video autoplay loop muted playsinline class="w-full h-full object-cover hidden" onloadeddata="this.classList.remove('hidden'); if(this.nextElementSibling) this.nextElementSibling.classList.add('hidden');">
@@ -446,7 +498,7 @@
     </section>
 
     <!-- ===================================================================
-         SECCIÓN 2: PORTAFOLIO CORPORATIVO NAVIDAD 2026 (REF-01 A REF-06)
+         SECCIÓN 2: PORTAFOLIO CORPORATIVO NAVIDAD 2026 (REF-01 A REF-07)
          =================================================================== -->
     <section id="catalogo" class="py-16 sm:py-20 px-4 sm:px-8 bg-alabaster hairline-b">
       <div class="max-w-7xl mx-auto">
@@ -454,10 +506,10 @@
           <div>
             <span class="font-mono text-xs uppercase tracking-[0.28em] text-querendona-700">02 · Portafolio de Productos Corporativos Navidad 2026</span>
             <h2 class="font-serif text-4xl sm:text-6xl text-ink-950 mt-1 leading-none">
-              Referencias Oficiales (REF-01 a REF-06)
+              Referencias Oficiales (REF-01 a REF-07)
             </h2>
             <p class="text-sm text-ink-600 mt-2 max-w-2xl">
-              Pedidos corporativos desde <strong>100 unidades</strong>. Alterna entre la <strong>Escala 1 (100 a 500 unidades — Precio Base)</strong> y la <strong>Escala 2 (501+ unidades con -4 % de descuento)</strong>.
+              Pedidos corporativos desde <strong>100 unidades</strong> (puedes combinar varias referencias). Alterna entre <strong>Escala 1 (100 a 500 unds)</strong> y <strong>Escala 2 (501+ unds, -4%)</strong>. <span id="bf-catalog-note" class="text-red-700 font-semibold">Además esta semana tienes -6% adicional Black Friday en tu pedido.</span>
             </p>
           </div>
 
@@ -496,62 +548,7 @@
                 <th class="py-3 text-right">Acción Directa</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-stoneborder text-xs sm:text-sm">
-              <tr class="bg-alabaster/60 opacity-75">
-                <td class="py-3.5 pr-4 font-mono font-semibold text-ink-400">REF-01</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-600 font-semibold">
-                  Cono Gourmet Novena
-                  <span class="ml-2 px-2 py-0.5 rounded-full bg-querendona-700 text-panela-400 font-mono text-[9px] uppercase tracking-widest align-middle">Agotado</span>
-                </td>
-                <td class="py-3.5 pr-4 text-ink-400">3 Buñuelos (45 g) + Natilla (45 g) + Cucharita de madera</td>
-                <td class="py-3.5 pr-4 font-mono line-through text-ink-400">$5.900 COP</td>
-                <td class="py-3.5 pr-4 font-mono line-through text-ink-400">$5.664 COP</td>
-                <td class="py-3.5 text-right"><button type="button" disabled class="px-3.5 py-1.5 rounded-full bg-stoneborder text-ink-600 font-mono text-[11px] cursor-not-allowed">Agotado</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-02</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Tamal Antojito (Se Entrega Caliente)</td>
-                <td class="py-3.5 pr-4 text-ink-600">Tamal caliente (150 g) + 1 Buñuelo (15 g) + Tenedor de madera</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$6.500 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$6.240 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-02', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-03</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Cajita Tradición Pesebre</td>
-                <td class="py-3.5 pr-4 text-ink-600">3 Buñuelos (45 g) + Natilla (60 g) + Cucharita de madera</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$6.500 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$6.240 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-03', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr class="bg-alabaster/60 opacity-75">
-                <td class="py-3.5 pr-4 font-mono font-semibold text-ink-400">REF-04</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-600 font-semibold">
-                  Cajita Farolito Día de Velitas
-                  <span class="ml-2 px-2 py-0.5 rounded-full bg-querendona-700 text-panela-400 font-mono text-[9px] uppercase tracking-widest align-middle">Agotado</span>
-                </td>
-                <td class="py-3.5 pr-4 text-ink-400">3 Buñuelos (45 g) + Natilla (60 g) + Cucharita + Vela LED incluida</td>
-                <td class="py-3.5 pr-4 font-mono line-through text-ink-400">$8.850 COP</td>
-                <td class="py-3.5 pr-4 font-mono line-through text-ink-400">$8.500 COP</td>
-                <td class="py-3.5 text-right"><button type="button" disabled class="px-3.5 py-1.5 rounded-full bg-stoneborder text-ink-600 font-mono text-[11px] cursor-not-allowed">Agotado</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-05</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Tamal Mini Personal Caliente</td>
-                <td class="py-3.5 pr-4 text-ink-600">Tamal caliente + Tenedor de madera</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$9.800 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$9.408 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-05', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-              <tr>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-querendona-700">REF-06</td>
-                <td class="py-3.5 pr-4 font-serif text-xl text-ink-950 font-semibold">Combo Trío Tradición 3 en 1</td>
-                <td class="py-3.5 pr-4 text-ink-600">Tamal Antojito (150 g) + 2 Buñuelos (15 g c/u) + Natilla (60 g) + Tenedor</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold">$10.000 COP</td>
-                <td class="py-3.5 pr-4 font-mono font-semibold text-bijao-700">$9.600 COP</td>
-                <td class="py-3.5 text-right"><button type="button" onclick="addToCart('REF-06', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button></td>
-              </tr>
-            </tbody>
+            <tbody id="corporate-price-table" class="divide-y divide-stoneborder text-xs sm:text-sm"></tbody>
           </table>
         </div>
       </div>
@@ -574,94 +571,115 @@
     </section>
 
     <!-- ===================================================================
-         SECCIÓN 4: CALCULADOR INTERACTIVO DE PRECIOS CORPORATIVOS Y NOVENAS
+         SECCIÓN 4: CALCULADOR MULTIPRODUCTO CON CHECKLIST EN TIEMPO REAL
          =================================================================== -->
     <section id="calculador" class="py-16 sm:py-20 px-4 sm:px-8 bg-alabaster hairline-b">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        <div class="lg:col-span-5 space-y-5">
-          <span class="px-3.5 py-1 rounded-full bg-querendona-100 text-querendona-700 font-mono text-[11px] uppercase tracking-widest inline-block">
-            Cotizador en Tiempo Real
-          </span>
-          <h2 class="font-serif text-4xl sm:text-6xl text-ink-950 leading-none">
-            Calculador de Precios Corporativos
-          </h2>
-          <p class="text-sm sm:text-base text-ink-600 leading-relaxed">
-            Selecciona cualquiera de nuestras <strong>referencias disponibles de Navidad</strong> y ajusta el número de unidades: de <strong>100 a 500 unidades</strong> aplica la Tarifa Base y desde <strong>501 unidades en adelante</strong> se descuenta automáticamente el <strong>-4 % corporativo</strong>.
-          </p>
-          <div class="p-5 rounded-3xl bg-white hairline-box space-y-2 text-xs text-ink-600 leading-relaxed">
-            <strong class="font-mono text-[11px] uppercase text-querendona-700 block">Condiciones Corporativas Oficiales:</strong>
-            <p>• Pedidos corporativos desde <strong>100 unidades</strong>.</p>
-            <p>• Reserva con el <strong>50 % de anticipo</strong> (mínimo 8 días antes del evento) y el <strong>50 % restante el día anterior al despacho</strong> (debe estar cancelado para poder hacer el envío).</p>
-            <p>• Los precios no incluyen IVA, somos régimen simplificado.</p>
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-5">
+          <div class="space-y-2 max-w-2xl">
+            <span class="px-3.5 py-1 rounded-full bg-querendona-100 text-querendona-700 font-mono text-[11px] uppercase tracking-widest inline-block">
+              Cotizador Multiproducto en Tiempo Real
+            </span>
+            <h2 class="font-serif text-4xl sm:text-6xl text-ink-950 leading-none">
+              Arma y Calcula tu Pedido Combinado
+            </h2>
+            <p class="text-sm sm:text-base text-ink-600 leading-relaxed">
+              Marca todos los productos que deseas incluir y ajusta la cantidad de cada uno. El total de unidades se suma entre todas las referencias para desbloquear la <strong>Escala 2 (-4% desde 501 unds)</strong>.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="calc-tier-pill" class="px-4 py-2 rounded-full bg-querendona-100 text-querendona-700 font-mono text-xs font-semibold">
+              Escala 1: 100 a 500 unds
+            </span>
+            <span id="calc-bf-pill" class="px-4 py-2 rounded-full bg-[#09090B] text-panela-400 border border-panela-400/50 font-mono text-xs font-bold">
+              ★ BLACK FRIDAY: -6% ADICIONAL
+            </span>
           </div>
         </div>
 
-        <div class="lg:col-span-7 rounded-[2rem] bg-white hairline-box p-6 sm:p-10 shadow-xl space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 hairline-b">
-            <div>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Simulador Oficial Navidad 2026</span>
-              <h3 class="font-serif text-3xl text-ink-950">Calcula tu Pedido</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Checklist de Productos (Izquierda) -->
+          <div class="lg:col-span-7 rounded-[2rem] bg-white hairline-box p-5 sm:p-8 shadow-sm space-y-3">
+            <div class="flex items-center justify-between pb-3 hairline-b">
+              <span class="font-mono text-xs uppercase tracking-wider text-ink-600 font-semibold">1. Selecciona tus referencias y cantidades:</span>
+              <button type="button" onclick="clearChecklist()" class="font-mono text-[11px] text-ink-400 hover:text-querendona-700 underline">Limpiar selección</button>
             </div>
-            <span id="concierge-tier-pill" class="px-3.5 py-1.5 rounded-full bg-querendona-100 text-querendona-700 font-mono text-[11px] font-semibold">
-              Escala 1: 100 a 500 unds
-            </span>
+            <div id="checklist-products" class="space-y-3"></div>
           </div>
 
-          <div class="space-y-2">
-            <label for="concierge-ref" class="font-mono text-xs uppercase tracking-wider text-ink-600 block">1. Selecciona la referencia del catálogo:</label>
-            <select id="concierge-ref" onchange="updateConciergeSummary()" class="w-full px-4 py-3.5 rounded-2xl bg-alabaster hairline-box text-sm font-medium text-ink-950 focus:outline-none focus:border-ink-950">
-              <option value="REF-01" data-scale1="5900" data-scale2="5664" disabled>REF-01 · Cono Gourmet Novena — (AGOTADO)</option>
-              <option value="REF-02" data-scale1="5500" data-scale2="5280">REF-02 · Tamal Antojito Caliente (Tamal 150g + 1 Buñuelo 15g + Tenedor) — $6.500 / $6.240</option>
-              <option value="REF-03" data-scale1="6500" data-scale2="6240" selected>REF-03 · Cajita Tradición Pesebre (3 Buñuelos 45g + Natilla 60g + Cucharita) — $6.500 / $6.240</option>
-              <option value="REF-04" data-scale1="8850" data-scale2="8500" disabled>REF-04 · Cajita Farolito Día de Velitas — (AGOTADO)</option>
-              <option value="REF-05" data-scale1="9800" data-scale2="9408">REF-05 · Tamal Mini Personal Caliente (Tamal caliente + Tenedor) — $9.800 / $9.408</option>
-              <option value="REF-06" data-scale1="10000" data-scale2="9600">REF-06 · Combo Trío Tradición 3 en 1 (Tamal 150g + 2 Buñuelos + Natilla 60g) — $10.000 / $9.600</option>
-            </select>
-          </div>
+          <!-- Resumen en Vivo (Derecha) -->
+          <div class="lg:col-span-5 lg:sticky lg:top-28 rounded-[2rem] bg-white hairline-box p-6 sm:p-8 shadow-xl space-y-5">
+            <div class="flex items-center justify-between pb-4 hairline-b">
+              <div>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-querendona-700">Resumen Corporativo</span>
+                <h3 class="font-serif text-3xl text-ink-950">Tu Cotización</h3>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-[10px] uppercase text-ink-400 block">Unidades totales</span>
+                <span id="calc-total-units" class="font-mono text-xl font-bold text-querendona-700">0 unds</span>
+              </div>
+            </div>
 
-          <div class="space-y-2">
-            <div class="flex justify-between items-center font-mono text-xs text-ink-600">
-              <span>2. Cantidad de unidades del pedido:</span>
-              <span id="concierge-qty-label" class="text-querendona-700 font-bold text-base">250 unidades</span>
+            <!-- Barra de progreso a Escala 2 (501+ unds) -->
+            <div class="p-3.5 rounded-2xl bg-alabaster hairline-box space-y-1.5">
+              <div class="flex justify-between font-mono text-[11px]">
+                <span id="calc-scale-msg" class="text-ink-800 font-medium">Suma 501 unds para activar Escala 2 (-4%)</span>
+                <span id="calc-scale-count" class="text-querendona-700 font-bold">0/501</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-stoneborder overflow-hidden">
+                <div id="calc-scale-bar" class="h-full bg-bijao-700 transition-all duration-300" style="width: 0%"></div>
+              </div>
             </div>
-            <input id="concierge-qty" type="range" min="100" max="1000" step="10" value="250" oninput="updateConciergeSummary()" class="w-full accent-querendona-700 cursor-pointer h-2 rounded-lg" />
-            <div class="flex justify-between font-mono text-[10px] text-ink-400">
-              <span>100 unds (Mínimo)</span>
-              <span>300 unds</span>
-              <span>501+ unds (-4% Dto.)</span>
-              <span>1.000 unds</span>
-            </div>
-          </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 rounded-2xl bg-alabaster hairline-box">
-            <div>
-              <span class="font-mono text-[10px] uppercase text-ink-600 block">Precio Unitario</span>
-              <span id="concierge-unit-price" class="font-serif text-2xl font-bold text-ink-950">$6.500 COP</span>
-            </div>
-            <div>
-              <span class="font-mono text-[10px] uppercase text-ink-600 block">Anticipo 50% (Reserva)</span>
-              <span id="concierge-deposit" class="font-serif text-2xl font-bold text-bijao-700">$812.500 COP</span>
-            </div>
-            <div>
-              <span class="font-mono text-[10px] uppercase text-ink-600 block">Total Pedido</span>
-              <span id="concierge-total" class="font-serif text-3xl font-bold text-querendona-700">$1.625.000 COP</span>
-            </div>
-          </div>
+            <!-- Desglose de productos marcados -->
+            <div id="calc-selected-summary" class="space-y-2 max-h-52 overflow-y-auto pr-1 text-xs"></div>
 
-          <div class="flex flex-col sm:flex-row gap-3">
-            <button type="button" onclick="addConciergeSelectionToCart()" class="flex-1 py-4 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider hover:bg-ink-950 transition shadow-md">
-              + Agregar al Pedido
-            </button>
-            <a id="concierge-wa-direct" href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="px-6 py-4 rounded-full bg-ink-950 text-white font-mono text-xs uppercase tracking-wider hover:bg-querendona-700 transition text-center">
-              📲 Solicitar por WhatsApp (+57 311 648 8685) ↗
-            </a>
+            <!-- Totales -->
+            <div class="p-5 rounded-2xl bg-alabaster hairline-box space-y-2 text-sm">
+              <div class="flex justify-between text-xs text-ink-600">
+                <span>Subtotal (según escala activa)</span>
+                <span id="calc-subtotal" class="font-mono font-semibold text-ink-950">$0 COP</span>
+              </div>
+              <div id="calc-bf-row" class="flex justify-between text-xs text-red-700 font-semibold">
+                <span>Descuento Black Friday (-6% extra)</span>
+                <span id="calc-bf-discount" class="font-mono">-$0 COP</span>
+              </div>
+              <div class="flex justify-between items-baseline pt-2.5 hairline-t">
+                <span class="font-semibold text-ink-950">Total Estimado</span>
+                <span id="calc-total" class="font-serif text-3xl font-bold text-querendona-700">$0 COP</span>
+              </div>
+              <div class="flex justify-between text-xs text-bijao-700 font-medium pt-1">
+                <span>Anticipo 50% (Reserva 8 días antes)</span>
+                <span id="calc-deposit" class="font-mono font-bold">$0 COP</span>
+              </div>
+            </div>
+
+            <!-- Aviso si tiene menos de 100 unidades -->
+            <div id="calc-min-alert" class="hidden p-3 rounded-2xl bg-panela-100 border border-panela-400/60 text-xs text-ink-800">
+              El pedido mínimo corporativo es de <strong>100 unidades combinadas</strong>. Si necesitas menos, puedes pedir desde 1 unidad en <a href="./unidades.html" class="underline font-bold text-querendona-700">Catálogo por Unidades</a>.
+            </div>
+
+            <!-- Acciones -->
+            <div class="flex flex-col gap-2.5">
+              <button type="button" onclick="addChecklistToCart()" class="w-full py-3.5 rounded-full bg-querendona-700 text-white font-mono text-xs uppercase tracking-wider font-semibold hover:bg-ink-950 transition shadow-md">
+                + Agregar Selección al Pedido
+              </button>
+              <a id="calc-wa-direct" href="https://wa.me/573116488685" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-full bg-ink-950 text-white font-mono text-xs uppercase tracking-wider hover:bg-bijao-700 transition text-center">
+                📲 Cotizar esta Combinación por WhatsApp ↗
+              </a>
+            </div>
+
+            <p class="text-[11px] text-ink-400 leading-relaxed">
+              • Reserva con 50% de anticipo (8 días antes) y 50% el día anterior al despacho. Precios no incluyen IVA (régimen simplificado).
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===================================================================
-         BANNER PUENTE FINAL HACIA UNIDADES (PARA PEDIDOS FAMILIARES / <100 UNDS)
+         BANNER PUENTE FINAL HACIA UNIDADES
          =================================================================== -->
     <section class="py-12 px-4 sm:px-8 bg-white hairline-b">
       <div class="max-w-7xl mx-auto rounded-3xl bg-alabaster hairline-box p-7 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -678,7 +696,7 @@
   </main>
 
   <!-- =====================================================================
-       PIE DE PÁGINA OFICIAL CON EL LOGOTIPO DE LA QUERENDONA
+       PIE DE PÁGINA OFICIAL
        ===================================================================== -->
   <footer class="bg-querendona-700 text-white hairline-t py-16 px-4 sm:px-8 pb-24">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
@@ -720,7 +738,7 @@
   </footer>
 
   <!-- =====================================================================
-       MODAL DE CAPTURA DE DATOS PARA DESCARGAR EL CATÁLOGO PDF EN VERCEL
+       MODAL DE CAPTURA DE DATOS PARA DESCARGAR EL CATÁLOGO PDF
        ===================================================================== -->
   <div id="catalog-lead-modal" class="fixed inset-0 z-[110] bg-ink-950/60 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="w-full max-w-lg rounded-[2rem] bg-white hairline-box p-6 sm:p-9 shadow-2xl relative">
@@ -796,13 +814,21 @@
       </div>
 
       <div class="pt-4 hairline-t space-y-4">
-        <div class="p-4 rounded-2xl bg-alabaster hairline-box space-y-1">
+        <div class="p-4 rounded-2xl bg-alabaster hairline-box space-y-1.5">
           <div class="flex justify-between text-xs text-ink-600">
             <span>Cantidad Total:</span>
             <span id="cart-total-units" class="font-mono font-semibold text-ink-950">0 unidades</span>
           </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-ink-600">Total Estimado:</span>
+          <div class="flex justify-between text-xs text-ink-600">
+            <span>Subtotal:</span>
+            <span id="cart-subtotal-price" class="font-mono font-semibold text-ink-950">$0 COP</span>
+          </div>
+          <div id="cart-bf-row" class="flex justify-between text-xs text-red-700 font-semibold">
+            <span>Descuento Black Friday (-6%):</span>
+            <span id="cart-bf-discount" class="font-mono">-$0 COP</span>
+          </div>
+          <div class="flex justify-between items-center pt-1.5 hairline-t">
+            <span class="text-xs font-semibold text-ink-950">Total Estimado:</span>
             <span id="cart-total-price" class="font-serif text-2xl font-bold text-querendona-700">$0 COP</span>
           </div>
         </div>
@@ -814,6 +840,41 @@
   </div>
 
   <script>
+    // =========================================================================
+    // CONFIGURACIÓN BLACK FRIDAY (Cambia a false la próxima semana para apagarlo)
+    // =========================================================================
+    const BLACK_FRIDAY_ACTIVE = true;
+    const BLACK_FRIDAY_RATE = 0.06; // 6% adicional
+    const BLACK_FRIDAY_END = new Date('2026-11-29T23:59:59-05:00').getTime();
+
+    function initBlackFridayUI() {
+      const ribbon = document.getElementById('bf-top-ribbon');
+      const hero = document.getElementById('bf-hero-banner');
+      const note = document.getElementById('bf-catalog-note');
+      const calcPill = document.getElementById('calc-bf-pill');
+      const calcRow = document.getElementById('calc-bf-row');
+      const cartRow = document.getElementById('cart-bf-row');
+
+      if (!BLACK_FRIDAY_ACTIVE) {
+        [ribbon, hero, note, calcPill, calcRow, cartRow].forEach(el => el && el.classList.add('hidden'));
+        return;
+      }
+
+      function tickCountdown() {
+        const diff = Math.max(0, BLACK_FRIDAY_END - Date.now());
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        const el = document.getElementById('bf-countdown');
+        if (el) {
+          el.textContent = `${String(d).padStart(2, '0')}d : ${String(h).padStart(2, '0')}h : ${String(m).padStart(2, '0')}m : ${String(s).padStart(2, '0')}s`;
+        }
+      }
+      tickCountdown();
+      setInterval(tickCountdown, 1000);
+    }
+
     function enterExperience() {
       const pre = document.getElementById('brand-preloader');
       if (pre) {
@@ -850,11 +911,12 @@
       el.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateY(0px)';
     }
 
-    // 6 PRODUCTOS CORPORATIVOS (REF-01 y REF-04 marcados como agotados: cambia soldOut: true a false para reactivarlos)
+    // 7 PRODUCTOS CORPORATIVOS (REF-01 y REF-04 agotados · REF-07 nuevo)
     const CORPORATE_REFS = [
       {
         sku: 'REF-01',
         soldOut: true,
+        shortName: 'Cono Gourmet Novena',
         name: 'Producto 1 (REF-01): Cono Gourmet Novena',
         specs: '3 Buñuelos (45 g) + Natilla (45 g) + Cucharita de madera.',
         scale1Price: 5900,
@@ -864,15 +926,17 @@
       {
         sku: 'REF-02',
         soldOut: false,
+        shortName: 'Tamal Antojito Caliente',
         name: 'Producto 2 (REF-02): Tamal Antojito (Se Entrega Caliente)',
         specs: 'Tamal caliente (150 g) + 1 Buñuelo (15 g) + Tenedor de madera.',
-        scale1Price: 6500,
-        scale2Price: 6240,
+        scale1Price: 5500,
+        scale2Price: 5280,
         img: 'ref-02.JPG'
       },
       {
         sku: 'REF-03',
         soldOut: false,
+        shortName: 'Cajita Tradición Pesebre',
         name: 'Producto 3 (REF-03): Cajita Tradición Pesebre',
         specs: '3 Buñuelos (45 g) + Natilla (60 g) + Cucharita de madera.',
         scale1Price: 6500,
@@ -882,7 +946,8 @@
       {
         sku: 'REF-04',
         soldOut: true,
-        name: 'Producto 4 (REF-04): Cajita Farolito Día de Velitas (Doble Uso con Vela LED)',
+        shortName: 'Cajita Farolito Día de Velitas',
+        name: 'Producto 4 (REF-04): Cajita Farolito Día de Velitas (Vela LED)',
         specs: '3 Buñuelos (45 g) + Natilla (60 g) + Cucharita + Vela LED incluida.',
         scale1Price: 8850,
         scale2Price: 8500,
@@ -891,6 +956,7 @@
       {
         sku: 'REF-05',
         soldOut: false,
+        shortName: 'Tamal Mini Personal Caliente',
         name: 'Producto 5 (REF-05): Tamal Mini Personal Caliente',
         specs: 'Tamal caliente + Tenedor de madera.',
         scale1Price: 9800,
@@ -900,29 +966,47 @@
       {
         sku: 'REF-06',
         soldOut: false,
+        shortName: 'Combo Trío Tradición 3 en 1',
         name: 'Producto 6 (REF-06): Combo Trío Tradición 3 en 1',
         specs: 'Tamal Antojito (150 g) + 2 Buñuelos (15 g c/u) + Natilla (60 g) + Tenedor de madera.',
         scale1Price: 10000,
         scale2Price: 9600,
         img: 'ref-06.JPG'
+      },
+      {
+        sku: 'REF-07',
+        soldOut: false,
+        isNew: true,
+        shortName: 'Domo Natilla, Mora & Buñuelos',
+        name: 'Producto 7 (REF-07): Domo Natilla, Mora & Buñuelos',
+        specs: 'Natilla artesanal en domo sellado + 2 buñuelitos (15 g c/u) + vasito independiente de mermelada de mora y sello de seguridad.',
+        scale1Price: 6700,
+        scale2Price: 6432,
+        img: 'ref-07.JPG'
       }
     ];
 
     const PERMANENT_SKUS = [
-      { sku: 'LQ-01', soldOut: false, name: 'Pack ×3 Tamales al Vacío', specs: '3 tamales pereiranos en hoja de bijao empacados al vacío listos en 8 minutos.', scale1Price: 28000, scale2Price: 28000, img: 'lq-01.JPG' },
-      { sku: 'LQ-02', soldOut: false, name: 'Tamal Individual Caliente', specs: 'Tamal pereirano tradicional recién salido de vaporera.', scale1Price: 16000, scale2Price: 16000, img: 'lq-02.JPG' },
-      { sku: 'LQ-03', soldOut: false, name: 'Fiambre Tradicional en Hoja', specs: 'Auténtico fiambre montañero en hoja de bijao con arroz blanco, carne en hogao, mazorca, yuca y papa.', scale1Price: 25000, scale2Price: 25000, img: 'lq-03.JPG' },
-      { sku: 'LQ-04', soldOut: false, name: 'Mantequilla Artesanal 250 g', specs: 'Tarrina de 250 g de mantequilla batida artesanalmente.', scale1Price: 14000, scale2Price: 14000, img: 'lq-04.JPG' },
-      { sku: 'LQ-05', soldOut: false, name: 'Guacamole Rústico 250 g', specs: 'Aguacate Hass del Eje Cafetero en textura rústica.', scale1Price: 12000, scale2Price: 12000, img: 'lq-05.JPG' },
-      { sku: 'LQ-06', soldOut: false, name: 'Pan Aliñado (Don Gerardo)', specs: 'Horneado artesanal en colaboración con Panadería Don Gerardo.', scale1Price: 12000, scale2Price: 12000, img: 'lq-06.JPG' }
+      { sku: 'LQ-01', soldOut: false, shortName: 'Pack ×3 Tamales al Vacío', name: 'Pack ×3 Tamales al Vacío', specs: '3 tamales pereiranos en hoja de bijao empacados al vacío listos en 8 minutos.', scale1Price: 28000, scale2Price: 28000, img: 'lq-01.JPG' },
+      { sku: 'LQ-02', soldOut: false, shortName: 'Tamal Individual Caliente', name: 'Tamal Individual Caliente', specs: 'Tamal pereirano tradicional recién salido de vaporera.', scale1Price: 16000, scale2Price: 16000, img: 'lq-02.JPG' },
+      { sku: 'LQ-03', soldOut: false, shortName: 'Fiambre Tradicional en Hoja', name: 'Fiambre Tradicional en Hoja', specs: 'Auténtico fiambre montañero en hoja de bijao con arroz blanco, carne en hogao, mazorca, yuca y papa.', scale1Price: 25000, scale2Price: 25000, img: 'lq-03.JPG' },
+      { sku: 'LQ-04', soldOut: false, shortName: 'Mantequilla Artesanal 250 g', name: 'Mantequilla Artesanal 250 g', specs: 'Tarrina de 250 g de mantequilla batida artesanalmente.', scale1Price: 14000, scale2Price: 14000, img: 'lq-04.JPG' },
+      { sku: 'LQ-05', soldOut: false, shortName: 'Guacamole Rústico 250 g', name: 'Guacamole Rústico 250 g', specs: 'Aguacate Hass del Eje Cafetero en textura rústica.', scale1Price: 12000, scale2Price: 12000, img: 'lq-05.JPG' },
+      { sku: 'LQ-06', soldOut: false, shortName: 'Pan Aliñado (Don Gerardo)', name: 'Pan Aliñado (Don Gerardo)', specs: 'Horneado artesanal en colaboración con Panadería Don Gerardo.', scale1Price: 12000, scale2Price: 12000, img: 'lq-06.JPG' }
     ];
 
     const ALL_PRODUCTS = [...CORPORATE_REFS, ...PERMANENT_SKUS];
     let currentCorporateScale = 1;
     let cart = {};
 
+    // Estado inicial del checklist multiproducto (ej. REF-07 y REF-03 preseleccionados para mostrar la suma combinada)
+    let checklistState = {
+      'REF-07': { checked: true, qty: 100 },
+      'REF-03': { checked: true, qty: 100 }
+    };
+
     function formatCOP(n) {
-      return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' COP';
+      return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' COP';
     }
 
     function setCorporateScale(scale) {
@@ -941,6 +1025,7 @@
       if (corpGrid) {
         corpGrid.innerHTML = CORPORATE_REFS.map(item => {
           const activePrice = currentCorporateScale === 2 ? item.scale2Price : item.scale1Price;
+          const bfPrice = Math.round(activePrice * (1 - BLACK_FRIDAY_RATE));
           const isSoldOut = !!item.soldOut;
           return `
             <article class="${isSoldOut ? 'opacity-85' : 'luxury-card'} rounded-3xl bg-white hairline-box overflow-hidden flex flex-col justify-between" ${isSoldOut ? '' : 'onmousemove="tiltCard3D(event, this)" onmouseleave="resetCard3D(this)"'}>
@@ -954,9 +1039,14 @@
                       </div>
                     </div>
                   ` : ''}
-                  <span class="absolute top-3 left-3 px-3 py-1 rounded-full ${isSoldOut ? 'bg-querendona-700 text-panela-400' : 'bg-white/95 text-querendona-700'} font-mono text-[10px] uppercase font-bold shadow-sm">
-                    ${isSoldOut ? item.sku + ' · AGOTADO' : item.sku}
+                  <span class="absolute top-3 left-3 px-3 py-1 rounded-full ${isSoldOut ? 'bg-querendona-700 text-panela-400' : (item.isNew ? 'bg-bijao-700 text-white' : 'bg-white/95 text-querendona-700')} font-mono text-[10px] uppercase font-bold shadow-sm">
+                    ${isSoldOut ? item.sku + ' · AGOTADO' : (item.isNew ? item.sku + ' · NUEVO' : item.sku)}
                   </span>
+                  ${!isSoldOut && BLACK_FRIDAY_ACTIVE ? `
+                    <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-[#09090B] text-panela-400 border border-panela-400/60 font-mono text-[9px] uppercase font-bold shadow-sm">
+                      -6% BF
+                    </span>
+                  ` : ''}
                   <span class="absolute bottom-3 right-3 px-4 py-1.5 rounded-full ${isSoldOut ? 'bg-ink-600 line-through' : 'bg-querendona-700'} text-white font-mono text-xs font-semibold shadow-md">
                     ${formatCOP(activePrice)}
                   </span>
@@ -970,6 +1060,7 @@
                     ` : `
                       <div>• Escala 1 (100 a 500 unds): <strong>${formatCOP(item.scale1Price)}</strong></div>
                       <div class="text-bijao-700">• Escala 2 (501+ unds, -4% Dto.): <strong>${formatCOP(item.scale2Price)}</strong></div>
+                      ${BLACK_FRIDAY_ACTIVE ? `<div class="text-red-700 font-semibold">• Con Black Friday (-6%): <strong>${formatCOP(bfPrice)}</strong></div>` : ''}
                     `}
                   </div>
                 </div>
@@ -989,6 +1080,33 @@
                 `}
               </div>
             </article>
+          `;
+        }).join('');
+      }
+
+      // Render dinámico de la tabla de precios
+      const tableBody = document.getElementById('corporate-price-table');
+      if (tableBody) {
+        tableBody.innerHTML = CORPORATE_REFS.map(item => {
+          const isSoldOut = !!item.soldOut;
+          return `
+            <tr class="${isSoldOut ? 'bg-alabaster/60 opacity-75' : ''}">
+              <td class="py-3.5 pr-4 font-mono font-semibold ${isSoldOut ? 'text-ink-400' : 'text-querendona-700'}">${item.sku}</td>
+              <td class="py-3.5 pr-4 font-serif text-xl ${isSoldOut ? 'text-ink-600' : 'text-ink-950'} font-semibold">
+                ${item.shortName}
+                ${isSoldOut ? '<span class="ml-2 px-2 py-0.5 rounded-full bg-querendona-700 text-panela-400 font-mono text-[9px] uppercase tracking-widest align-middle">Agotado</span>' : ''}
+                ${item.isNew ? '<span class="ml-2 px-2 py-0.5 rounded-full bg-bijao-700 text-white font-mono text-[9px] uppercase tracking-widest align-middle">Nuevo</span>' : ''}
+              </td>
+              <td class="py-3.5 pr-4 ${isSoldOut ? 'text-ink-400' : 'text-ink-600'}">${item.specs}</td>
+              <td class="py-3.5 pr-4 font-mono ${isSoldOut ? 'line-through text-ink-400' : 'font-semibold'}">${formatCOP(item.scale1Price)}</td>
+              <td class="py-3.5 pr-4 font-mono ${isSoldOut ? 'line-through text-ink-400' : 'font-semibold text-bijao-700'}">${formatCOP(item.scale2Price)}</td>
+              <td class="py-3.5 text-right">
+                ${isSoldOut
+                  ? '<button type="button" disabled class="px-3.5 py-1.5 rounded-full bg-stoneborder text-ink-600 font-mono text-[11px] cursor-not-allowed">Agotado</button>'
+                  : `<button type="button" onclick="addToCart('${item.sku}', 100)" class="px-3.5 py-1.5 rounded-full bg-ink-950 text-white font-mono text-[11px] hover:bg-querendona-700">+ Cotizar 100</button>`
+                }
+              </td>
+            </tr>
           `;
         }).join('');
       }
@@ -1019,20 +1137,196 @@
       }
     }
 
-    function openCatalogLeadModal() {
-      const m = document.getElementById('catalog-lead-modal');
-      if (m) {
-        m.classList.remove('hidden');
-        m.classList.add('flex');
-      }
+    // =========================================================================
+    // CALCULADOR MULTIPRODUCTO (CHECKLIST INTERACTIVO)
+    // =========================================================================
+    function renderChecklist() {
+      const container = document.getElementById('checklist-products');
+      if (!container) return;
+
+      // Calcular unidades combinadas actuales para saber si aplica Escala 2
+      let combinedUnits = 0;
+      CORPORATE_REFS.forEach(item => {
+        const st = checklistState[item.sku];
+        if (!item.soldOut && st && st.checked && st.qty > 0) combinedUnits += st.qty;
+      });
+      const isScale2 = combinedUnits >= 501;
+
+      container.innerHTML = CORPORATE_REFS.map(item => {
+        const isSoldOut = !!item.soldOut;
+        const st = checklistState[item.sku] || { checked: false, qty: 100 };
+        const active = !isSoldOut && st.checked;
+        const unitPrice = isScale2 ? item.scale2Price : item.scale1Price;
+
+        return `
+          <div class="p-3.5 sm:p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${isSoldOut ? 'bg-alabaster/60 border-stoneborder opacity-65' : (active ? 'bg-querendona-100/40 border-querendona-700 shadow-xs' : 'bg-white border-stoneborder hover:border-ink-400')}">
+            <label class="flex items-center gap-3 flex-1 min-w-0 ${isSoldOut ? 'cursor-not-allowed' : 'cursor-pointer'}">
+              <input
+                type="checkbox"
+                ${active ? 'checked' : ''}
+                ${isSoldOut ? 'disabled' : ''}
+                onchange="toggleChecklistItem('${item.sku}', this.checked)"
+                class="w-5 h-5 accent-querendona-700 rounded cursor-pointer shrink-0"
+              />
+              <img src="${item.img}" alt="${item.shortName}" onerror="tryNextExt(this)" class="w-12 h-12 rounded-xl object-cover shrink-0 ${isSoldOut ? 'grayscale' : ''}" />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="font-mono text-[10px] font-bold text-querendona-700">${item.sku}</span>
+                  ${isSoldOut ? '<span class="px-2 py-0.5 rounded-full bg-querendona-700 text-panela-400 font-mono text-[9px] uppercase">Agotado</span>' : ''}
+                  ${item.isNew ? '<span class="px-2 py-0.5 rounded-full bg-bijao-700 text-white font-mono text-[9px] uppercase">Nuevo</span>' : ''}
+                </div>
+                <p class="font-serif text-lg sm:text-xl text-ink-950 leading-tight truncate">${item.shortName}</p>
+                <p class="font-mono text-[11px] text-ink-600">${formatCOP(unitPrice)} c/u ${isScale2 && !isSoldOut ? '<span class="text-bijao-700 font-bold">(Escala 2)</span>' : ''}</p>
+              </div>
+            </label>
+
+            ${isSoldOut ? `
+              <span class="font-mono text-[11px] text-ink-400 uppercase px-3">Sin stock</span>
+            ` : `
+              <div class="flex items-center justify-between sm:justify-end gap-2 ${active ? '' : 'opacity-40 pointer-events-none'}">
+                <div class="inline-flex items-center bg-white border border-stoneborder rounded-full p-1">
+                  <button type="button" onclick="adjustChecklistQty('${item.sku}', -25)" class="w-7 h-7 rounded-full hover:bg-alabaster font-mono text-xs font-bold text-ink-800">−</button>
+                  <input
+                    type="number"
+                    min="10"
+                    step="10"
+                    value="${st.qty}"
+                    onchange="setChecklistQty('${item.sku}', this.value)"
+                    class="w-14 text-center font-mono text-xs font-bold text-ink-950 focus:outline-none bg-transparent"
+                  />
+                  <button type="button" onclick="adjustChecklistQty('${item.sku}', 25)" class="w-7 h-7 rounded-full bg-querendona-700 text-white font-mono text-xs font-bold">+</button>
+                </div>
+                <span class="font-mono text-xs font-bold text-querendona-700 min-w-[84px] text-right">
+                  ${active ? formatCOP(unitPrice * st.qty) : '$0'}
+                </span>
+              </div>
+            `}
+          </div>
+        `;
+      }).join('');
+
+      updateChecklistSummary();
     }
 
+    function toggleChecklistItem(sku, isChecked) {
+      if (!checklistState[sku]) checklistState[sku] = { checked: isChecked, qty: 100 };
+      else checklistState[sku].checked = isChecked;
+      if (isChecked && (!checklistState[sku].qty || checklistState[sku].qty < 10)) checklistState[sku].qty = 100;
+      renderChecklist();
+    }
+
+    function adjustChecklistQty(sku, delta) {
+      if (!checklistState[sku]) checklistState[sku] = { checked: true, qty: 100 };
+      checklistState[sku].checked = true;
+      checklistState[sku].qty = Math.max(10, (checklistState[sku].qty || 0) + delta);
+      renderChecklist();
+    }
+
+    function setChecklistQty(sku, rawVal) {
+      const val = Math.max(10, parseInt(rawVal, 10) || 10);
+      if (!checklistState[sku]) checklistState[sku] = { checked: true, qty: val };
+      else checklistState[sku].qty = val;
+      renderChecklist();
+    }
+
+    function clearChecklist() {
+      checklistState = {};
+      renderChecklist();
+    }
+
+    function updateChecklistSummary() {
+      let totalUnits = 0;
+      const selectedItems = [];
+
+      CORPORATE_REFS.forEach(item => {
+        const st = checklistState[item.sku];
+        if (!item.soldOut && st && st.checked && st.qty > 0) {
+          totalUnits += st.qty;
+          selectedItems.push({ item, qty: st.qty });
+        }
+      });
+
+      const isScale2 = totalUnits >= 501;
+      let subtotal = 0;
+      const summaryLines = [];
+      const waLines = ['Hola La Querendona Foods, quiero solicitar esta cotización corporativa combinada:'];
+
+      selectedItems.forEach(({ item, qty }) => {
+        const unit = isScale2 ? item.scale2Price : item.scale1Price;
+        const lineSub = unit * qty;
+        subtotal += lineSub;
+        summaryLines.push(`
+          <div class="flex justify-between items-center py-1.5 border-b border-stoneborder/60">
+            <span class="truncate pr-2"><strong class="font-mono text-querendona-700">${qty}×</strong> ${item.shortName}</span>
+            <span class="font-mono font-semibold text-ink-950 shrink-0">${formatCOP(lineSub)}</span>
+          </div>
+        `);
+        waLines.push(`• ${qty}× ${item.shortName} (${item.sku}) a ${formatCOP(unit)} = ${formatCOP(lineSub)}`);
+      });
+
+      const bfDiscount = BLACK_FRIDAY_ACTIVE ? Math.round(subtotal * BLACK_FRIDAY_RATE) : 0;
+      const total = subtotal - bfDiscount;
+      const deposit = Math.round(total * 0.5);
+
+      document.getElementById('calc-total-units').textContent = `${totalUnits} unds`;
+      document.getElementById('calc-subtotal').textContent = formatCOP(subtotal);
+      document.getElementById('calc-bf-discount').textContent = '-' + formatCOP(bfDiscount);
+      document.getElementById('calc-total').textContent = formatCOP(total);
+      document.getElementById('calc-deposit').textContent = formatCOP(deposit);
+
+      document.getElementById('calc-selected-summary').innerHTML = summaryLines.length
+        ? summaryLines.join('')
+        : '<p class="text-xs text-ink-400 text-center py-4">Marca uno o más productos en la lista para calcular tu cotización.</p>';
+
+      const pct = Math.min(100, Math.round((totalUnits / 501) * 100));
+      document.getElementById('calc-scale-bar').style.width = pct + '%';
+      document.getElementById('calc-scale-count').textContent = `${Math.min(totalUnits, 501)}/501`;
+      document.getElementById('calc-scale-msg').textContent = isScale2
+        ? '★ ¡Escala 2 (-4%) activa en toda tu selección!'
+        : `Te faltan ${501 - totalUnits} unds para activar Escala 2 (-4%)`;
+
+      document.getElementById('calc-tier-pill').textContent = isScale2
+        ? '★ Escala 2 Activa: 501+ unds (-4% Dto.)'
+        : 'Escala 1: 100 a 500 unds (Precio Base)';
+
+      document.getElementById('calc-min-alert').classList.toggle('hidden', totalUnits === 0 || totalUnits >= 100);
+
+      waLines.push('--------------------------------');
+      waLines.push(`Unidades combinadas: ${totalUnits} (${isScale2 ? 'Escala 2 -4%' : 'Escala 1'})`);
+      waLines.push(`Subtotal: ${formatCOP(subtotal)}`);
+      if (BLACK_FRIDAY_ACTIVE && bfDiscount > 0) waLines.push(`Descuento Black Friday (-6% adicional): -${formatCOP(bfDiscount)}`);
+      waLines.push(`Total estimado: ${formatCOP(total)} (Anticipo 50%: ${formatCOP(deposit)})`);
+
+      document.getElementById('calc-wa-direct').href = 'https://wa.me/573116488685?text=' + encodeURIComponent(waLines.join('\n'));
+    }
+
+    function addChecklistToCart() {
+      let added = 0;
+      CORPORATE_REFS.forEach(item => {
+        const st = checklistState[item.sku];
+        if (!item.soldOut && st && st.checked && st.qty > 0) {
+          cart[item.sku] = (cart[item.sku] || 0) + st.qty;
+          added++;
+        }
+      });
+      if (added === 0) {
+        alert('Marca al menos un producto disponible en la lista.');
+        return;
+      }
+      updateCartUI();
+      toggleCartDrawer();
+    }
+
+    // =========================================================================
+    // MODAL PDF & CARRITO LATERAL
+    // =========================================================================
+    function openCatalogLeadModal() {
+      const m = document.getElementById('catalog-lead-modal');
+      if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+    }
     function closeCatalogLeadModal() {
       const m = document.getElementById('catalog-lead-modal');
-      if (m) {
-        m.classList.add('hidden');
-        m.classList.remove('flex');
-      }
+      if (m) { m.classList.add('hidden'); m.classList.remove('flex'); }
     }
 
     async function triggerVercelPdfDownload() {
@@ -1082,11 +1376,7 @@
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
             _subject: 'Nuevo Cliente Descargó el Catálogo Navidad 2026 — ' + company,
-            Nombre: name,
-            Empresa: company,
-            WhatsApp: phone,
-            Correo: email,
-            Volumen_Estimado: volume
+            Nombre: name, Empresa: company, WhatsApp: phone, Correo: email, Volumen_Estimado: volume
           })
         });
       } catch (err) {}
@@ -1118,21 +1408,29 @@
     }
 
     function updateCartUI() {
-      let units = 0, total = 0, rows = [], waLines = ['Hola La Querendona Foods, quiero realizar el siguiente pedido:'];
+      let units = 0, corpUnits = 0, subtotal = 0, rows = [];
+      const waLines = ['Hola La Querendona Foods, quiero realizar el siguiente pedido:'];
+
+      // Primero contamos unidades corporativas combinadas para Escala 2
+      Object.keys(cart).forEach(sku => {
+        if (sku.startsWith('REF-')) corpUnits += cart[sku] || 0;
+      });
+      const isScale2 = corpUnits >= 501;
+
       Object.keys(cart).forEach(sku => {
         const qty = cart[sku];
         const item = ALL_PRODUCTS.find(x => x.sku === sku);
         if (!item || item.soldOut || qty <= 0) return;
-        const unitPrice = qty >= 501 ? item.scale2Price : item.scale1Price;
+        const unitPrice = (sku.startsWith('REF-') && isScale2) ? item.scale2Price : item.scale1Price;
         const sub = unitPrice * qty;
         units += qty;
-        total += sub;
-        waLines.push(`• ${qty}x ${item.name} (${formatCOP(unitPrice)} c/u) = ${formatCOP(sub)}`);
+        subtotal += sub;
+        waLines.push(`• ${qty}× ${item.shortName} (${item.sku}) a ${formatCOP(unitPrice)} = ${formatCOP(sub)}`);
         rows.push(`
           <div class="py-3.5 flex items-center justify-between gap-3">
             <div class="min-w-0">
-              <span class="font-mono text-[10px] text-querendona-700 block">${item.sku} ${qty >= 501 && item.scale2Price < item.scale1Price ? '· ★ ESCALA 2 (-4%)' : ''}</span>
-              <h4 class="font-serif text-lg text-ink-950 truncate">${item.name}</h4>
+              <span class="font-mono text-[10px] text-querendona-700 block">${item.sku} ${sku.startsWith('REF-') && isScale2 ? '· ★ ESCALA 2 (-4%)' : ''}</span>
+              <h4 class="font-serif text-lg text-ink-950 truncate">${item.shortName}</h4>
               <span class="font-mono text-xs text-ink-600">${formatCOP(unitPrice)} c/u · <strong>${formatCOP(sub)}</strong></span>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
@@ -1143,9 +1441,19 @@
           </div>
         `);
       });
+
+      const bfDiscount = BLACK_FRIDAY_ACTIVE ? Math.round(subtotal * BLACK_FRIDAY_RATE) : 0;
+      const total = subtotal - bfDiscount;
+
+      waLines.push('--------------------------------');
+      waLines.push(`Subtotal: ${formatCOP(subtotal)}`);
+      if (BLACK_FRIDAY_ACTIVE && bfDiscount > 0) waLines.push(`Descuento Black Friday (-6% adicional): -${formatCOP(bfDiscount)}`);
       waLines.push(`Total Estimado: ${formatCOP(total)}`);
+
       document.getElementById('cart-count-badge').textContent = String(units);
       document.getElementById('cart-total-units').textContent = `${units} unidades`;
+      document.getElementById('cart-subtotal-price').textContent = formatCOP(subtotal);
+      document.getElementById('cart-bf-discount').textContent = '-' + formatCOP(bfDiscount);
       document.getElementById('cart-total-price').textContent = formatCOP(total);
       document.getElementById('cart-items-list').innerHTML = rows.join('') || '<p class="text-xs text-ink-400 py-8 text-center">Tu solicitud está vacía.</p>';
       document.getElementById('wa-checkout-link').href = 'https://wa.me/573116488685?text=' + encodeURIComponent(waLines.join('\n'));
@@ -1158,45 +1466,11 @@
       d.classList.toggle('flex');
     }
 
-    function updateConciergeSummary() {
-      const sel = document.getElementById('concierge-ref');
-      const qtyIn = document.getElementById('concierge-qty');
-      if (!sel || !qtyIn) return;
-      const opt = sel.options[sel.selectedIndex];
-      const scale1 = parseInt(opt.getAttribute('data-scale1'), 10) || 6500;
-      const scale2 = parseInt(opt.getAttribute('data-scale2'), 10) || 6240;
-      const qty = parseInt(qtyIn.value, 10) || 250;
-      const isScale2 = qty >= 501;
-      const unit = isScale2 ? scale2 : scale1;
-      const total = unit * qty;
-      const deposit = Math.round(total * 0.5);
-
-      document.getElementById('concierge-qty-label').textContent = `${qty} unidades`;
-      document.getElementById('concierge-unit-price').textContent = formatCOP(unit);
-      document.getElementById('concierge-deposit').textContent = formatCOP(deposit);
-      document.getElementById('concierge-total').textContent = formatCOP(total);
-      document.getElementById('concierge-tier-pill').textContent = isScale2
-        ? '★ Escala 2 Activa: 501+ unds (-4% Dto.)'
-        : 'Escala 1 Activa: 100 a 500 unds (Precio Base)';
-
-      const waMsg = `Hola La Querendona Foods, quiero solicitar cotización corporativa:\n• Producto: ${opt.text.split('—')[0].trim()}\n• Cantidad: ${qty} unidades\n• Valor unitario: ${formatCOP(unit)}\n• Total estimado: ${formatCOP(total)} (Anticipo 50%: ${formatCOP(deposit)})`;
-      document.getElementById('concierge-wa-direct').href = 'https://wa.me/573116488685?text=' + encodeURIComponent(waMsg);
-    }
-
-    function addConciergeSelectionToCart() {
-      const sku = document.getElementById('concierge-ref').value;
-      const item = ALL_PRODUCTS.find(x => x.sku === sku);
-      if (!item || item.soldOut) return;
-      const qty = parseInt(document.getElementById('concierge-qty').value, 10) || 250;
-      cart[sku] = (cart[sku] || 0) + qty;
-      updateCartUI();
-      toggleCartDrawer();
-    }
-
     window.onload = function () {
+      initBlackFridayUI();
       renderCatalogs();
+      renderChecklist();
       updateCartUI();
-      updateConciergeSummary();
     };
   </script>
 </body>
