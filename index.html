@@ -4,6 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>La Querendona Foods | Reconstruyendo el Sabor</title>
+  <meta name="description" content="Comida tradicional colombiana artesanal: tamales, buñuelos, fiambre y delicias de temporada. Conoce nuestro catálogo individual y corporativo." />
+
+  <!-- Vista Previa Interactiva para WhatsApp y Redes Sociales (Open Graph) -->
+  <meta property="og:site_name" content="La Querendona Foods" />
+  <meta property="og:title" content="La Querendona — Reconstruyendo el Sabor" />
+  <meta property="og:description" content="Comida tradicional colombiana artesanal: tamales, buñuelos, fiambre y natilla. Explora nuestro catálogo individual y corporativo aquí." />
+  <meta property="og:url" content="https://www.laquerendonafoods.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.laquerendonafoods.com/og-la-querendona.jpg" />
+  <meta property="og:image:secure_url" content="https://www.laquerendonafoods.com/og-la-querendona.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Compatibilidad adicional para previsualizaciones (Twitter / X / Telegram) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La Querendona — Reconstruyendo el Sabor" />
+  <meta name="twitter:description" content="Comida tradicional colombiana artesanal: tamales, buñuelos, fiambre y delicias de temporada." />
+  <meta name="twitter:image" content="https://www.laquerendonafoods.com/og-la-querendona.jpg" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -138,23 +157,39 @@
       <div class="pointer-events-none absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_50px_at_top,transparent_10%,white)]"></div>
     </div>
 
-    <!-- 3. Dos Botones Blancos Gemelos 3D (Ambos Activos) -->
-    <div id="gateway-buttons" class="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700 pb-2 sm:pb-3">
+    <!-- 3. Botones de Acción (Gemelos Blancos 3D + Botón Compartir WhatsApp) -->
+    <div id="gateway-buttons" class="relative z-30 flex flex-col items-center justify-center gap-2.5 w-full max-w-xl opacity-0 translate-y-2 transition-all duration-700 pb-2 sm:pb-3">
 
-      <!-- Botón 1: Clientes Corporativos -->
-      <a
-        href="./corporativos.html"
-        class="w-52 sm:w-56 h-10 sm:h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_6px_16px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-pointer"
-      >
-        Clientes Corporativos
-      </a>
+      <!-- Fila Principal: Dos Botones Blancos Gemelos 3D -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 w-full">
+        <!-- Botón 1: Clientes Corporativos -->
+        <a
+          href="./corporativos.html"
+          class="w-52 sm:w-56 h-10 sm:h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_6px_16px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-pointer"
+        >
+          Clientes Corporativos
+        </a>
 
-      <!-- Botón 2: Unidades (Desbloqueado y conectado a unidades.html) -->
+        <!-- Botón 2: Unidades -->
+        <a
+          href="./unidades.html"
+          class="w-52 sm:w-56 h-10 sm:h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_6px_16px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-pointer"
+        >
+          Unidades
+        </a>
+      </div>
+
+      <!-- Fila Secundaria: Botón Interactivo para Invitar / Compartir por WhatsApp -->
       <a
-        href="./unidades.html"
-        class="w-52 sm:w-56 h-10 sm:h-11 px-6 rounded-full bg-gradient-to-b from-white via-neutral-100 to-neutral-300 text-black font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap flex items-center justify-center border-b-[3px] border-neutral-400 shadow-[0_6px_16px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(255,255,255,0.65)] active:border-b-0 active:translate-y-0.5 transition-all duration-200 ease-out cursor-pointer"
+        href="https://api.whatsapp.com/send?text=%E2%9C%A8%20*LA%20QUERENDONA*%20%E2%9C%A8%0A_Reconstruyendo%20el%20Sabor_%20%F0%9F%8C%BF%0A%0ADescubre%20nuestra%20l%C3%ADnea%20artesanal%20de%20comida%20tradicional%20colombiana%3A%20tamales%2C%20bu%C3%B1uelos%2C%20fiambres%2C%20natilla%20y%20m%C3%A1s.%0A%0A%F0%9F%91%87%20*Explora%20nuestro%20cat%C3%A1logo%20y%20haz%20tu%20pedido%20aqu%C3%AD%3A*%0Ahttps%3A%2F%2Fwww.laquerendonafoods.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-0.5 inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#401018] via-[#5B1D28] to-[#401018] border border-[#D4AF37]/60 text-[#FAF8F5] text-[10px] font-medium uppercase tracking-[0.15em] shadow-[0_0_15px_rgba(212,175,55,0.18)] hover:border-[#D4AF37] hover:scale-105 hover:shadow-[0_0_22px_rgba(212,175,55,0.4)] transition-all duration-200 cursor-pointer"
       >
-        Unidades
+        <svg class="w-3.5 h-3.5 text-[#D4AF37] shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+        </svg>
+        <span>Compartir por WhatsApp</span>
       </a>
 
     </div>
